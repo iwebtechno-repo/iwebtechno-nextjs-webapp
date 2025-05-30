@@ -1,11 +1,12 @@
 trigger:
   branches:
     include:
-      - main   # or your deployment branch
+      - main
 
 variables:
-  azureSubscription: 'Microsoft Azure Sponsorship'   # Set this in Azure DevOps
-  azureContainerRegistry: 'iwebtechno-etauhfhpcbevcac7.azurecr.io'
+  azureSubscription: 'CI/CD Service'                      # ARM service connection name
+  azureContainerRegistryServiceConnection: 'iwebtechno'   # ACR service connection name
+  azureContainerRegistryLoginServer: 'iwebtechno-etauhfhpcbevcac7.azurecr.io'  # ACR login server URL
   imageName: 'iwebtechno-nextjs-webapp'
   webAppName: 'iwebtechno-nextjs-webapp'
   resourceGroup: 'iWebTechno-website'
@@ -21,8 +22,8 @@ stages:
     - task: Docker@2
       displayName: Build and push Docker image
       inputs:
-        containerRegistry: '$(azureContainerRegistry)'
-        repository: '$(azureContainerRegistry)/$(imageName)'
+        containerRegistry: '$(azureContainerRegistryServiceConnection)'   # service connection name
+        repository: '$(azureContainerRegistryLoginServer)/$(imageName)'   # full repo path
         command: 'buildAndPush'
         Dockerfile: 'Dockerfile'
         tags: |
@@ -33,7 +34,6 @@ stages:
   dependsOn: BuildAndPush
   jobs:
   - deployment: DeployWebApp
-    environment: 'production'
     pool:
       vmImage: 'ubuntu-latest'
     strategy:
@@ -46,4 +46,4 @@ stages:
               azureSubscription: '$(azureSubscription)'
               appName: '$(webAppName)'
               resourceGroupName: '$(resourceGroup)'
-              imageName: '$(azureContainerRegistry)/$(imageName):latest'
+              imageName: '$(azureContainerRegistryLoginServer)/$(imageName):latest'
