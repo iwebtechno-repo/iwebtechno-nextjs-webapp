@@ -1,48 +1,49 @@
 trigger:
   branches:
     include:
-      - main  # or your working branch
+      - main   # or your deployment branch
 
 variables:
-  imageName: 'iwebtechno-nextjs-app'
-  tag: '$(Build.BuildId)'
-
-pool:
-  vmImage: 'ubuntu-latest'
+  azureSubscription: 'Microsoft Azure Sponsorship'   # Set this in Azure DevOps
+  azureContainerRegistry: 'iwebtechno-etauhfhpcbevcac7.azurecr.io'
+  imageName: 'iwebtechno-nextjs-webapp'
+  webAppName: 'iwebtechno-nextjs-webapp'
+  resourceGroup: 'iWebTechno-website'
 
 stages:
 - stage: BuildAndPush
-  displayName: 'Build and Push Docker Image to ACR'
+  displayName: Build and Push Docker Image
   jobs:
-  - job: DockerBuild
-    displayName: 'Build Docker image and push to ACR'
+  - job: Build
+    pool:
+      vmImage: 'ubuntu-latest'
     steps:
-    - checkout: self
-
     - task: Docker@2
-      displayName: 'Build and Push Docker image'
+      displayName: Build and push Docker image
       inputs:
-        containerRegistry: 'azure-service-connection'  # Name of your Azure DevOps Service Connection to ACR
-        repository: 'iwebtechno-etauhfhpcbevcac7.azurecr.io/$(imageName)'
+        containerRegistry: '$(azureContainerRegistry)'
+        repository: '$(azureContainerRegistry)/$(imageName)'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        Dockerfile: 'Dockerfile'
         tags: |
-          $(tag)
+          latest
 
 - stage: Deploy
-  displayName: 'Deploy to Azure App Service'
+  displayName: Deploy to Azure Web App
   dependsOn: BuildAndPush
   jobs:
   - deployment: DeployWebApp
-    displayName: 'Deploy image from ACR to Web App'
     environment: 'production'
+    pool:
+      vmImage: 'ubuntu-latest'
     strategy:
       runOnce:
         deploy:
           steps:
           - task: AzureWebAppContainer@1
-            displayName: 'Deploy to App Service using container image'
+            displayName: Deploy container to Azure Web App
             inputs:
-              azureSubscription: 'azure-service-connection'  # Same service connection
-              appName: 'iwebtechno-nextjs-webapp'
-              containers: 'iwebtechno-etauhfhpcbevcac7.azurecr.io/$(imageName):$(tag)'
+              azureSubscription: '$(azureSubscription)'
+              appName: '$(webAppName)'
+              resourceGroupName: '$(resourceGroup)'
+              imageName: '$(azureContainerRegistry)/$(imageName):latest'
