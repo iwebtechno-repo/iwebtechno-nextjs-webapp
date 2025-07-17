@@ -5,7 +5,7 @@ const CTA = () => {
   return (
     <section className="relative py-20 px-4 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 to-purple-600/90 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0470b6]/90 to-[#f49d2f]/90 z-0"></div>
 
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10 z-0">
@@ -17,7 +17,7 @@ const CTA = () => {
         <Card variant="none" className="p-8 md:p-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Ready to{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-orange-300">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
               Transform
             </span>{" "}
             Your Institution?

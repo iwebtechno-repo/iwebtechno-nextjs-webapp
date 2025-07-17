@@ -43,3 +43,6 @@ next-env.d.ts
 # Azure deployment files
 service-principal-credentials.json
 .azure/
+
+
+testcode.html

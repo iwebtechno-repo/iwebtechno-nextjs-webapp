@@ -12,7 +12,7 @@ const Features = () => {
 
       <div className="container relative z-10 mx-auto px-4">
         <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-          <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400">
+          <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
             Comprehensive
           </span>{" "}
           Campus Digitization

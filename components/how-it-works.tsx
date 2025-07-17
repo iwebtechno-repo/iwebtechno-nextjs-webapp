@@ -106,7 +106,7 @@ const HowItWorks = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           How{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
             iWeb's
           </span>{" "}
           Campus Digitization Works

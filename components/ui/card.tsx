@@ -90,7 +90,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       switch (variant) {
         case "gradient":
         case "multi":
-          return "bg-gradient-to-br from-[#d0427f]/20 to-[#303293]/20 dark:from-[#d0427f]/20 dark:to-[#303293]/20 border-transparent";
+          return "bg-gradient-to-br from-[#0470b6]/20 to-[#f49d2f]/20 dark:from-[#0470b6]/20 dark:to-[#f49d2f]/20 border-transparent";
         case "blue":
           return "bg-gradient-to-br from-blue-500/20 to-blue-600/20 dark:from-blue-400/20 dark:to-blue-500/20 border-transparent";
         case "purple":
@@ -109,7 +109,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         switch (variant) {
           case "gradient":
           case "multi":
-            return "text-[#d0427f] dark:text-[#d0427f]";
+            return "text-[#0470b6] dark:text-[#0470b6]";
           case "blue":
             return "text-blue-500 dark:text-blue-400";
           case "purple":

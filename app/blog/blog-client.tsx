@@ -133,7 +133,7 @@ const BlogClient = () => {
           <div className="text-center mb-12">
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
               The iWebTechno{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
                 Blog
               </span>
             </h1>

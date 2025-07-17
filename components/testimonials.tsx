@@ -7,11 +7,11 @@ const gradientVariants: Record<string, string> = {
   purple: "bg-gradient-to-r from-purple-700 to-purple-500",
   green: "bg-gradient-to-r from-green-700 to-green-500",
   orange: "bg-gradient-to-r from-orange-600 to-orange-400",
-  multi: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400",
-  gradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
-  link: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
-  none: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
-  outline: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
+  multi: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
+  gradient: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
+  link: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
+  none: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
+  outline: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
 };
 
 const Testimonials = () => {

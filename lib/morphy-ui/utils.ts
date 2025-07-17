@@ -6,26 +6,26 @@ import { type ColorVariant, type ComponentEffect } from "./types";
 
 export const gradientPresets = {
   // Primary brand gradient
-  primary: "from-[#d0427f] to-[#303293]",
+  primary: "from-[#0470b6] to-[#f49d2f]",
 
-  // Solid color gradients (for non-gradient variants)
-  secondary: "from-blue-500 to-purple-600",
-  success: "from-green-500 to-emerald-600",
-  warning: "from-orange-500 to-amber-600",
-  danger: "from-red-500 to-pink-600",
-  multi: "from-blue-500 via-purple-500 to-pink-500",
+  // Harmonized gradients for the new brand
+  secondary: "from-[#0470b6] to-[#f49d2f]", // fallback, same as primary
+  success: "from-[#0470b6] to-[#3ecf8e]", // blue to a greenish tint
+  warning: "from-[#f49d2f] to-[#fbbf24]", // orange to a lighter orange
+  danger: "from-[#f49d2f] to-[#e53e3e]", // orange to red
+  multi: "from-[#0470b6] via-[#f49d2f] to-[#0470b6]", // blue to orange to blue
 
   // Base colors (for solid variants)
-  blue: "from-blue-500 to-blue-600",
-  purple: "from-purple-500 to-purple-600",
-  green: "from-green-500 to-green-600",
-  orange: "from-orange-500 to-orange-600",
+  blue: "from-[#0470b6] to-[#1e90e8]", // brand blue to lighter blue
+  purple: "from-[#0470b6] to-[#7c3aed]", // brand blue to purple
+  green: "from-[#3ecf8e] to-[#0470b6]", // green to brand blue
+  orange: "from-[#f49d2f] to-[#fbbf24]", // brand orange to lighter orange
 
   // Enhanced gradient variants for all colors
-  "blue-gradient": "from-blue-400 via-blue-500 to-blue-700",
-  "purple-gradient": "from-purple-400 via-purple-500 to-purple-700",
-  "green-gradient": "from-green-400 via-green-500 to-green-700",
-  "orange-gradient": "from-orange-400 via-orange-500 to-orange-700",
+  "blue-gradient": "from-[#0470b6] via-[#1e90e8] to-[#f49d2f]", // blue to light blue to orange
+  "purple-gradient": "from-[#0470b6] via-[#7c3aed] to-[#f49d2f]", // blue to purple to orange
+  "green-gradient": "from-[#3ecf8e] via-[#0470b6] to-[#f49d2f]", // green to blue to orange
+  "orange-gradient": "from-[#f49d2f] via-[#fbbf24] to-[#0470b6]", // orange to yellow to blue
 } as const;
 
 // ============================================================================
@@ -39,9 +39,9 @@ export const getVariantStyles = (
   switch (variant) {
     case "gradient":
       if (effect === "fill") {
-        return `bg-gradient-to-r ${gradientPresets.primary} hover:from-[#d0427f]/90 hover:to-[#303293]/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
+        return `bg-gradient-to-r ${gradientPresets.primary} hover:from-[#0470b6]/90 hover:to-[#f49d2f]/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
       } else {
-        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#d0427f]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
+        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
 
     case "blue":
@@ -104,7 +104,7 @@ export const getVariantStyles = (
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.multi} hover:from-blue-500/90 hover:via-purple-500/90 hover:to-pink-500/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
       } else {
-        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#d0427f]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
+        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
 
     case "link":
@@ -136,7 +136,7 @@ export const getVariantStylesNoHover = (
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.primary} text-white shadow-lg transition-all duration-200`;
       } else {
-        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#d0427f]/20 backdrop-blur-[10px] transition-all duration-200";
+        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] transition-all duration-200";
       }
 
     case "blue":
@@ -199,7 +199,7 @@ export const getVariantStylesNoHover = (
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.multi} text-white shadow-lg transition-all duration-200`;
       } else {
-        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#d0427f]/20 backdrop-blur-[10px] transition-all duration-200";
+        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] transition-all duration-200";
       }
 
     case "link":
