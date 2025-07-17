@@ -1,116 +1,113 @@
-# .dockerignore
 # Dependencies
 node_modules
-npm-debug.log
-yarn-debug.log
-yarn-error.log
-.pnpm-debug.log
-.yarn
-.yarnrc
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Next.js build output
+# Production build
 .next
 out
-.next/
-.next/cache/
-.next/server/
-.next/static/
-.next/types/
-.next/build-manifest.json
-.next/prerender-manifest.json
-.next/routes-manifest.json
-.next/server-manifest.json
-.next/build-id
-.next/required-server-files.json
 
-# Testing
-coverage
-.nyc_output
-__tests__
-*.test.js
-*.spec.js
-*.test.ts
-*.spec.ts
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Version control
-.git
-.gitignore
-.gitattributes
-.github
-.gitlab
-.hg
-.svn
-
-# IDE and editors
-.idea
+# IDE files
 .vscode
+.idea
 *.swp
 *.swo
-*.swn
-*.bak
-*.sublime-workspace
-*.sublime-project
-.project
-.settings
-.classpath
 
-# Environment variables
-.env
-.env.*
-!.env.example
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Documentation
+README.md
+*.md
+
+# Test files
+coverage
+.nyc_output
 
 # Logs
 logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# Build and distribution
-dist
-build
-*.tsbuildinfo
+# Optional npm cache directory
+.npm
 
-# Temporary files
-*.tmp
-*.temp
-.cache
-.temp
-.tmp
+# Optional eslint cache
+.eslintcache
 
-# Documentation
-docs
-*.md
-!README.md
-LICENSE
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
-# Docker
-Dockerfile
-docker-compose*.yml
-.dockerignore
+# Optional REPL history
+.node_repl_history
 
-# Misc
-*.zip
-*.tar
-*.gz
-*.rar
-*.7z
-*.bz2
-*.xz
+# Output of 'npm pack'
 *.tgz
-*.tar.gz
-*.tar.bz2
-*.tar.xz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Azure
+.azure
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Dependency directories
+jspm_packages/ 

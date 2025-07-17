@@ -1,47 +1,40 @@
-import type React from "react";
+import "@/lib/morphy-ui/morphy";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Footer from "@/components/footer";
-import MainNavigation from "@/components/main-navigation"
+import { IconThemeProvider } from "@/lib/morphy-ui/icon-theme-context";
+import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/navbar";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "iWebTechno - Campus Digitization Solutions",
-  description:
-    "Digitizing educational institutions with innovative SaaS solutions",
+  title: "iWebTechno",
+  description: "Transform Your Campus with Digital Solutions for Free",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Add direct font links */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-      </head>
-      <body className={`${inter.variable}`}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange={false}
+          disableTransitionOnChange
         >
-          <div className="min-h-screen flex flex-col bg-light-gradient dark:bg-dark-gradient">
-          <MainNavigation />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </div>
+          <Toaster position="top-center" richColors closeButton />
+          <IconThemeProvider defaultWeight="regular">
+            <main>
+              <div className="min-h-screen pb-28">{children}</div>
+            </main>
+            <Navbar />
+          </IconThemeProvider>
         </ThemeProvider>
       </body>
     </html>

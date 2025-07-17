@@ -1,9 +1,7 @@
+import { Card } from "@/components/ui/card";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { GlassCard } from "@/components/ui/glass-card";
-import { GradientText } from "@/components/ui/gradient-text";
 
-export default function Features() {
+const Features = () => {
   return (
     <section className="relative overflow-hidden py-16">
       {/* Background Elements */}
@@ -14,17 +12,19 @@ export default function Features() {
 
       <div className="container relative z-10 mx-auto px-4">
         <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-          <GradientText variant="multi" className="font-bold">
+          <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400">
             Comprehensive
-          </GradientText>{" "}
+          </span>{" "}
           Campus Digitization
         </h2>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Feature 1 */}
-          <GlassCard variant="blue" intensity="medium" className="p-8">
+          <Card variant="blue" showRipple className="p-8">
             <h3 className="mb-4 text-xl font-semibold">
-              <GradientText variant="blue">Seamless Integration</GradientText>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500">
+                Seamless Integration
+              </span>
             </h3>
             <p className="mb-6 flex-grow">
               Our platform integrates all aspects of campus management into a
@@ -32,22 +32,21 @@ export default function Features() {
               everything works together seamlessly.
             </p>
             <div className="mt-auto">
-              <Button
-                asChild
-                variant="outline"
-                className="bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20"
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
-                <Link href="/products">Learn More</Link>
-              </Button>
+                Learn More
+              </Link>
             </div>
-          </GlassCard>
+          </Card>
 
           {/* Feature 2 */}
-          <GlassCard variant="purple" intensity="medium" className="p-8">
+          <Card variant="purple" showRipple className="p-8">
             <h3 className="mb-4 text-xl font-semibold">
-              <GradientText variant="purple">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-purple-500">
                 Mobile-First Approach
-              </GradientText>
+              </span>
             </h3>
             <p className="mb-6 flex-grow">
               Access your campus management system anytime, anywhere with our
@@ -55,22 +54,21 @@ export default function Features() {
               from desktops to smartphones.
             </p>
             <div className="mt-auto">
-              <Button
-                asChild
-                variant="outline"
-                className="bg-gradient-to-r from-purple-500/10 to-pink-600/10 hover:from-purple-500/20 hover:to-pink-600/20"
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
-                <Link href="/products">Learn More</Link>
-              </Button>
+                Learn More
+              </Link>
             </div>
-          </GlassCard>
+          </Card>
 
           {/* Feature 3 */}
-          <GlassCard variant="green" intensity="medium" className="p-8">
+          <Card variant="green" showRipple className="p-8">
             <h3 className="mb-4 text-xl font-semibold">
-              <GradientText variant="green">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 to-green-500">
                 Data Security & Compliance
-              </GradientText>
+              </span>
             </h3>
             <p className="mb-6 flex-grow">
               We prioritize the security of your data with industry-leading
@@ -78,20 +76,21 @@ export default function Features() {
               regulations.
             </p>
             <div className="mt-auto">
-              <Button
-                asChild
-                variant="outline"
-                className="bg-gradient-to-r from-green-500/10 to-teal-600/10 hover:from-green-500/20 hover:to-teal-600/20"
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
-                <Link href="/products">Learn More</Link>
-              </Button>
+                Learn More
+              </Link>
             </div>
-          </GlassCard>
+          </Card>
 
           {/* Feature 4 */}
-          <GlassCard variant="orange" intensity="medium" className="p-8">
+          <Card variant="orange" showRipple className="p-8">
             <h3 className="mb-4 text-xl font-semibold">
-              <GradientText variant="orange">Scalable Solutions</GradientText>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-orange-400">
+                Scalable Solutions
+              </span>
             </h3>
             <p className="mb-6 flex-grow">
               Whether you're a small college or a large university with multiple
@@ -99,17 +98,18 @@ export default function Features() {
               compromising performance.
             </p>
             <div className="mt-auto">
-              <Button
-                asChild
-                variant="outline"
-                className="bg-gradient-to-r from-orange-500/10 to-amber-600/10 hover:from-orange-500/20 hover:to-amber-600/20"
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
-                <Link href="/products">Learn More</Link>
-              </Button>
+                Learn More
+              </Link>
             </div>
-          </GlassCard>
+          </Card>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Features;

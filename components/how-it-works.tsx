@@ -1,48 +1,25 @@
-import { GlassCard } from "@/components/ui/glass-card";
-import { GradientText } from "@/components/ui/gradient-text";
+import { Card } from "@/components/ui/card";
 import {
   GraduationCap,
   Calendar,
   CreditCard,
   BookOpen,
-  FileText,
-  MonitorCog,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-
-type ServiceVariant = "blue" | "purple" | "green" | "orange" | "multi";
+  Users,
+  Package,
+  Check,
+} from "@phosphor-icons/react";
+import { type ComponentType } from "react";
+import { type ColorVariant } from "@/lib/morphy-ui/types";
+import { type IconWeight } from "@phosphor-icons/react";
 
 interface Service {
   title: string;
-  icon: React.ElementType;
+  icon: ComponentType<{ className?: string; weight?: IconWeight }>;
   description: string[];
-  variant: ServiceVariant;
+  variant: ColorVariant;
 }
 
-const variantColors = {
-  blue: {
-    bg: "bg-blue-100 dark:bg-blue-900/30",
-    text: "text-blue-600 dark:text-blue-400",
-  },
-  purple: {
-    bg: "bg-purple-100 dark:bg-purple-900/30",
-    text: "text-purple-600 dark:text-purple-400",
-  },
-  green: {
-    bg: "bg-green-100 dark:bg-green-900/30",
-    text: "text-green-600 dark:text-green-400",
-  },
-  orange: {
-    bg: "bg-orange-100 dark:bg-orange-900/30",
-    text: "text-orange-600 dark:text-orange-400",
-  },
-  multi: {
-    bg: "bg-blue-100 dark:bg-blue-900/30",
-    text: "text-blue-600 dark:text-blue-400",
-  },
-};
-
-export default function HowItWorks() {
+const HowItWorks = () => {
   const services: Service[] = [
     {
       title: "Admission Management",
@@ -94,7 +71,7 @@ export default function HowItWorks() {
     },
     {
       title: "Purchase & Stores Inventory",
-      icon: MonitorCog,
+      icon: Package,
       description: [
         "Purchase Requisition",
         "Supplier Pricing & Quotation",
@@ -106,7 +83,7 @@ export default function HowItWorks() {
     },
     {
       title: "HRMS & Payroll",
-      icon: FileText,
+      icon: Users,
       description: [
         "Employee Service Book",
         "Claims & Reimbursement",
@@ -128,43 +105,39 @@ export default function HowItWorks() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          How <GradientText variant="blue">iWeb's</GradientText> Campus
-          Digitization Works
+          How{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500">
+            iWeb's
+          </span>{" "}
+          Campus Digitization Works
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <GlassCard key={index} variant={service.variant} intensity="medium">
+            <Card
+              key={index}
+              variant={service.variant}
+              showRipple
+              icon={{ icon: service.icon, title: service.title }}
+            >
               <div className="p-6 flex flex-col h-full">
-                <div className="flex items-center gap-3 mb-4">
-                  <service.icon className="h-5 w-5 text-gray-600 dark:text-gray-300 flex-shrink-0" />
-                  <h3 className="text-lg font-semibold leading-none">
-                    <GradientText variant={service.variant}>
-                      {service.title}
-                    </GradientText>
-                  </h3>
-                </div>
                 <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   {service.description.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <div
-                        className={cn(
-                          "flex-shrink-0 h-4 w-4 rounded-full flex items-center justify-center text-[10px]",
-                          variantColors[service.variant].bg,
-                          variantColors[service.variant].text
-                        )}
-                      >
-                        ✓
+                      <div className="flex-shrink-0 h-4 w-4 rounded-full flex items-center justify-center text-[10px] bg-green-500/20 text-green-500">
+                        <Check weight="bold" />
                       </div>
                       <span className="leading-tight">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </GlassCard>
+            </Card>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default HowItWorks;

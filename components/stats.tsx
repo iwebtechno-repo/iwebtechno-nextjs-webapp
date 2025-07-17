@@ -1,32 +1,44 @@
-import { GlassCard } from "@/components/ui/glass-card";
-import { GradientText } from "@/components/ui/gradient-text";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
-export default function Stats() {
+const gradientVariants: Record<string, string> = {
+  blue: "bg-gradient-to-r from-blue-700 to-blue-500",
+  purple: "bg-gradient-to-r from-purple-700 to-purple-500",
+  green: "bg-gradient-to-r from-green-700 to-green-500",
+  orange: "bg-gradient-to-r from-orange-600 to-orange-400",
+  multi: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
+  gradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
+  link: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
+  none: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
+  outline: "bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400", // default
+};
+
+const Stats = () => {
   const stats = [
     {
       number: "250,000",
       description: "man hours in SaaS",
-      variant: "blue",
+      variant: "blue" as const,
     },
     {
       number: "12+",
       description: "Universities on-boarded",
-      variant: "purple",
+      variant: "purple" as const,
     },
     {
       number: "650+",
       description: "Campuses Digitized",
-      variant: "green",
+      variant: "green" as const,
     },
     {
       number: "1,000,000",
       description: "Students Live",
-      variant: "orange",
+      variant: "orange" as const,
     },
     {
       number: "₹8 Billion+",
       description: "Fees Collected",
-      variant: "multi",
+      variant: "multi" as const,
     },
   ];
 
@@ -41,26 +53,33 @@ export default function Stats() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {stats.map((stat, index) => (
-            <GlassCard
+            <Card
               key={index}
-              intensity="light"
+              effect="glass"
               className="hover:shadow-md transition-all duration-300"
-              variant={stat.variant as any}
+              variant={stat.variant}
             >
               <div className="p-6 text-center">
                 <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                  <GradientText variant={stat.variant as any}>
+                  <span
+                    className={cn(
+                      "bg-clip-text text-transparent",
+                      gradientVariants[stat.variant]
+                    )}
+                  >
                     {stat.number}
-                  </GradientText>
+                  </span>
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
                   {stat.description}
                 </p>
               </div>
-            </GlassCard>
+            </Card>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Stats;

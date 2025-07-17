@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { GlassCard } from "@/components/ui/glass-card";
-import { ArrowRight, Play } from "lucide-react";
-import { GradientText } from "./ui/gradient-text";
+import { Card } from "@/components/ui/card";
+import { Play } from "@phosphor-icons/react";
+import Link from "next/link";
 
-export default function Hero() {
+const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -26,16 +24,21 @@ export default function Hero() {
       <div className="container mx-auto px-4">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div
-            className={`transition-all duration-1000 ${
+            className={`transform-gpu transition-all duration-1000 ${
               isVisible
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
             }`}
           >
             <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-              Transform Your <GradientText variant="multi">Campus</GradientText>{" "}
+              Transform Your{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400">
+                Campus
+              </span>{" "}
               with Digital Solutions for{" "}
-              <GradientText variant="green">Free</GradientText>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 to-green-500">
+                Free
+              </span>
             </h1>
             <p className="mb-8 max-w-lg text-lg text-gray-600 dark:text-gray-300">
               Comprehensive campus digitization solutions designed to streamline
@@ -43,42 +46,45 @@ export default function Hero() {
               growth.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" variant="default">
-                <Link href="/schedule-demo">
-                  Schedule a Demo <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <Link
+                href="/schedule-demo"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-600/90 hover:to-purple-600/90 h-12 px-8"
+              >
+                Get Started
+              </Link>
               <Button
                 variant="outline"
                 size="lg"
-                className="flex items-center gap-2"
+                effect="glass"
+                showRipple
+                icon={{ icon: Play }}
               >
-                <Play className="h-4 w-4" /> Watch Video
+                Watch Video
               </Button>
             </div>
           </div>
 
           <div
-            className={`transition-all duration-1000 delay-300 ${
+            className={`transform-gpu transition-all duration-1000 delay-300 ${
               isVisible
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
             }`}
           >
-            <GlassCard intensity="medium" className="overflow-hidden p-2">
-              <Image
+            <Card className="overflow-hidden p-2">
+              <img
                 src="/placeholder.svg?height=600&width=800"
                 alt="Campus Digitization Dashboard"
                 width={800}
                 height={600}
                 className="rounded-md object-cover"
               />
-            </GlassCard>
+            </Card>
           </div>
         </div>
 
         <div
-          className={`mt-20 transition-all duration-1000 delay-500 ${
+          className={`mt-20 transform-gpu transition-all duration-1000 delay-500 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
@@ -88,7 +94,7 @@ export default function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-8 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
             {[1, 2, 3, 4, 5].map((i) => (
               <div key={i} className="h-12 w-auto">
-                <Image
+                <img
                   src={`/placeholder.svg?height=48&width=120&text=Partner${i}`}
                   alt={`Partner ${i}`}
                   width={120}
@@ -102,4 +108,6 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

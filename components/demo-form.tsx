@@ -1,13 +1,20 @@
 "use client";
 
 import type React from "react";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { GradientText } from "@/components/ui/gradient-text";
-import { CheckCircle2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CheckCircle } from "@phosphor-icons/react";
 
-export default function DemoForm() {
+const DemoForm = () => {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -21,22 +28,20 @@ export default function DemoForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSelectChange = (value: string) => {
+    setFormState((prev) => ({ ...prev, role: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // Show success state
     setIsSubmitted(true);
     setIsSubmitting(false);
   };
@@ -46,11 +51,13 @@ export default function DemoForm() {
       <div className="text-center py-8">
         <div className="flex justify-center mb-6">
           <div className="rounded-full bg-green-100 p-3 dark:bg-green-900/30">
-            <CheckCircle2 className="h-12 w-12 text-green-600 dark:text-green-400" />
+            <CheckCircle className="h-12 w-12 text-green-600 dark:text-green-400" />
           </div>
         </div>
         <h3 className="text-2xl font-bold mb-4">
-          <GradientText variant="green">Thank You!</GradientText>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 to-green-500">
+            Thank You!
+          </span>
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           Your demo request has been received. One of our representatives will
@@ -59,7 +66,8 @@ export default function DemoForm() {
         <Button
           onClick={() => setIsSubmitted(false)}
           variant="outline"
-          className="bg-gradient-to-r from-green-500/10 to-teal-600/10 hover:from-green-500/20 hover:to-teal-600/20"
+          effect="glass"
+          showRipple
         >
           Submit Another Request
         </Button>
@@ -77,14 +85,14 @@ export default function DemoForm() {
           >
             Full Name <span className="text-red-500">*</span>
           </label>
-          <input
+          <Input
             type="text"
             id="name"
             name="name"
             required
             value={formState.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-gray-100"
+            placeholder="John Doe"
           />
         </div>
         <div>
@@ -94,14 +102,14 @@ export default function DemoForm() {
           >
             Email Address <span className="text-red-500">*</span>
           </label>
-          <input
+          <Input
             type="email"
             id="email"
             name="email"
             required
             value={formState.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-gray-100"
+            placeholder="john.doe@example.com"
           />
         </div>
       </div>
@@ -114,13 +122,13 @@ export default function DemoForm() {
           >
             Phone Number
           </label>
-          <input
+          <Input
             type="tel"
             id="phone"
             name="phone"
             value={formState.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-gray-100"
+            placeholder="+1 (555) 123-4567"
           />
         </div>
         <div>
@@ -130,14 +138,14 @@ export default function DemoForm() {
           >
             Institution Name <span className="text-red-500">*</span>
           </label>
-          <input
+          <Input
             type="text"
             id="institution"
             name="institution"
             required
             value={formState.institution}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-gray-100"
+            placeholder="University of Innovation"
           />
         </div>
       </div>
@@ -149,23 +157,25 @@ export default function DemoForm() {
         >
           Your Role <span className="text-red-500">*</span>
         </label>
-        <select
-          id="role"
+        <Select
           name="role"
           required
           value={formState.role}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-gray-100"
+          onValueChange={handleSelectChange}
         >
-          <option value="">Select your role</option>
-          <option value="Vice Chancellor">Vice Chancellor</option>
-          <option value="Dean">Dean</option>
-          <option value="Principal">Principal</option>
-          <option value="IT Director">IT Director</option>
-          <option value="Administrator">Administrator</option>
-          <option value="Faculty">Faculty</option>
-          <option value="Other">Other</option>
-        </select>
+          <SelectTrigger>
+            <SelectValue placeholder="Select your role" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Vice Chancellor">Vice Chancellor</SelectItem>
+            <SelectItem value="Dean">Dean</SelectItem>
+            <SelectItem value="Principal">Principal</SelectItem>
+            <SelectItem value="IT Director">IT Director</SelectItem>
+            <SelectItem value="Administrator">Administrator</SelectItem>
+            <SelectItem value="Faculty">Faculty</SelectItem>
+            <SelectItem value="Other">Other</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div>
@@ -175,21 +185,23 @@ export default function DemoForm() {
         >
           Additional Information
         </label>
-        <textarea
+        <Textarea
           id="message"
           name="message"
           rows={4}
           value={formState.message}
           onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-gray-100"
           placeholder="Tell us about your specific requirements or questions..."
-        ></textarea>
+        />
       </div>
 
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 transition-all duration-300"
+        variant="gradient"
+        effect="fill"
+        showRipple
+        className="w-full"
       >
         {isSubmitting ? "Submitting..." : "Schedule My Demo"}
       </Button>
@@ -206,4 +218,6 @@ export default function DemoForm() {
       </p>
     </form>
   );
-}
+};
+
+export default DemoForm;

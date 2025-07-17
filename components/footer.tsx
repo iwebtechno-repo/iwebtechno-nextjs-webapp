@@ -1,17 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Mail,
+  FacebookLogo,
+  TwitterLogo,
+  LinkedinLogo,
+  Envelope,
   Phone,
-  Award,
-} from "lucide-react";
-import { GradientText } from "@/components/ui/gradient-text";
+  Trophy,
+} from "@phosphor-icons/react";
+import { InstagramIcon } from "@/lib/morphy-ui/morphy";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 to-gray-950 text-white">
       <div className="max-w-7xl mx-auto py-12 px-4">
@@ -29,40 +28,43 @@ export default function Footer() {
             </Link>
             <p className="text-gray-300 mb-4">
               Digitizing educational institutions with innovative{" "}
-              <GradientText variant="blue">SaaS solutions</GradientText>.
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-300">
+                SaaS solutions
+              </span>
+              .
             </p>
             <div className="flex space-x-4 mb-4">
               <Link
                 href="#"
                 className="text-gray-300 hover:text-white transition-colors"
               >
-                <Facebook size={20} />
+                <FacebookLogo size={20} />
               </Link>
               <Link
                 href="#"
                 className="text-gray-300 hover:text-white transition-colors"
               >
-                <Twitter size={20} />
+                <TwitterLogo size={20} />
               </Link>
               <Link
                 href="#"
                 className="text-gray-300 hover:text-white transition-colors"
               >
-                <Instagram size={20} />
+                <InstagramIcon className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
                 className="text-gray-300 hover:text-white transition-colors"
               >
-                <Linkedin size={20} />
+                <LinkedinLogo size={20} />
               </Link>
             </div>
             <div className="flex items-center space-x-2 text-gray-300 mb-2">
-              <Award size={16} />
+              <Trophy size={16} />
               <span className="text-sm">ISO 9001:2015</span>
             </div>
             <div className="flex items-center space-x-2 text-gray-300">
-              <Award size={16} />
+              <Trophy size={16} />
               <span className="text-sm">ISO/IEC 27001:2013</span>
             </div>
           </div>
@@ -70,13 +72,15 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <h3 className="text-lg font-semibold mb-4">
-              <GradientText variant="orange">Contact Us</GradientText>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-orange-300">
+                Contact Us
+              </span>
             </h3>
 
             <div className="mb-4">
               <h4 className="font-semibold mb-2">Sales</h4>
               <div className="flex items-center mb-1">
-                <Mail className="mr-2 h-4 w-4 text-gray-300" />
+                <Envelope className="mr-2 h-4 w-4 text-gray-300" />
                 <a
                   href="mailto:sales@iwebtechno.com"
                   className="text-gray-300 hover:text-white transition-colors"
@@ -93,7 +97,7 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold mb-2">Support</h4>
               <div className="flex items-center mb-1">
-                <Mail className="mr-2 h-4 w-4 text-gray-300" />
+                <Envelope className="mr-2 h-4 w-4 text-gray-300" />
                 <a
                   href="mailto:help@iwebtechno.com"
                   className="text-gray-300 hover:text-white transition-colors"
@@ -111,7 +115,9 @@ export default function Footer() {
           {/* Office Locations */}
           <div>
             <h3 className="text-lg font-semibold mb-4">
-              <GradientText variant="purple">Our Offices</GradientText>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-purple-300">
+                Our Offices
+              </span>
             </h3>
 
             <div className="mb-4">
@@ -152,4 +158,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
