@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Card } from "@/components/ui/card";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const DemoForm = dynamic(() => import("@/components/demo-form"), {
   ssr: false,
@@ -21,10 +22,7 @@ const ScheduleDemoClient = () => {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-              Schedule Your{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400">
-                Personalized Demo
-              </span>
+              Schedule Your <GradientText>Personalized Demo</GradientText>
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
               See how iWebTechno can transform your institution with our

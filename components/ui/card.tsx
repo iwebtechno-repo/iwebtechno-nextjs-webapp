@@ -53,33 +53,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const IconComponent = icon?.icon;
     const iconPosition = icon?.position || "top-left";
 
-    // Icon positioning classes
-    const iconPositionClasses = {
-      "top-left": "absolute top-6 left-6",
-      "top-right": "absolute top-6 right-6",
-      "bottom-left": "absolute bottom-6 left-6",
-      "bottom-right": "absolute bottom-6 right-6",
-    };
-
-    // Calculate padding based on icon position and content
-    const getIconPadding = () => {
-      if (!IconComponent) return "";
-
-      const hasTitleOrSubtitle = icon?.title || icon?.subtitle;
-      const isTopPositioned =
-        iconPosition === "top-left" || iconPosition === "top-right";
-      const isBottomPositioned =
-        iconPosition === "bottom-left" || iconPosition === "bottom-right";
-
-      if (isTopPositioned) {
-        // Add top padding for top-positioned icons
-        return hasTitleOrSubtitle ? "pt-20" : "pt-16";
-      } else if (isBottomPositioned) {
-        // Add bottom padding for bottom-positioned icons
-        return hasTitleOrSubtitle ? "pb-20" : "pb-16";
-      }
-
-      return "";
+    // Icon alignment classes for in-flow layout
+    const iconAlignClasses = {
+      "top-left": "justify-start mb-4",
+      "top-right": "justify-end mb-4 flex-row-reverse",
+      "bottom-left": "justify-start mt-4",
+      "bottom-right": "justify-end mt-4 flex-row-reverse",
     };
 
     const getIconBoxStyle = (isHovered: boolean) => {
@@ -143,12 +122,54 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       props.onMouseLeave?.(e);
     };
 
+    // Helper to render the icon block
+    const renderIconBlock = () => {
+      if (!IconComponent) return null;
+      return (
+        <div
+          className={cn(
+            "flex items-center gap-3 w-full",
+            iconAlignClasses[iconPosition]
+          )}
+        >
+          <div className="relative">
+            <div
+              className={cn(
+                "w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border",
+                getIconBoxStyle(isHovered),
+                !isHovered && "border-primary/20 hover:border-primary/50"
+              )}
+            >
+              <IconComponent
+                className={cn(
+                  "h-5 w-5 transition-colors duration-300",
+                  getIconColor(isHovered)
+                )}
+                weight="regular"
+              />
+            </div>
+          </div>
+          {(icon?.title || icon?.subtitle) && (
+            <div className="flex flex-col">
+              {icon?.title && (
+                <span className="text-sm font-semibold">{icon.title}</span>
+              )}
+              {icon?.subtitle && (
+                <span className="text-xs text-muted-foreground">
+                  {icon.subtitle}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    };
+
     return (
       <div
         ref={ref}
         className={cn(
           "rounded-lg border bg-card text-card-foreground shadow-sm relative p-6",
-          getIconPadding(),
           variantStyles,
           showRipple ? "overflow-hidden" : "",
           className
@@ -157,46 +178,14 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         onMouseLeave={handleMouseLeave}
         {...props}
       >
-        {IconComponent && (
-          <div
-            className={cn(
-              "flex items-center gap-3",
-              iconPositionClasses[iconPosition]
-            )}
-          >
-            <div className="relative">
-              <div
-                className={cn(
-                  "w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border",
-                  getIconBoxStyle(isHovered),
-                  !isHovered && "border-primary/20 hover:border-primary/50"
-                )}
-              >
-                <IconComponent
-                  className={cn(
-                    "h-5 w-5 transition-colors duration-300",
-                    getIconColor(isHovered)
-                  )}
-                  weight="regular"
-                />
-              </div>
-            </div>
-            {(icon.title || icon.subtitle) && (
-              <div className="flex flex-col">
-                {icon.title && (
-                  <span className="text-sm font-semibold">{icon.title}</span>
-                )}
-                {icon.subtitle && (
-                  <span className="text-xs text-muted-foreground">
-                    {icon.subtitle}
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-        )}
+        {/* Render icon block at top or bottom, in flow, never absolute */}
+        {IconComponent &&
+          (iconPosition === "top-left" || iconPosition === "top-right") &&
+          renderIconBlock()}
         {children}
-
+        {IconComponent &&
+          (iconPosition === "bottom-left" || iconPosition === "bottom-right") &&
+          renderIconBlock()}
         {/* Ripple element */}
         {showRipple && ripple && (
           <span

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { MagnifyingGlass, CaretRight } from "@phosphor-icons/react";
+import { GradientText } from "@/components/ui/gradient-text";
 import Footer from "@/components/footer";
 
 // Sample blog posts data
@@ -132,10 +133,7 @@ const BlogClient = () => {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-              The iWebTechno{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
-                Blog
-              </span>
+              The iWebTechno <GradientText>Blog</GradientText>
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
               Insights, trends, and updates on campus digitization and

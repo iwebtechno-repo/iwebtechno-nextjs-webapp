@@ -78,18 +78,17 @@
 ### 7. **Avoid Single-Purpose Styling Components**
 
 - **Do NOT create separate components for simple styling wrappers.** For example, a `GradientText` component that only applies a gradient is an anti-pattern.
-- **DO use Tailwind CSS utility classes directly on `<span>` or other elements.** This keeps the styling logic co-located with the component's structure, increasing portability and reducing component clutter.
-- **Rationale**: Direct utility class usage makes components more self-contained and easier to understand, maintain, and migrate. It avoids unnecessary abstractions for simple styling tasks.
+- **EXCEPTION:** The `GradientText` component from morphy-ui is the ONLY allowed wrapper for gradient text in headers. Use it for all main application/section headers. It automatically applies the brand blue→orange gradient in light mode and orange→blue in dark mode.
+- **DO use Tailwind CSS utility classes directly on `<span>` or other elements for all other gradient text.**
+- **Rationale**: Direct utility class usage makes components more self-contained and easier to understand, maintain, and migrate. It avoids unnecessary abstractions for simple styling tasks, except for the approved header gradient pattern.
 
 ```typescript
-// ❌ WRONG - Anti-pattern: Using a dedicated styling component
+// ✅ CORRECT - For headers
 import { GradientText } from "@/components/ui/gradient-text";
-<GradientText>Hello World</GradientText>
+<h1><GradientText>Header</GradientText></h1>
 
-// ✅ CORRECT - Using Tailwind utilities directly
-<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
-  Hello World
-</span>
+// ✅ CORRECT - For inline gradient text
+<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f] dark:from-[#f49d2f] dark:to-[#0470b6]">Text</span>
 ```
 
 ### 8. **Layout & Spacing Patterns**
@@ -350,3 +349,14 @@ import localImage from '@/public/images/local-image.png';
   height={300}
 />
 ```
+
+### 20. **Accordion Layout & Separator Rules**
+
+- Use shadcn/ui Accordion for all expandable/collapsible lists.
+- On **desktop (md+)**:
+  - Submodules/features should be grouped into rows of two, rendered as a grid.
+  - Each row is a single Accordion with two AccordionItems (left and right) that expand/collapse together.
+  - After each row (except the last), insert a full-width horizontal divider (`<div className="border-b w-full" />`) to act as a row separator. Do NOT use `border-b` on individual AccordionItems for desktop.
+- On **mobile**:
+  - Use a single column with independent AccordionItems, each with its own `border-b` for separation.
+- All colors and gradients must use the brand palette: blue→orange in light mode, orange→blue in dark mode.

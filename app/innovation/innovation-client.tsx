@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const InnovationClient = () => {
   return (
@@ -8,11 +9,7 @@ const InnovationClient = () => {
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Driving{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400 font-bold">
-              Innovation
-            </span>{" "}
-            in Education
+            Driving <GradientText>Innovation</GradientText> in Education
           </h1>
           <p className="text-lg mb-8">
             Discover our innovative approaches to educational technology.

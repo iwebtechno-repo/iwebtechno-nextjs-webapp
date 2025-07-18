@@ -2,18 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  SparkleIcon,
-  CaretRightIcon,
-  ListChecksIcon,
-  CheckCircleIcon,
-  PlusCircleIcon,
-  WarningCircleIcon,
-  ArrowRightIcon,
-  GearIcon,
-  HouseIcon,
-  type Icon as PhosphorIconType,
-} from "@phosphor-icons/react";
+import { CaretRightIcon, SparkleIcon } from "@phosphor-icons/react";
 import {
   Accordion,
   AccordionItem,
@@ -21,178 +10,132 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import {
+  CalendarIcon,
+  UsersIcon,
+  GraduationCapIcon,
+  UserPlusIcon,
+  ChalkboardTeacherIcon,
   BookOpenIcon,
-  BuildingsIcon,
-  FileArrowUpIcon,
-  FileTextIcon,
-  UserIcon,
-  UserListIcon,
+  ListChecksIcon,
+  ClockIcon,
+  CheckCircleIcon,
+  PlusCircleIcon,
+  ArrowsClockwiseIcon,
+  WarningCircleIcon,
+  ChartBarIcon,
+  type Icon as PhosphorIconType,
 } from "@phosphor-icons/react";
 import React from "react";
 import { GradientText } from "@/components/ui/gradient-text";
 
 const sampleScreens = [
   {
-    name: "Login Screen",
-    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-admission2-v01.jpg",
+    name: "Dashboard",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-attendance-1-v01.jpg",
   },
   {
-    name: "Student Details",
-    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-admission3.jpg",
+    name: "Time Table",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-attendance-2-v01.jpg",
   },
   {
-    name: "Admission Dashboard",
-    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-admission3-v01.jpg",
+    name: "Attendance Dashboard",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-attendance-3-v01.jpg",
   },
 ];
 
 const submodules = [
   {
-    code: "MU",
-    title: "Maintain University",
-    desc: "Register universities and manage details such as name, address, and academic years. Start academic years by adding courses/programs.",
+    code: "SFT",
+    title: "Student / Faculty Timetable Creation",
+    desc: "Generate timetables for students and faculty for each college, with detailed scheduling.",
   },
   {
-    code: "CR",
-    title: "College Registration",
-    desc: "Colleges can register online and provide all necessary information for onboarding.",
-  },
-  {
-    code: "MC",
-    title: "Maintain Colleges",
-    desc: "Register colleges, categorize them, and manage their programs, courses, and departments.",
-  },
-  {
-    code: "IEU",
-    title: "Import/Export Utility",
-    desc: "Import and export students, courses, and results in Excel, CSV, or SQL format.",
-  },
-  {
-    code: "PC",
-    title: "Programs Creation",
-    desc: "Create various types of programs (Diploma, Certificate, Graduate, Postgraduate, etc.).",
-  },
-  {
-    code: "CC",
-    title: "Courses/Subjects Creation",
-    desc: "Create and map courses/subjects to programs and semesters.",
-  },
-  {
-    code: "OR",
-    title: "Online Registration",
-    desc: "Students can register and select courses for their chosen program.",
-  },
-  {
-    code: "OA",
-    title: "Online Admission",
-    desc: "Facilitate online admission and course mapping for students.",
-  },
-  {
-    code: "OAP",
-    title: "Online Admission Portal Config",
-    desc: "Configure program settings, prospectus fees, entrance fees, and timetable preferences.",
-  },
-  {
-    code: "ORW",
-    title: "Offline Registration/Walk-ins",
-    desc: "Admin cell can register walk-in students and manage their program registrations.",
-  },
-  {
-    code: "SRP",
-    title: "Student Registration Process",
-    desc: "Centralized admission and registration with quota/non-quota system and fee category assignment.",
-  },
-  {
-    code: "SEP",
-    title: "Students Eligibility Process",
-    desc: "Document verification and eligibility checks after profile submission.",
-  },
-  {
-    code: "SIF",
-    title: "Students Information System",
-    desc: "Centralized access to student information for universities and boards, with approval/rejection workflows.",
+    code: "SC",
+    title: "Scholarship & Concession",
+    desc: "Automate fee waivers and concessions as per government rules for qualifying students.",
   },
   {
     code: "AC",
-    title: "Admission Cancellation",
-    desc: "Configurable rules for admission cancellation and fee refunds.",
+    title: "Academic Calendar",
+    desc: "Create and manage academic calendars, including holidays and semester dates, for each program.",
   },
   {
-    code: "AT",
-    title: "Admission Transfer",
-    desc: "Transfer students between colleges in multi-campus setups.",
+    code: "AB",
+    title: "Allot Batches",
+    desc: "Distribute students into batches for practical and tutorial sessions.",
   },
   {
-    code: "SP",
-    title: "Student Profile (Mailing and SMS list)",
-    desc: "Maintain complete student profiles, including mailing and SMS lists.",
+    code: "ACB",
+    title: "Allot Clinical Batches",
+    desc: "Assign students to clinical and tutorial batches for hands-on learning.",
   },
   {
-    code: "R-Reg",
-    title: "Re-registration",
-    desc: "Allow repeaters and students with backlogs to re-register for courses.",
+    code: "FCA",
+    title: "Faculty Course Allocation",
+    desc: "Allocate courses to faculty for each college, managed by the college admin.",
   },
   {
-    code: "ERG",
-    title: "Enrollment and Roll Number Generation",
-    desc: "Automatically generate roll numbers for confirmed admissions.",
+    code: "CTM",
+    title: "Course Topic Master",
+    desc: "Maintain topics and subtopics for theory, practical, clinical, and tutorial subjects.",
   },
   {
-    code: "CR2",
-    title: "Course Registration",
-    desc: "Enable students to register for offered and elective courses, including backlogs.",
+    code: "CP",
+    title: "Course Planner",
+    desc: "Assign faculty to topics and subtopics for scheduled lectures.",
   },
   {
-    code: "SPT",
-    title: "Single Click Program/Semester Transfer",
-    desc: "Promote students to the next semester/year or transfer to other programs.",
+    code: "TTC",
+    title: "Time Table Creation",
+    desc: "Create department- and course-wise timetables, manage teacher/classroom clashes.",
   },
   {
-    code: "SCT",
-    title: "Special Configurable Treatment for Reserve Class Students",
-    desc: "Configure reservation rules as per government policies.",
+    code: "SA",
+    title: "Student Attendance",
+    desc: "Mark attendance manually or digitally for each class, subject, or full day.",
   },
   {
-    code: "CEG",
-    title: "Configurable Enrollment Generation",
-    desc: "Flexible enrollment generation for various academic needs.",
+    code: "MLA",
+    title: "Mark Extra Lecture Attendance",
+    desc: "Record attendance for extra lectures conducted by teachers.",
   },
   {
-    code: "HGM",
-    title: "Hostel & Guest House Management",
-    desc: "Manage hostels, guest houses, room allocation, and asset management.",
+    code: "MAR",
+    title: "Mark Attendance for Replaced/Swapped Lectures",
+    desc: "Track attendance for lectures that are replaced or swapped by teachers.",
+  },
+  {
+    code: "CDM",
+    title: "Condone & Defaulter Management",
+    desc: "Manage condonation for short attendance and generate defaulter lists instantly.",
+  },
+  {
+    code: "MRG",
+    title: "Statistical Report Generation",
+    desc: "Generate detailed statistical and graphical attendance reports.",
   },
 ];
 
 // Map submodule code to icon
 const submoduleIcons: Record<string, PhosphorIconType> = {
-  MU: BuildingsIcon,
-  CR: UserListIcon,
-  MC: BuildingsIcon,
-  IEU: FileArrowUpIcon,
-  PC: FileTextIcon,
-  CC: BookOpenIcon,
-  OR: UserIcon,
-  OA: UserListIcon,
-  OAP: GearIcon,
-  ORW: UserListIcon,
-  SRP: UserListIcon,
-  SEP: CheckCircleIcon,
-  SIF: UserListIcon,
-  AC: WarningCircleIcon,
-  AT: ArrowRightIcon,
-  SP: UserIcon,
-  "R-Reg": PlusCircleIcon,
-  ERG: ListChecksIcon,
-  CR2: ListChecksIcon,
-  SPT: ArrowRightIcon,
-  SCT: GearIcon,
-  CEG: GearIcon,
-  HGM: HouseIcon,
+  SFT: CalendarIcon,
+  SC: GraduationCapIcon,
+  AC: CalendarIcon,
+  AB: UsersIcon,
+  ACB: UserPlusIcon,
+  FCA: ChalkboardTeacherIcon,
+  CTM: BookOpenIcon,
+  CP: ListChecksIcon,
+  TTC: ClockIcon,
+  SA: CheckCircleIcon,
+  MLA: PlusCircleIcon,
+  MAR: ArrowsClockwiseIcon,
+  CDM: WarningCircleIcon,
+  MRG: ChartBarIcon,
 };
 
-const AdmissionManagementPage = () => {
-  // Split submodules into two columns, top-down
+const StudentAttendancePage = () => {
+  // Group submodules into rows of two
   const rows = [];
   for (let i = 0; i < submodules.length; i += 2) {
     rows.push([submodules[i], submodules[i + 1]]);
@@ -209,19 +152,19 @@ const AdmissionManagementPage = () => {
           className="p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl"
         >
           <img
-            src="https://iwebtechno.com/wp-content/uploads/2019/11/icon-admission-management.jpg"
-            alt="Admission Management System"
+            src="https://iwebtechno.com/wp-content/uploads/2019/11/icon-student-attendance.jpg"
+            alt="Student Attendance System"
             className="w-40 h-32 rounded-xl object-cover shadow-lg border border-white/30 bg-white/10"
           />
           <div className="flex-1">
             <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
-              <GradientText>Admission Management</GradientText>
+              <GradientText>Student Attendance</GradientText>
             </h1>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Digitize your University, College, School, or Coaching Classes
-              with our comprehensive Admission Management module. Integrates
-              seamlessly with Fee Collection, Accounts, and Payment Gateways
-              (including UPI, QR, BBPS, and more).
+              with our advanced Attendance Management module. Integrated with
+              biometric devices and face readers for real-time, seamless
+              attendance tracking for students and staff.
             </p>
             <Button
               variant="gradient"
@@ -242,25 +185,25 @@ const AdmissionManagementPage = () => {
       {/* Features Section */}
       <section className="max-w-5xl mx-auto mb-16">
         <h2 className="text-2xl font-semibold mb-6">
-          <GradientText>Key Features</GradientText>
+          <GradientText>Why Choose Our Attendance Module?</GradientText>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card variant="blue" effect="glass" showRipple className="p-6">
             <p className="text-gray-600 dark:text-gray-400 font-semibold mb-2">
-              Online & Offline Admissions
+              Real-Time Biometric & Face Reader Integration
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              Manage both online and walk-in admissions, with seamless
-              integration to payment gateways and document verification.
+              Supports biometric handhelds and face readers for instant,
+              accurate attendance capture for both students and staff.
             </p>
           </Card>
           <Card variant="purple" effect="glass" showRipple className="p-6">
             <p className="text-gray-600 dark:text-gray-400 font-semibold mb-2">
-              Automated Fee Collection
+              Alerts, Notifications & Exam Integration
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              Ready APIs for online fee collection with leading banks, fintech,
-              and government-mandated systems (BBPS, UPI, QR).
+              Automated alerts, notifications, and seamless integration with the
+              examination process for complete workflow automation.
             </p>
           </Card>
         </div>
@@ -390,12 +333,11 @@ const AdmissionManagementPage = () => {
       <section className="max-w-5xl mx-auto mb-16 text-center">
         <Card variant="gradient" effect="glass" showRipple className="p-8">
           <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
-            Ready to transform your admissions?
+            Ready to digitize your attendance?
           </h3>
           <p className="mb-4 text-gray-700 dark:text-gray-300">
-            Contact us for a personalized demo and see how our Admission
-            Management module can streamline your institute's enrollment
-            process.
+            Contact us for a personalized demo and see how our Attendance
+            Management module can automate your institute's attendance process.
           </p>
           <Button
             variant="gradient"
@@ -415,4 +357,4 @@ const AdmissionManagementPage = () => {
   );
 };
 
-export default AdmissionManagementPage;
+export default StudentAttendancePage;

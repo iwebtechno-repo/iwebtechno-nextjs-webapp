@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { type ColorVariant, type ComponentEffect } from "@/lib/morphy-ui/types";
@@ -42,7 +41,6 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
   variant?: ColorVariant;
   effect?: ComponentEffect;
   showRipple?: boolean;
@@ -61,7 +59,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "gradient",
       effect = "glass",
       size,
-      asChild = false,
       showRipple = false,
       icon,
       children,
@@ -69,7 +66,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
     const { addRipple, resetRipple, ripple } = useRipple();
     const iconWeight = useIconWeight();
 
@@ -87,7 +83,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (showRipple) {
         addRipple(e);
       }
-      // Call the original onMouseEnter if it exists
       props.onMouseEnter?.(e);
     };
 
@@ -95,12 +90,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (showRipple) {
         resetRipple();
       }
-      // Call the original onMouseLeave if it exists
       props.onMouseLeave?.(e);
     };
 
     return (
-      <Comp
+      <button
         className={cn(
           buttonVariants({ size }),
           variantStyles,
@@ -110,21 +104,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        type={props.type || "button"}
         {...props}
       >
         {IconComponent && (
           <IconComponent
-            className={cn(
-              "h-4 w-4",
-              // Apply margin only when there's text content
-              hasTextContent ? "mr-2.5" : "",
-              iconColor
-            )}
+            className={cn("h-4 w-4", hasTextContent ? "mr-2.5" : "", iconColor)}
             weight={icon?.weight || iconWeight}
           />
         )}
         {children}
-
         {/* Ripple element */}
         {showRipple && ripple && (
           <span
@@ -141,7 +130,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             }}
           />
         )}
-      </Comp>
+      </button>
     );
   }
 );

@@ -1,4 +1,4 @@
-# iWeb Design System (v3.2)
+# GenZDealZ Design System (v3.2)
 
 ## 🎯 Core Rules
 
@@ -75,7 +75,23 @@
   - `icon`: `{ icon: IconComponent, title?: string, subtitle?: string }`
 - **Only use className for custom positioning, layout, or unique styling not covered by morphy props**
 
-### 7. **Layout & Spacing Patterns**
+### 7. **Avoid Single-Purpose Styling Components**
+
+- **Do NOT create separate components for simple styling wrappers.** For example, a `GradientText` component that only applies a gradient is an anti-pattern.
+- **EXCEPTION:** The `GradientText` component from morphy-ui is the ONLY allowed wrapper for gradient text in headers. Use it for all main application/section headers. It automatically applies the brand blue→orange gradient in light mode and orange→blue in dark mode.
+- **DO use Tailwind CSS utility classes directly on `<span>` or other elements for all other gradient text.**
+- **Rationale**: Direct utility class usage makes components more self-contained and easier to understand, maintain, and migrate. It avoids unnecessary abstractions for simple styling tasks, except for the approved header gradient pattern.
+
+```typescript
+// ✅ CORRECT - For headers
+import { GradientText } from "@/components/ui/gradient-text";
+<h1><GradientText>Header</GradientText></h1>
+
+// ✅ CORRECT - For inline gradient text
+<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f] dark:from-[#f49d2f] dark:to-[#0470b6]">Text</span>
+```
+
+### 8. **Layout & Spacing Patterns**
 
 - **Navbar-aware layouts**: Always account for fixed navbar height (7rem/112px) in layout calculations
 - **Consistent container widths**: Use `w-64` (16rem) for sidebars, full width for main content areas
@@ -86,7 +102,7 @@
 - **Height calculations**: Use `h-screen` for full viewport, `calc(100vh - 7rem)` for navbar-aware layouts
 - **Gap management**: Minimize gaps between sidebar and main content (use consistent width units)
 
-### 8. **State Management & Interactions**
+### 9. **State Management & Interactions**
 
 - **Active state prominence**: Make active states significantly more prominent than hover states
 - **State hierarchy**: Active > Hover > Default (clear visual distinction between each)
@@ -94,7 +110,7 @@
 - **State persistence**: Use `isActive` prop for persistent state management
 - **Event handling**: Always prevent event bubbling when needed (`e.stopPropagation()`)
 
-### 9. **Accessibility & UX Patterns**
+### 10. **Accessibility & UX Patterns**
 
 - **Keyboard navigation**: All interactive elements must be keyboard accessible
 - **ARIA labels**: Use descriptive `aria-label` for all interactive elements
@@ -102,7 +118,7 @@
 - **Focus management**: Ensure proper focus order and visible focus indicators
 - **Screen reader support**: Use semantic HTML and proper ARIA attributes
 
-### 10. **Toast Notifications (Sonner)**
+### 11. **Toast Notifications (Sonner)**
 
 - **Only one `<Toaster />` (Sonner) should be mounted in the app, and it must be placed in `app/layout.tsx`.**
 - **Do NOT add `<Toaster />` to individual app router pages.**
@@ -300,26 +316,6 @@ SocialIcons.Instagram   // InstagramIcon component
 _Last Updated: 2024-12_
 _Version: 3.2_
 
-### 4. **Text Overflow & Tooltips**
-
-- **Always add tooltips for truncated text**: Use native HTML `title` attribute with `truncate` class
-- **Automatic overflow detection**: Browser will only show tooltip when text is actually truncated
-- **Implementation pattern**:
-
-```typescript
-// ✅ CORRECT - Native tooltip for overflow
-<p className="truncate" title="Full text content">
-  Truncated text content
-</p>
-
-// ❌ WRONG - No tooltip for truncated text
-<p className="truncate">
-  Truncated text content
-</p>
-```
-
-- **Use cases**: Chat titles, button labels, card titles, navigation items, any text that might overflow
-
 ## 🖼️ Images & Media
 
 ### 20. **Image Component Usage**
@@ -353,3 +349,14 @@ import localImage from '@/public/images/local-image.png';
   height={300}
 />
 ```
+
+### 20. **Accordion Layout & Separator Rules**
+
+- Use shadcn/ui Accordion for all expandable/collapsible lists.
+- On **desktop (md+)**:
+  - Submodules/features should be grouped into rows of two, rendered as a grid.
+  - Each row is a single Accordion with two AccordionItems (left and right) that expand/collapse together.
+  - After each row (except the last), insert a full-width horizontal divider (`<div className="border-b w-full" />`) to act as a row separator. Do NOT use `border-b` on individual AccordionItems for desktop.
+- On **mobile**:
+  - Use a single column with independent AccordionItems, each with its own `border-b` for separation.
+- All colors and gradients must use the brand palette: blue→orange in light mode, orange→blue in dark mode.
