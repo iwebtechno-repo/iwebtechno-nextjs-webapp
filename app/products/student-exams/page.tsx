@@ -1,14 +1,14 @@
 "use client";
 
+import React from "react";
 import { ProductPageHeader } from "@/components/ui/product-page-header";
-import { GradientIcon } from "@/components/ui/gradient-icon";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
 import { gradients } from "@/lib/morphy-ui/morphy";
@@ -20,8 +20,8 @@ import {
   PlusCircleIcon,
   ChartBar,
   BookOpen,
-  type Icon as PhosphorIconType,
 } from "@phosphor-icons/react";
+import { type IconWeight } from "@phosphor-icons/react";
 import Link from "next/link";
 
 const submodules = [
@@ -168,38 +168,6 @@ const submodules = [
   },
 ];
 
-const submoduleIcons: Record<string, PhosphorIconType> = {
-  EPC: ListChecksIcon,
-  ERC: ListChecksIcon,
-  RH: CheckCircleIcon,
-  ES: ChartBar,
-  ECA: BookOpen,
-  EC: BookOpen,
-  SA: CheckCircleIcon,
-  EEM: PlusCircleIcon,
-  I: WarningCircleIcon,
-  QPU: BookOpen,
-  AM: ListChecksIcon,
-  IM: ChartBar,
-  FAF: PlusCircleIcon,
-  EA: CheckCircleIcon,
-  CAP: WarningCircleIcon,
-  ASE: BookOpen,
-  FMF: ChartBar,
-  RG: ListChecksIcon,
-  RLP: PlusCircleIcon,
-  RE: WarningCircleIcon,
-  GCG: BookOpen,
-  TSG: ChartBar,
-  DG: ListChecksIcon,
-  CP: PlusCircleIcon,
-  RAS: WarningCircleIcon,
-  ER: BookOpen,
-  ERS: ChartBar,
-  MR: ListChecksIcon,
-  CP2: PlusCircleIcon,
-};
-
 const StudentExamsPage = () => {
   // Group submodules into rows of two for desktop
   const rows = [];
@@ -210,46 +178,73 @@ const StudentExamsPage = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
       <ProductPageHeader
-        title="Student Exams & Results"
-        subtitle="Examination Management System"
-        description="Our Student Exams & Results module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. Comprehensive examination management from scheduling to result generation."
+        title="Student Exams"
+        subtitle="Digital Examination System"
+        description="Our Student Exams module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. We cover end to end examination rules for Indian Government University digitization."
         icon={SparkleIcon}
         patternType="exams"
+        backgroundImage="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
 
       {/* Features Section */}
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={SparkleIcon} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Exam Scheduling</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: SparkleIcon,
+                title: "Exam Scheduling",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Automated exam scheduling and timetable management
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={BookOpen} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Question Papers</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: BookOpen,
+                title: "Question Papers",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Secure question paper upload and download system
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={ChartBar} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Result Processing</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: ChartBar,
+                title: "Result Processing",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Automated result generation and grade calculation
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={CheckCircleIcon} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">
-                Attendance Tracking
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: CheckCircleIcon,
+                title: "Attendance Tracking",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Exam attendance monitoring and reporting
-              </p>
+              </CardDescription>
             </Card>
           </div>
         </div>
@@ -259,13 +254,17 @@ const StudentExamsPage = () => {
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              <GradientText>Comprehensive Modules</GradientText>
-            </h2>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-lg flex items-center justify-center">
+                <SparkleIcon className="w-6 h-6 text-white dark:text-black" />
+              </div>
+              <h2 className="text-3xl font-bold">
+                <GradientText>Comprehensive Modules</GradientText>
+              </h2>
+            </div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Explore our complete suite of examination and result management
-              features designed to streamline every aspect of academic
-              assessment.
+              Explore our complete suite of student exam features designed to
+              streamline every aspect of examination management.
             </p>
           </div>
 
@@ -280,22 +279,22 @@ const StudentExamsPage = () => {
                         submodule && (
                           <AccordionItem
                             key={submodule.code}
-                            value={submodule.code}
+                            value={`row-${rowIndex}`}
                             className="border rounded-lg"
                           >
-                            <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                            <AccordionTrigger className="px-6 py-2 hover:no-underline">
                               <div className="flex items-center gap-4 text-left">
-                                <GradientIcon
-                                  icon={submoduleIcons[submodule.code]}
-                                  size="sm"
-                                />
+                                <div className="flex items-center gap-3">
+                                  <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center text-white dark:text-black text-xs font-bold">
+                                    {submodules.findIndex(
+                                      (s) => s.code === submodule.code
+                                    ) + 1}
+                                  </span>
+                                </div>
                                 <div>
                                   <h3 className="font-semibold text-lg">
                                     {submodule.title}
                                   </h3>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    {submodule.desc}
-                                  </p>
                                 </div>
                               </div>
                             </AccordionTrigger>
@@ -330,17 +329,17 @@ const StudentExamsPage = () => {
                   value={submodule.code}
                   className="border rounded-lg"
                 >
-                  <AccordionTrigger className="px-4 py-4 hover:no-underline">
+                  <AccordionTrigger className="px-4 py-2 hover:no-underline">
                     <div className="flex items-center gap-3 text-left">
-                      <GradientIcon
-                        icon={submoduleIcons[submodule.code]}
-                        size="sm"
-                      />
+                      <div className="flex items-center gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center text-white dark:text-black text-xs font-bold">
+                          {submodules.findIndex(
+                            (s) => s.code === submodule.code
+                          ) + 1}
+                        </span>
+                      </div>
                       <div>
                         <h3 className="font-semibold">{submodule.title}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {submodule.desc}
-                        </p>
                       </div>
                     </div>
                   </AccordionTrigger>

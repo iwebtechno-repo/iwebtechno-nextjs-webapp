@@ -47,7 +47,6 @@ export interface ButtonProps
   icon?: {
     icon: React.ComponentType<{ className?: string; weight?: IconWeight }>;
     title?: string;
-    subtitle?: string;
     weight?: IconWeight;
   };
 }

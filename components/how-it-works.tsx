@@ -33,7 +33,7 @@ const HowItWorks = () => {
         "Import/Export Utility",
         "Program Creation",
       ],
-      variant: "blue",
+      variant: "gradient",
     },
     {
       title: "Student Attendance",
@@ -45,7 +45,7 @@ const HowItWorks = () => {
         "Faculty course allocation",
         "Time Table Creation",
       ],
-      variant: "blue",
+      variant: "gradient",
     },
     {
       title: "Fee Collection",
@@ -57,7 +57,7 @@ const HowItWorks = () => {
         "Funds & Grants Management",
         "Online Budgeting",
       ],
-      variant: "blue",
+      variant: "gradient",
     },
     {
       title: "Student Exams & Results",
@@ -69,7 +69,7 @@ const HowItWorks = () => {
         "Answer sheet encoding",
         "Degree generation",
       ],
-      variant: "blue",
+      variant: "gradient",
     },
     {
       title: "Purchase & Stores Inventory",
@@ -81,7 +81,7 @@ const HowItWorks = () => {
         "Goods Inward/GRN",
         "Inventory with Barcode",
       ],
-      variant: "blue",
+      variant: "gradient",
     },
     {
       title: "HRMS & Payroll",
@@ -93,7 +93,7 @@ const HowItWorks = () => {
         "Arrear & Bonus",
         "Loan Management",
       ],
-      variant: "blue",
+      variant: "gradient",
     },
   ];
 
@@ -126,9 +126,7 @@ const HowItWorks = () => {
                 <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   {service.description.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2">
-                      <div
-                        className={`flex-shrink-0 h-4 w-4 rounded-full flex items-center justify-center text-[10px] bg-[${colors.blue[500]}]/20 text-[${colors.blue[500]}]`}
-                      >
+                      <div className="flex-shrink-0 h-4 w-4 rounded-full flex items-center justify-center text-[10px] bg-[#0470b6]/20 text-[#0470b6] dark:bg-[#fbbf24]/20 dark:text-[#fbbf24]">
                         <Check weight="bold" />
                       </div>
                       <span className="leading-tight">{item}</span>

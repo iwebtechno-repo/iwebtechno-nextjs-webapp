@@ -1,6 +1,5 @@
 import { type IconWeight } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import { gradients } from "@/lib/morphy-ui/morphy";
 
 interface GradientIconProps {
   icon: React.ComponentType<{ className?: string; weight?: IconWeight }>;
@@ -22,13 +21,12 @@ export const GradientIcon = ({
   return (
     <div
       className={cn(
-        "flex-shrink-0 bg-gradient-to-r rounded-lg flex items-center justify-center",
-        gradients.brand,
+        "flex-shrink-0 bg-gradient-to-r rounded-lg flex items-center justify-center from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b]",
         sizeClasses[size],
         className
       )}
     >
-      <IconComponent className="text-white" />
+      <IconComponent className="text-white dark:text-black" />
     </div>
   );
 };

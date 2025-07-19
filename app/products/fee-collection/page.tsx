@@ -1,14 +1,14 @@
 "use client";
 
+import React from "react";
 import { ProductPageHeader } from "@/components/ui/product-page-header";
-import { GradientIcon } from "@/components/ui/gradient-icon";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
 import { gradients } from "@/lib/morphy-ui/morphy";
@@ -21,8 +21,8 @@ import {
   PlusCircleIcon,
   WarningCircleIcon,
   ListChecksIcon,
-  type IconWeight,
 } from "@phosphor-icons/react";
+import { type IconWeight } from "@phosphor-icons/react";
 import Link from "next/link";
 
 const submodules = [
@@ -73,21 +73,6 @@ const submodules = [
   },
 ];
 
-const submoduleIcons: Record<
-  string,
-  React.ComponentType<{ className?: string; weight?: IconWeight }>
-> = {
-  FM: ListChecksIcon,
-  FPO: PlusCircleIcon,
-  FI: ListChecksIcon,
-  FPC: WarningCircleIcon,
-  FR: CheckCircleIcon,
-  MFP: PlusCircleIcon,
-  OP: ChartBar,
-  FIM: BookOpen,
-  OB: ChartBar,
-};
-
 const FeeCollectionPage = () => {
   // Group submodules into rows of two for desktop
   const rows = [];
@@ -98,46 +83,73 @@ const FeeCollectionPage = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
       <ProductPageHeader
-        title="Fee Collection & Finance"
-        subtitle="Financial Management System"
-        description="Our Online Fee Collection module is integrated with Accounts and Finance and it will digitize your University, College, School or even Coaching Classes / Tutorials with ease. Multiple payment modes including UPI, BBPS, and traditional methods."
+        title="Fee Collection"
+        subtitle="Digital Payment System"
+        description="Our Fee Collection module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. We cover end to end fee collection rules for Indian Government University digitization."
         icon={SparkleIcon}
         patternType="finance"
+        backgroundImage="https://wallpaper-house.com/data/out/8/wallpaper2you_264665.jpg"
       />
 
       {/* Features Section */}
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={SparkleIcon} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Online Payments</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: SparkleIcon,
+                title: "Online Payments",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Multiple payment gateways with real-time processing
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={GraduationCap} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Fee Management</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: GraduationCap,
+                title: "Fee Management",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Flexible fee structures with installment options
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={ChartBar} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Financial Reports</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: ChartBar,
+                title: "Financial Reports",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Comprehensive financial analytics and reporting
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={BookOpen} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">
-                Account Integration
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              icon={{
+                icon: BookOpen,
+                title: "Account Integration",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Seamless integration with accounting systems
-              </p>
+              </CardDescription>
             </Card>
           </div>
         </div>
@@ -147,12 +159,17 @@ const FeeCollectionPage = () => {
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              <GradientText>Comprehensive Modules</GradientText>
-            </h2>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-lg flex items-center justify-center">
+                <SparkleIcon className="w-6 h-6 text-white dark:text-black" />
+              </div>
+              <h2 className="text-3xl font-bold">
+                <GradientText>Comprehensive Modules</GradientText>
+              </h2>
+            </div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Explore our complete suite of fee collection and finance features
-              designed to streamline every aspect of financial management.
+              Explore our complete suite of fee collection features designed to
+              streamline every aspect of financial management.
             </p>
           </div>
 
@@ -167,22 +184,22 @@ const FeeCollectionPage = () => {
                         submodule && (
                           <AccordionItem
                             key={submodule.code}
-                            value={submodule.code}
+                            value={`row-${rowIndex}`}
                             className="border rounded-lg"
                           >
-                            <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                            <AccordionTrigger className="px-6 py-2 hover:no-underline">
                               <div className="flex items-center gap-4 text-left">
-                                <GradientIcon
-                                  icon={submoduleIcons[submodule.code]}
-                                  size="sm"
-                                />
+                                <div className="flex items-center gap-3">
+                                  <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center text-white dark:text-black text-xs font-bold">
+                                    {submodules.findIndex(
+                                      (s) => s.code === submodule.code
+                                    ) + 1}
+                                  </span>
+                                </div>
                                 <div>
                                   <h3 className="font-semibold text-lg">
                                     {submodule.title}
                                   </h3>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    {submodule.desc}
-                                  </p>
                                 </div>
                               </div>
                             </AccordionTrigger>
@@ -217,17 +234,17 @@ const FeeCollectionPage = () => {
                   value={submodule.code}
                   className="border rounded-lg"
                 >
-                  <AccordionTrigger className="px-4 py-4 hover:no-underline">
+                  <AccordionTrigger className="px-4 py-2 hover:no-underline">
                     <div className="flex items-center gap-3 text-left">
-                      <GradientIcon
-                        icon={submoduleIcons[submodule.code]}
-                        size="sm"
-                      />
+                      <div className="flex items-center gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center text-white dark:text-black text-xs font-bold">
+                          {submodules.findIndex(
+                            (s) => s.code === submodule.code
+                          ) + 1}
+                        </span>
+                      </div>
                       <div>
                         <h3 className="font-semibold">{submodule.title}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {submodule.desc}
-                        </p>
                       </div>
                     </div>
                   </AccordionTrigger>

@@ -25,8 +25,8 @@ const ScheduleDemoClient = () => {
               Schedule Your <GradientText>Personalized Demo</GradientText>
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
-              See how iWebTechno can transform your institution with our
-              comprehensive campus digitization solutions.
+              See how iWebTechno can transform your institution with our digital
+              solutions for free.
             </p>
           </div>
 

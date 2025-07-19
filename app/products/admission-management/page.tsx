@@ -1,14 +1,14 @@
 "use client";
 
+import React from "react";
 import { ProductPageHeader } from "@/components/ui/product-page-header";
-import { GradientIcon } from "@/components/ui/gradient-icon";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
 import {
@@ -69,20 +69,6 @@ const submodules = [
   },
 ];
 
-const submoduleIcons: Record<
-  string,
-  React.ComponentType<{ className?: string; weight?: IconWeight }>
-> = {
-  OF: ListChecksIcon,
-  DP: BookOpen,
-  PG: ChartBar,
-  AS: CheckCircleIcon,
-  AP: PlusCircleIcon,
-  RM: WarningCircleIcon,
-  FC: ChartBar,
-  RP: ListChecksIcon,
-};
-
 const AdmissionManagementPage = () => {
   // Group submodules into rows of two for desktop
   const rows = [];
@@ -95,46 +81,75 @@ const AdmissionManagementPage = () => {
       <ProductPageHeader
         title="Admission Management"
         subtitle="Digital Enrollment System"
-        description="Streamline your admission process with our comprehensive digital enrollment system. From online applications to fee collection, manage the entire student journey efficiently."
+        description="Our Admission Management module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. We cover end to end admission rules for Indian Government University digitization."
         icon={SparkleIcon}
         patternType="admission"
+        backgroundImage="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
 
       {/* Features Section */}
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={SparkleIcon} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">
-                Online Applications
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              showRipple
+              icon={{
+                icon: SparkleIcon,
+                title: "Online Applications",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Digital application forms with real-time validation
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={GraduationCap} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">
-                Document Management
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              showRipple
+              icon={{
+                icon: GraduationCap,
+                title: "Document Management",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Secure storage and verification of student documents
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={ChartBar} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Fee Collection</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              showRipple
+              icon={{
+                icon: ChartBar,
+                title: "Fee Collection",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Integrated payment processing and receipt generation
-              </p>
+              </CardDescription>
             </Card>
-            <Card variant="none" className="text-center p-6">
-              <GradientIcon icon={BookOpen} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Admission Reports</h3>
-              <p className="text-gray-600 dark:text-gray-300">
+            <Card
+              variant="none"
+              effect="glass"
+              showRipple
+              icon={{
+                icon: BookOpen,
+                title: "Admission Reports",
+                gradient: true,
+              }}
+              className="text-center p-6"
+            >
+              <CardDescription>
                 Comprehensive analytics and reporting dashboard
-              </p>
+              </CardDescription>
             </Card>
           </div>
         </div>
@@ -144,9 +159,14 @@ const AdmissionManagementPage = () => {
       <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              <GradientText>Comprehensive Modules</GradientText>
-            </h2>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-lg flex items-center justify-center">
+                <SparkleIcon className="w-6 h-6 text-white dark:text-black" />
+              </div>
+              <h2 className="text-3xl font-bold">
+                <GradientText>Comprehensive Modules</GradientText>
+              </h2>
+            </div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Explore our complete suite of admission management features
               designed to streamline every aspect of student enrollment.
@@ -164,22 +184,22 @@ const AdmissionManagementPage = () => {
                         submodule && (
                           <AccordionItem
                             key={submodule.code}
-                            value={submodule.code}
+                            value={`row-${rowIndex}`}
                             className="border rounded-lg"
                           >
-                            <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                            <AccordionTrigger className="px-6 py-2 hover:no-underline">
                               <div className="flex items-center gap-4 text-left">
-                                <GradientIcon
-                                  icon={submoduleIcons[submodule.code]}
-                                  size="sm"
-                                />
+                                <div className="flex items-center gap-3">
+                                  <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center text-white dark:text-black text-xs font-bold">
+                                    {submodules.findIndex(
+                                      (s) => s.code === submodule.code
+                                    ) + 1}
+                                  </span>
+                                </div>
                                 <div>
                                   <h3 className="font-semibold text-lg">
                                     {submodule.title}
                                   </h3>
-                                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    {submodule.desc}
-                                  </p>
                                 </div>
                               </div>
                             </AccordionTrigger>
@@ -189,10 +209,7 @@ const AdmissionManagementPage = () => {
                                   {submodule.desc}
                                 </p>
                                 <div className="flex flex-wrap gap-2">
-                                  {/* Features are not directly mapped from submodules to this section,
-                                    so this part of the new_code will be empty or need adjustment
-                                    based on how features are intended to be displayed here.
-                                    For now, keeping the structure but noting the missing data. */}
+                                  {/* Features will be added here */}
                                 </div>
                               </div>
                             </AccordionContent>
@@ -217,17 +234,17 @@ const AdmissionManagementPage = () => {
                   value={submodule.code}
                   className="border rounded-lg"
                 >
-                  <AccordionTrigger className="px-4 py-4 hover:no-underline">
+                  <AccordionTrigger className="px-4 py-2 hover:no-underline">
                     <div className="flex items-center gap-3 text-left">
-                      <GradientIcon
-                        icon={submoduleIcons[submodule.code]}
-                        size="sm"
-                      />
+                      <div className="flex items-center gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center text-white dark:text-black text-xs font-bold">
+                          {submodules.findIndex(
+                            (s) => s.code === submodule.code
+                          ) + 1}
+                        </span>
+                      </div>
                       <div>
                         <h3 className="font-semibold">{submodule.title}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {submodule.desc}
-                        </p>
                       </div>
                     </div>
                   </AccordionTrigger>
@@ -237,10 +254,7 @@ const AdmissionManagementPage = () => {
                         {submodule.desc}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {/* Features are not directly mapped from submodules to this section,
-                            so this part of the new_code will be empty or need adjustment
-                            based on how features are intended to be displayed here.
-                            For now, keeping the structure but noting the missing data. */}
+                        {/* Features will be added here */}
                       </div>
                     </div>
                   </AccordionContent>
@@ -259,8 +273,8 @@ const AdmissionManagementPage = () => {
             className="relative overflow-hidden p-8 md:p-12 text-center"
           >
             {/* Background decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-[#0470b6]/20 to-[#f49d2f]/20 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-[#f49d2f]/20 to-[#0470b6]/20 rounded-full blur-xl"></div>
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-[#0470b6]/20 to-[#0891b2]/20 dark:from-[#fbbf24]/20 dark:to-[#f59e0b]/20 rounded-full blur-xl"></div>
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-[#0891b2]/20 to-[#0470b6]/20 dark:from-[#f59e0b]/20 dark:to-[#fbbf24]/20 rounded-full blur-xl"></div>
 
             <div className="relative z-10">
               <h3 className="text-3xl sm:text-4xl font-bold mb-6">

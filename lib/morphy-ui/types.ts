@@ -52,7 +52,6 @@ export type IconPosition =
 export interface IconConfig {
   icon: React.ComponentType<{ className?: string; weight?: IconWeight }>;
   title?: string;
-  subtitle?: string;
   position?: IconPosition;
 }
 

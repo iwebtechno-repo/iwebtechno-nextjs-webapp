@@ -43,7 +43,7 @@ const NavButton = ({
 
   return (
     <Button
-      variant={isActive ? "gradient" : "link"}
+      variant={isActive ? "multi" : "link"}
       effect="fill"
       size={isDesktop ? "default" : "default"}
       className={cn(

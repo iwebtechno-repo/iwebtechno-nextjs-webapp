@@ -1,4 +1,4 @@
-# GenZDealZ Design System (v3.2)
+# GenZDealZ Design System (v3.3)
 
 ## 🎯 Core Rules
 
@@ -41,6 +41,7 @@
 - **Use icon prop** — Prefer `icon={{ icon: IconName }}` over manual icon rendering
 - Import like: `import { ChatCircleIcon } from "@phosphor-icons/react";`
 - **Social Icons**: Use exported social icons from morphy system (`GoogleIcon`, `AppleIcon`, `InstagramIcon`)
+- **Icon prop structure**: `{ icon: IconComponent, title?: string, gradient?: boolean }` - NO subtitle in icon prop
 
 ### 6. **Morphy Props Over Manual ClassNames**
 
@@ -72,10 +73,37 @@
   - `effect`: `"fill"` (default) or `"glass"`
   - `showRipple`: boolean
   - `size`: `"sm"`, `"default"`, `"lg"`, `"xl"`, `"icon"`, `"icon-sm"`
-  - `icon`: `{ icon: IconComponent, title?: string, subtitle?: string }`
+  - `icon`: `{ icon: IconComponent, title?: string, gradient?: boolean }`
 - **Only use className for custom positioning, layout, or unique styling not covered by morphy props**
 
-### 7. **Avoid Single-Purpose Styling Components**
+### 7. **Card Component Icon Usage**
+
+- **ALWAYS use Card's `icon` prop instead of manual `GradientIcon` components**
+- **Icon prop structure**: `{ icon: IconComponent, title?: string, gradient?: boolean }`
+- **Subtitle content goes in card body using `CardDescription`** - never in icon prop
+- **Gradient icons**: Use `gradient: true` in icon prop for gradient backgrounds
+
+```typescript
+// ❌ WRONG - Using GradientIcon component
+<Card>
+  <GradientIcon icon={SparkleIcon} />
+  <h3>Title</h3>
+  <p>Description</p>
+</Card>
+
+// ✅ CORRECT - Using Card's icon prop
+<Card
+  icon={{
+    icon: SparkleIcon,
+    title: "Title",
+    gradient: true
+  }}
+>
+  <CardDescription>Description</CardDescription>
+</Card>
+```
+
+### 8. **Avoid Single-Purpose Styling Components**
 
 - **Do NOT create separate components for simple styling wrappers.** For example, a `GradientText` component that only applies a gradient is an anti-pattern.
 - **EXCEPTION:** The `GradientText` component from morphy-ui is the ONLY allowed wrapper for gradient text in headers. Use it for all main application/section headers. It automatically applies the brand blue→orange gradient in light mode and orange→blue in dark mode.
@@ -91,7 +119,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f] dark:from-[#f49d2f] dark:to-[#0470b6]">Text</span>
 ```
 
-### 8. **Layout & Spacing Patterns**
+### 9. **Layout & Spacing Patterns**
 
 - **Navbar-aware layouts**: Always account for fixed navbar height (7rem/112px) in layout calculations
 - **Consistent container widths**: Use `w-64` (16rem) for sidebars, full width for main content areas
@@ -102,7 +130,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 - **Height calculations**: Use `h-screen` for full viewport, `calc(100vh - 7rem)` for navbar-aware layouts
 - **Gap management**: Minimize gaps between sidebar and main content (use consistent width units)
 
-### 9. **State Management & Interactions**
+### 10. **State Management & Interactions**
 
 - **Active state prominence**: Make active states significantly more prominent than hover states
 - **State hierarchy**: Active > Hover > Default (clear visual distinction between each)
@@ -110,7 +138,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 - **State persistence**: Use `isActive` prop for persistent state management
 - **Event handling**: Always prevent event bubbling when needed (`e.stopPropagation()`)
 
-### 10. **Accessibility & UX Patterns**
+### 11. **Accessibility & UX Patterns**
 
 - **Keyboard navigation**: All interactive elements must be keyboard accessible
 - **ARIA labels**: Use descriptive `aria-label` for all interactive elements
@@ -118,7 +146,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 - **Focus management**: Ensure proper focus order and visible focus indicators
 - **Screen reader support**: Use semantic HTML and proper ARIA attributes
 
-### 11. **Toast Notifications (Sonner)**
+### 12. **Toast Notifications (Sonner)**
 
 - **Only one `<Toaster />` (Sonner) should be mounted in the app, and it must be placed in `app/layout.tsx`.**
 - **Do NOT add `<Toaster />` to individual app router pages.**
@@ -131,7 +159,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 
 ## 🧩 Component Patterns
 
-### 11. **Button Component**
+### 13. **Button Component**
 
 ```typescript
 import { Button } from "@/components/ui/button";
@@ -153,26 +181,38 @@ import { Button } from "@/components/ui/button";
 </Button>
 ```
 
-### 12. **Card Component**
+### 14. **Card Component**
 
 ```typescript
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 
-// Complete card with all props
+// Complete card with icon prop and description
 <Card
   variant="multi"
+  effect="glass"
   showRipple
   icon={{
     icon: ChatCircleIcon,
     title: "Chat",
-    subtitle: "Start a conversation",
+    gradient: true
   }}
 >
-  Content
-</Card>;
+  <CardDescription>Start a conversation</CardDescription>
+</Card>
+
+// Card with gradient icon
+<Card
+  icon={{
+    icon: SparkleIcon,
+    title: "Feature",
+    gradient: true
+  }}
+>
+  <CardDescription>Feature description</CardDescription>
+</Card>
 ```
 
-### 13. **Icon Patterns**
+### 15. **Icon Patterns**
 
 ```typescript
 import { SparkleIcon, ChatCircleIcon } from "@phosphor-icons/react";
@@ -189,9 +229,14 @@ import { SparkleIcon, ChatCircleIcon } from "@phosphor-icons/react";
 <Button variant="none" effect="glass" icon={{ icon: SparkleIcon, title: "Action" }}>
   Click me
 </Button>
+
+// Gradient background for accordion icons
+<div className="flex-shrink-0 bg-gradient-to-r rounded-lg flex items-center justify-center from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] w-6 h-6">
+  {React.createElement(IconComponent, { className: "text-white dark:text-black" })}
+</div>
 ```
 
-### 14. **Chat Interface Patterns**
+### 16. **Chat Interface Patterns**
 
 ```typescript
 // Chat sidebar with proper state management
@@ -228,7 +273,7 @@ import { SparkleIcon, ChatCircleIcon } from "@phosphor-icons/react";
 
 ## 🎨 Brand Colors & Gradients
 
-### 15. **Primary Brand Gradient**
+### 17. **Primary Brand Gradient**
 
 ```css
 /* Primary Brand Gradient */
@@ -238,7 +283,7 @@ hover:from-[#d0427f]/90 hover:to-[#303293]/90
 
 ## 📁 File Structure
 
-### 16. **Project Organization**
+### 18. **Project Organization**
 
 ```
 components/ui/           # shadcn components
@@ -257,11 +302,11 @@ app/                     # Next.js pages
 
 ## 📦 Imports
 
-### 17. **Standard Imports**
+### 19. **Standard Imports**
 
 ```typescript
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import {
   useRipple,
   gradientPresets,
@@ -282,7 +327,7 @@ import {
 
 ## 🔧 Social Icons System
 
-### 18. **Social Icons Usage**
+### 20. **Social Icons Usage**
 
 ```typescript
 // Import social icons
@@ -301,7 +346,7 @@ SocialIcons.Instagram   // InstagramIcon component
 
 ## ⚖️ License Compliance
 
-### 19. **Dependency Licensing**
+### 21. **Dependency Licensing**
 
 - **Mandatory Check**: Before installing any new dependency, its license **must** be verified to ensure it is safe for commercial use.
 - **Permitted Licenses**: `MIT`, `Apache-2.0`, `ISC`, and `BSD` are pre-approved.
@@ -311,14 +356,14 @@ SocialIcons.Instagram   // InstagramIcon component
 
 ---
 
-**Remember**: Use `ColorVariant` everywhere, use `effect="glass"` for glass effects, ripple color is derived from `ColorVariant`, and all effects are centralized in morphy-ui.
+**Remember**: Use `ColorVariant` everywhere, use `effect="glass"` for glass effects, ripple color is derived from `ColorVariant`, and all effects are centralized in morphy-ui. **Icons never have subtitles - use CardDescription for subtitle content.**
 
 _Last Updated: 2024-12_
-_Version: 3.2_
+_Version: 3.3_
 
 ## 🖼️ Images & Media
 
-### 20. **Image Component Usage**
+### 22. **Image Component Usage**
 
 - **Use standard `<img>` for external sources**: For images loaded from external URLs (e.g., from an API or a different domain), use the standard HTML `<img>` tag instead of Next.js's `<Image>` component. This avoids configuration issues with `next.config.ts` for a large number of external domains.
 - **Linter Warnings for `<img>`**: It is acceptable to have linter warnings related to using `<img>` instead of `<Image>`. These warnings can be ignored as this is an intentional choice for handling external media.
@@ -350,7 +395,7 @@ import localImage from '@/public/images/local-image.png';
 />
 ```
 
-### 20. **Accordion Layout & Separator Rules**
+### 23. **Accordion Layout & Separator Rules**
 
 - Use shadcn/ui Accordion for all expandable/collapsible lists.
 - On **desktop (md+)**:
@@ -360,3 +405,52 @@ import localImage from '@/public/images/local-image.png';
 - On **mobile**:
   - Use a single column with independent AccordionItems, each with its own `border-b` for separation.
 - All colors and gradients must use the brand palette: blue→orange in light mode, orange→blue in dark mode.
+
+### 24. **Hero Backgrounds & Image Usage**
+
+- **Product Page Heroes**: Use high-quality (2K+) real images from the internet that are contextually relevant to each product
+- **Image Quality**: Minimum 2K resolution (2048px width) for hero backgrounds
+- **Image Sources**: Use reputable stock photo services or high-quality free images
+- **Contextual Relevance**: Images should directly relate to the product/service being offered
+- **Overlay Usage**: Apply dark overlays to ensure text readability over images
+- **Responsive Design**: Use `object-cover` and proper aspect ratios for mobile compatibility
+- **Performance**: Optimize images for web delivery while maintaining quality
+
+**Implementation Pattern:**
+
+```tsx
+// ✅ CORRECT - Hero with real background image
+<section className="relative min-h-[60vh] bg-cover bg-center bg-no-repeat"
+         style={{ backgroundImage: `url('https://high-quality-image-url.jpg')` }}>
+  {/* Dark overlay for text readability */}
+  <div className="absolute inset-0 bg-black/50"></div>
+
+  {/* Content */}
+  <div className="relative z-10 container mx-auto px-4 py-20">
+    <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+      <GradientText>Product Title</GradientText>
+    </h1>
+    <p className="text-xl text-gray-200 max-w-2xl">
+      Product description
+    </p>
+  </div>
+</section>
+
+// ✅ CORRECT - Responsive image handling
+<img
+  src="https://high-quality-image-url.jpg"
+  alt="Descriptive alt text"
+  className="w-full h-full object-cover"
+  loading="lazy"
+/>
+```
+
+**Product-Specific Image Guidelines:**
+
+- **Admission Management**: University campus, students applying, digital enrollment
+- **Student Attendance**: Classroom settings, attendance tracking, biometric systems
+- **Fee Collection**: Payment processing, financial management, digital transactions
+- **Student Exams**: Examination halls, question papers, result processing
+- **Purchase Inventory**: Supply chain, inventory management, procurement
+- **HRMS Payroll**: Office environments, HR processes, payroll management
+- **Portal GAD**: Digital transformation, portal interfaces, document management

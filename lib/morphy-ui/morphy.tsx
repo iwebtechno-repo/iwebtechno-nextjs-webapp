@@ -149,8 +149,8 @@ export const gradients = {
   // Secondary university gradient - yellow to yellow (accent)
   secondary: "from-[#fbbf24] to-[#f59e0b]",
 
-  // Brand gradient - blue to yellow
-  brand: "from-[#0470b6] to-[#fbbf24]",
+  // Brand gradient - blue to blue (light mode) / yellow to yellow (dark mode)
+  brand: "from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b]",
 
   // Light mode gradients
   light: {

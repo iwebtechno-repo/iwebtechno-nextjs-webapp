@@ -15,6 +15,7 @@ interface ProductPageHeaderProps {
     | "inventory"
     | "hrms"
     | "portal";
+  backgroundImage?: string;
 }
 
 const patternConfigs = {
@@ -68,53 +69,56 @@ export const ProductPageHeader = ({
   description,
   icon: IconComponent,
   patternType,
+  backgroundImage,
 }: ProductPageHeaderProps) => {
   const config = patternConfigs[patternType];
 
   return (
-    <section className="relative overflow-hidden py-10">
-      {/* Contextual Background Pattern */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradients.light.blue}/15 ${gradients.light.yellow}/10 ${gradients.light.blue}/20 dark:${gradients.dark.blue}/25 dark:${gradients.dark.yellow}/20 dark:${gradients.dark.blue}/30`}
-      >
-        {/* Pattern */}
+    <section
+      className="relative overflow-hidden min-h-[60vh] bg-cover bg-center bg-no-repeat py-20"
+      style={
+        backgroundImage ? { backgroundImage: `url('${backgroundImage}')` } : {}
+      }
+    >
+      {/* Dark overlay for text readability when using background image */}
+      {backgroundImage && <div className="absolute inset-0 bg-black/40"></div>}
+
+      {/* Contextual Background Pattern (fallback when no background image) */}
+      {!backgroundImage && (
         <div
-          className="absolute inset-0 opacity-60"
-          style={{ backgroundImage: `url('${config.pattern}')` }}
-        ></div>
-        {/* Flow Lines */}
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{ backgroundImage: `url('${config.flowLines}')` }}
-        ></div>
-      </div>
+          className={`absolute inset-0 bg-gradient-to-br ${gradients.light.blue}/15 ${gradients.light.yellow}/10 ${gradients.light.blue}/20 dark:${gradients.dark.blue}/25 dark:${gradients.dark.yellow}/20 dark:${gradients.dark.blue}/30`}
+        >
+          {/* Pattern */}
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{ backgroundImage: `url('${config.pattern}')` }}
+          ></div>
+          {/* Flow Lines */}
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{ backgroundImage: `url('${config.flowLines}')` }}
+          ></div>
+        </div>
+      )}
 
       <div className="container relative z-10 mx-auto px-4">
         <div className="text-center mb-8">
-          {/* Badge */}
-          <div
-            className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${gradients.light.blue}/10 ${gradients.light.yellow}/10 border border-[${colors.blue[500]}]/20 dark:border-[${colors.yellow[400]}]/20 mb-6`}
-          >
-            <IconComponent
-              className={`h-4 w-4 text-[${colors.blue[500]}] dark:text-[${colors.yellow[400]}] mr-2`}
-            />
-            <span
-              className={`text-sm font-medium text-[${colors.blue[500]}] dark:text-[${colors.yellow[400]}]`}
-            >
-              {subtitle}
-            </span>
-          </div>
-
           {/* Title */}
           <h1
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${typography.classes.heading}`}
+            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
+              typography.classes.heading
+            } ${backgroundImage ? "text-white" : ""}`}
           >
             <GradientText>{title}</GradientText>
           </h1>
 
           {/* Description */}
           <p
-            className={`text-xl text-[${colors.gray[600]}] dark:text-[${colors.gray[300]}] max-w-3xl mx-auto ${typography.classes.body}`}
+            className={`text-xl max-w-3xl mx-auto ${typography.classes.body} ${
+              backgroundImage
+                ? "text-gray-200"
+                : `text-[${colors.gray[600]}] dark:text-[${colors.gray[300]}]`
+            }`}
           >
             {description}
           </p>

@@ -36,15 +36,32 @@ const Hero = () => {
                 : "translate-y-10 opacity-0"
             }`}
           >
+            {/* Logo */}
+            <div className="mb-8">
+              <img
+                src="/iwebtechno.svg"
+                alt="iWebTechno Logo"
+                width={200}
+                height={80}
+                className="h-16 md:h-20 w-auto"
+              />
+            </div>
+
             <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
               Transform Your <GradientText>Campus</GradientText> with Digital
               Solutions for <GradientText>Free</GradientText>
             </h1>
-            <p className="mb-8 max-w-lg text-lg text-gray-600 dark:text-gray-300">
-              Comprehensive campus digitization solutions designed to streamline
-              operations, enhance learning experiences, and drive institutional
-              growth.
-            </p>
+            <div className="mb-8 flex flex-wrap gap-2">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                #GoDigital
+              </span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                #GoCashless
+              </span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                #GoGreen
+              </span>
+            </div>
             <div className="flex flex-wrap gap-4">
               <Link href="/schedule-demo">
                 <Button variant="gradient" size="xl" showRipple>
@@ -79,29 +96,6 @@ const Hero = () => {
                 className="rounded-md object-cover"
               />
             </Card>
-          </div>
-        </div>
-
-        <div
-          className={`mt-20 transform-gpu transition-all duration-1000 delay-500 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
-          <p className="mb-6 text-center text-sm font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-            Trusted by leading educational institutions
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 grayscale opacity-70 transition-all hover:grayscale-0 hover:opacity-100">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-12 w-auto">
-                <img
-                  src={`/placeholder.svg?height=48&width=120&text=Partner${i}`}
-                  alt={`Partner ${i}`}
-                  width={120}
-                  height={48}
-                  className="h-full w-auto object-contain"
-                />
-              </div>
-            ))}
           </div>
         </div>
       </div>

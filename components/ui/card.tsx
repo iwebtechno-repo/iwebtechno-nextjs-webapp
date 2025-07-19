@@ -23,8 +23,8 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: {
     icon: React.ComponentType<{ className?: string; weight?: IconWeight }>;
     title?: string;
-    subtitle?: string;
     position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+    gradient?: boolean;
   };
 }
 
@@ -88,7 +88,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         switch (variant) {
           case "gradient":
           case "multi":
-            return "text-[#0470b6] dark:text-[#0470b6]";
+            return "text-[#0470b6] dark:text-[#fbbf24]";
           case "blue":
             return "text-blue-500 dark:text-blue-400";
           case "purple":
@@ -125,6 +125,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     // Helper to render the icon block
     const renderIconBlock = () => {
       if (!IconComponent) return null;
+
+      // Check if gradient icon is requested
+      const isGradientIcon = icon?.gradient;
+
       return (
         <div
           className={cn(
@@ -136,28 +140,29 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             <div
               className={cn(
                 "w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border",
-                getIconBoxStyle(isHovered),
-                !isHovered && "border-primary/20 hover:border-primary/50"
+                isGradientIcon
+                  ? "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] border-transparent"
+                  : cn(
+                      getIconBoxStyle(isHovered),
+                      !isHovered && "border-primary/20 hover:border-primary/50"
+                    )
               )}
             >
               <IconComponent
                 className={cn(
                   "h-5 w-5 transition-colors duration-300",
-                  getIconColor(isHovered)
+                  isGradientIcon
+                    ? "text-white dark:text-black"
+                    : getIconColor(isHovered)
                 )}
                 weight="regular"
               />
             </div>
           </div>
-          {(icon?.title || icon?.subtitle) && (
+          {icon?.title && (
             <div className="flex flex-col">
               {icon?.title && (
                 <span className="text-sm font-semibold">{icon.title}</span>
-              )}
-              {icon?.subtitle && (
-                <span className="text-xs text-muted-foreground">
-                  {icon.subtitle}
-                </span>
               )}
             </div>
           )}

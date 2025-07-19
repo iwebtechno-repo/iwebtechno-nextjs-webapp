@@ -4,7 +4,7 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 import { getVariantGradient } from "@/lib/morphy-ui/utils";
 import { type ColorVariant } from "@/lib/morphy-ui/types";
-import { gradients, typography } from "@/lib/morphy-ui/morphy";
+import { typography } from "@/lib/morphy-ui/morphy";
 
 interface GradientTextProps {
   children: React.ReactNode;
@@ -25,8 +25,8 @@ export const GradientText = ({
   // Use university-focused gradients from Morphy UI
   const getUniversityGradient = () => {
     if (variant === "gradient") {
-      // University brand gradient - blue to yellow
-      return `bg-gradient-to-r ${gradients.brand}`;
+      // Use single color gradients like active navbar - blue in light mode, yellow in dark mode
+      return "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b]";
     }
     // For other variants, use the morphy-ui system
     const gradient = getVariantGradient(variant);
