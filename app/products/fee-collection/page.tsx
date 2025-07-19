@@ -11,6 +11,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
+import { gradients } from "@/lib/morphy-ui/morphy";
 import {
   SparkleIcon,
   GraduationCap,
@@ -20,52 +21,55 @@ import {
   PlusCircleIcon,
   WarningCircleIcon,
   ListChecksIcon,
+  type IconWeight,
 } from "@phosphor-icons/react";
-import { type IconWeight } from "@phosphor-icons/react";
 import Link from "next/link";
-
-// Sample screens removed as they're not being used in the current implementation
 
 const submodules = [
   {
-    code: "OF",
-    title: "Online Form Filling",
-    desc: "Students can fill admission forms online with all required details and documents upload facility.",
+    code: "FM",
+    title: "Fee Management",
+    desc: "Configurable fee rule process available so that fees can be configured program wise, year wise or category wise by creating fee categories.",
   },
   {
-    code: "DP",
-    title: "Document Processing",
-    desc: "Automated document verification and processing with digital signature support.",
+    code: "FPO",
+    title: "Fee Payment - Online/Offline",
+    desc: "Online Mode: Student needs to login with their own registration no. & do the fee payment. Offline Mode: If any student has brought the cheque/DD/Cash, then admission convener can save the payment details.",
   },
   {
-    code: "PG",
-    title: "Payment Gateway Integration",
-    desc: "Seamless integration with multiple payment gateways including UPI, QR, BBPS, and traditional methods.",
+    code: "FI",
+    title: "Fee Installments",
+    desc: "Students can do the partial fee payment.",
   },
   {
-    code: "AS",
-    title: "Application Status Tracking",
-    desc: "Real-time status tracking for students and parents throughout the admission process.",
+    code: "FPC",
+    title: "Fee Payment Cancelation",
+    desc: "Fee payment transaction can be cancelled.",
   },
   {
-    code: "AP",
-    title: "Approval Process",
-    desc: "Multi-level approval workflow with role-based access control and automated notifications.",
+    code: "FR",
+    title: "Fee Refund",
+    desc: "Excess student fee amount can be returned back to the student.",
   },
   {
-    code: "RM",
-    title: "Registration Management",
-    desc: "Complete student registration management with unique ID generation and profile creation.",
+    code: "MFP",
+    title: "Miscellaneous Fee Payment - Online/Offline",
+    desc: "Fees such as Transfer certificate, Examination fee, Provisional Certificate etc. can be paid which are not a part of the academic fees.",
   },
   {
-    code: "FC",
-    title: "Fee Collection",
-    desc: "Integrated fee collection with installment options and automated receipt generation.",
+    code: "OP",
+    title: "Online Payment",
+    desc: "Payment of these fees can be done online using payment gateways, wallet or via Debit Card, Credit Cards, Net Banking, UPI or the very Latest BBPS – Bharat Bill Payment System modes. Installment wise payments are also permitted.",
   },
   {
-    code: "RP",
-    title: "Reporting & Analytics",
-    desc: "Comprehensive reporting and analytics dashboard for admission trends and insights.",
+    code: "FIM",
+    title: "Finance Management",
+    desc: "Accounts Group/Chart of Accounts/Opening Balance. Receivables and Payables modules. Cash Management. Cost/Center/Annual Budgeting/Tax Structures. Funds & Grants Management. Track Payables/Vendor Ageing Analysis. Raise Debit/Credit Notes. Journal Voucher Transaction. Cash book Entries and managing the registers automatically. Advance Management and its settlement. Generate receipts on Settlement Bills. Inter P&A transfer. Income & Expenditure Reports. Detailed Grants Utilization. Balance sheet. Account Statements. Scheme wise Revenue Expenditure.",
+  },
+  {
+    code: "OB",
+    title: "Online Budgeting",
+    desc: "Defining Budget Heads. Proposed Budget Management. Budget Allocation. Integrated Budget Management with Receipt and Expenditure Management. Budget Reports.",
   },
 ];
 
@@ -73,17 +77,18 @@ const submoduleIcons: Record<
   string,
   React.ComponentType<{ className?: string; weight?: IconWeight }>
 > = {
-  OF: ListChecksIcon,
-  DP: BookOpen,
-  PG: ChartBar,
-  AS: CheckCircleIcon,
-  AP: PlusCircleIcon,
-  RM: WarningCircleIcon,
-  FC: ChartBar,
-  RP: ListChecksIcon,
+  FM: ListChecksIcon,
+  FPO: PlusCircleIcon,
+  FI: ListChecksIcon,
+  FPC: WarningCircleIcon,
+  FR: CheckCircleIcon,
+  MFP: PlusCircleIcon,
+  OP: ChartBar,
+  FIM: BookOpen,
+  OB: ChartBar,
 };
 
-const AdmissionManagementPage = () => {
+const FeeCollectionPage = () => {
   // Group submodules into rows of two for desktop
   const rows = [];
   for (let i = 0; i < submodules.length; i += 2) {
@@ -93,11 +98,11 @@ const AdmissionManagementPage = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
       <ProductPageHeader
-        title="Admission Management"
-        subtitle="Digital Enrollment System"
-        description="Streamline your admission process with our comprehensive digital enrollment system. From online applications to fee collection, manage the entire student journey efficiently."
+        title="Fee Collection & Finance"
+        subtitle="Financial Management System"
+        description="Our Online Fee Collection module is integrated with Accounts and Finance and it will digitize your University, College, School or even Coaching Classes / Tutorials with ease. Multiple payment modes including UPI, BBPS, and traditional methods."
         icon={SparkleIcon}
-        patternType="admission"
+        patternType="finance"
       />
 
       {/* Features Section */}
@@ -106,34 +111,32 @@ const AdmissionManagementPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <Card variant="none" className="text-center p-6">
               <GradientIcon icon={SparkleIcon} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">
-                Online Applications
-              </h3>
+              <h3 className="text-lg font-semibold mb-2">Online Payments</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Digital application forms with real-time validation
+                Multiple payment gateways with real-time processing
               </p>
             </Card>
             <Card variant="none" className="text-center p-6">
               <GradientIcon icon={GraduationCap} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">
-                Document Management
-              </h3>
+              <h3 className="text-lg font-semibold mb-2">Fee Management</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Secure storage and verification of student documents
+                Flexible fee structures with installment options
               </p>
             </Card>
             <Card variant="none" className="text-center p-6">
               <GradientIcon icon={ChartBar} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Fee Collection</h3>
+              <h3 className="text-lg font-semibold mb-2">Financial Reports</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Integrated payment processing and receipt generation
+                Comprehensive financial analytics and reporting
               </p>
             </Card>
             <Card variant="none" className="text-center p-6">
               <GradientIcon icon={BookOpen} className="mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Admission Reports</h3>
+              <h3 className="text-lg font-semibold mb-2">
+                Account Integration
+              </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Comprehensive analytics and reporting dashboard
+                Seamless integration with accounting systems
               </p>
             </Card>
           </div>
@@ -148,8 +151,8 @@ const AdmissionManagementPage = () => {
               <GradientText>Comprehensive Modules</GradientText>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Explore our complete suite of admission management features
-              designed to streamline every aspect of student enrollment.
+              Explore our complete suite of fee collection and finance features
+              designed to streamline every aspect of financial management.
             </p>
           </div>
 
@@ -189,10 +192,7 @@ const AdmissionManagementPage = () => {
                                   {submodule.desc}
                                 </p>
                                 <div className="flex flex-wrap gap-2">
-                                  {/* Features are not directly mapped from submodules to this section,
-                                    so this part of the new_code will be empty or need adjustment
-                                    based on how features are intended to be displayed here.
-                                    For now, keeping the structure but noting the missing data. */}
+                                  {/* Features will be added here */}
                                 </div>
                               </div>
                             </AccordionContent>
@@ -237,10 +237,7 @@ const AdmissionManagementPage = () => {
                         {submodule.desc}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {/* Features are not directly mapped from submodules to this section,
-                            so this part of the new_code will be empty or need adjustment
-                            based on how features are intended to be displayed here.
-                            For now, keeping the structure but noting the missing data. */}
+                        {/* Features will be added here */}
                       </div>
                     </div>
                   </AccordionContent>
@@ -252,42 +249,47 @@ const AdmissionManagementPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-10">
-        <div className="container mx-auto px-4">
-          <Card
-            variant="gradient"
-            className="relative overflow-hidden p-8 md:p-12 text-center"
+      <section className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <Card
+          variant="gradient"
+          effect="glass"
+          className="p-12 lg:p-16 text-center relative overflow-hidden"
+        >
+          {/* Background Pattern */}
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${gradients.brand}/5`}
           >
-            {/* Background decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-[#0470b6]/20 to-[#f49d2f]/20 rounded-full blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-[#f49d2f]/20 to-[#0470b6]/20 rounded-full blur-xl"></div>
+            <div className='absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%230470b6" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-30'></div>
+          </div>
 
-            <div className="relative z-10">
-              <h3 className="text-3xl sm:text-4xl font-bold mb-6">
-                <GradientText>Ready to Digitize Your Admissions?</GradientText>
-              </h3>
-              <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join hundreds of institutions that have transformed their
-                admission process with our comprehensive digital solution.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/schedule-demo">
-                  <Button variant="blue" size="xl" showRipple>
-                    Schedule Demo
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline" size="xl" effect="glass" showRipple>
-                    Contact Sales
-                  </Button>
-                </Link>
-              </div>
+          <div className="relative z-10">
+            <h3
+              className={`text-3xl sm:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r ${gradients.brand}`}
+            >
+              Ready to streamline your financial operations?
+            </h3>
+            <p className="text-xl mb-8 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Contact us for a personalized demo and see how our Fee Collection
+              & Finance module can streamline your institute's financial
+              processes with modern, efficient workflows.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/schedule-demo">
+                <Button variant="blue" size="xl" showRipple>
+                  Schedule Demo
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline" size="xl" effect="glass" showRipple>
+                  Contact Sales
+                </Button>
+              </Link>
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
       </section>
     </main>
   );
 };
 
-export default AdmissionManagementPage;
+export default FeeCollectionPage;

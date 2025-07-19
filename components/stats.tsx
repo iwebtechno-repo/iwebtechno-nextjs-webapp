@@ -1,16 +1,17 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { gradients } from "@/lib/morphy-ui/morphy";
 
 const gradientVariants: Record<string, string> = {
   blue: "bg-gradient-to-r from-blue-700 to-blue-500",
   purple: "bg-gradient-to-r from-purple-700 to-purple-500",
   green: "bg-gradient-to-r from-green-700 to-green-500",
   orange: "bg-gradient-to-r from-orange-600 to-orange-400",
-  multi: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
-  gradient: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
-  link: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
-  none: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
-  outline: "bg-gradient-to-r from-[#0470b6] to-[#f49d2f]",
+  multi: `bg-gradient-to-r ${gradients.brand}`,
+  gradient: `bg-gradient-to-r ${gradients.brand}`,
+  link: `bg-gradient-to-r ${gradients.brand}`,
+  none: `bg-gradient-to-r ${gradients.brand}`,
+  outline: `bg-gradient-to-r ${gradients.brand}`,
 };
 
 const Stats = () => {
@@ -43,7 +44,7 @@ const Stats = () => {
   ];
 
   return (
-    <section className="py-16 px-4 relative">
+    <section className="py-10 py-16 px-4 relative">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute left-1/3 top-1/4 h-64 w-64 rounded-full bg-blue-500/5 blur-3xl"></div>

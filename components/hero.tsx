@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { GradientText } from "@/components/ui/gradient-text";
+import { colors } from "@/lib/morphy-ui/morphy";
 import { Play } from "@phosphor-icons/react";
 import Link from "next/link";
 
@@ -14,11 +16,15 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-32">
+    <section className="relative overflow-hidden py-10">
       {/* Background decorative elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-[30%] -right-[10%] h-[500px] w-[500px] rounded-full bg-blue-200/30 blur-3xl dark:bg-blue-900/20"></div>
-        <div className="absolute -bottom-[10%] -left-[10%] h-[300px] w-[300px] rounded-full bg-purple-200/30 blur-3xl dark:bg-purple-900/20"></div>
+        <div
+          className={`absolute -top-[30%] -right-[10%] h-[500px] w-[500px] rounded-full bg-[${colors.blue[200]}]/30 blur-3xl dark:bg-[${colors.blue[900]}]/20`}
+        ></div>
+        <div
+          className={`absolute -bottom-[10%] -left-[10%] h-[300px] w-[300px] rounded-full bg-[${colors.yellow[200]}]/30 blur-3xl dark:bg-[${colors.yellow[900]}]/20`}
+        ></div>
       </div>
 
       <div className="container mx-auto px-4">
@@ -31,14 +37,8 @@ const Hero = () => {
             }`}
           >
             <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-              Transform Your{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-orange-400">
-                Campus
-              </span>{" "}
-              with Digital Solutions for{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-700 to-green-500">
-                Free
-              </span>
+              Transform Your <GradientText>Campus</GradientText> with Digital
+              Solutions for <GradientText>Free</GradientText>
             </h1>
             <p className="mb-8 max-w-lg text-lg text-gray-600 dark:text-gray-300">
               Comprehensive campus digitization solutions designed to streamline
@@ -46,15 +46,14 @@ const Hero = () => {
               growth.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link
-                href="/schedule-demo"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-600/90 hover:to-purple-600/90 h-12 px-8"
-              >
-                Get Started
+              <Link href="/schedule-demo">
+                <Button variant="gradient" size="xl" showRipple>
+                  Get Started
+                </Button>
               </Link>
               <Button
                 variant="outline"
-                size="lg"
+                size="xl"
                 effect="glass"
                 showRipple
                 icon={{ icon: Play }}

@@ -4,19 +4,21 @@ import { type IconWeight } from "@phosphor-icons/react";
 // CORE DESIGN SYSTEM TYPES
 // ============================================================================
 
-// Enhanced color variant type with gradient variants for all colors
+// Enhanced color variant type with university-focused variants
 export type ColorVariant =
   | "none"
   | "link"
   | "gradient" // Primary brand gradient
   | "blue"
   | "blue-gradient" // Blue gradient variant
+  | "yellow"
+  | "yellow-gradient" // Yellow gradient variant
   | "purple"
-  | "purple-gradient" // Purple gradient variant
+  | "purple-gradient" // Purple gradient variant (fallback to blue)
   | "green"
-  | "green-gradient" // Green gradient variant
+  | "green-gradient" // Green gradient variant (fallback to blue)
   | "orange"
-  | "orange-gradient" // Orange gradient variant
+  | "orange-gradient" // Orange gradient variant (fallback to yellow)
   | "multi"
   | "outline";
 

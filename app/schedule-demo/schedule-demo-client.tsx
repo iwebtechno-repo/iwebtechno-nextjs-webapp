@@ -12,7 +12,7 @@ const DemoForm = dynamic(() => import("@/components/demo-form"), {
 const ScheduleDemoClient = () => {
   return (
     <main className="min-h-screen">
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative py-10 py-20 px-4 overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute left-1/4 top-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl"></div>

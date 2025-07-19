@@ -51,7 +51,7 @@ const NavButton = ({
         isDesktop ? "font-semibold" : "rounded-full px-4 py-3"
       )}
       title={item.label}
-      showRipple
+      showRipple={false}
     >
       <Link
         href={item.href}
@@ -110,7 +110,7 @@ export const Navbar = () => {
                     effect="fill"
                     size="default"
                     className="flex items-center gap-2 group"
-                    showRipple
+                    showRipple={false}
                     onMouseEnter={() => setOpen(true)}
                     onMouseLeave={() => setOpen(false)}
                     tabIndex={0}
@@ -231,7 +231,7 @@ export const Navbar = () => {
                     </li>
                     <li>
                       <Link
-                        href="/products/hrml-payroll"
+                        href="/products/hrms-payroll"
                         className="group grid grid-cols-[48px_1fr] items-center gap-x-4 px-4 py-4 rounded-lg transition-colors hover:bg-accent focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                       >
                         <div className="flex items-center justify-center h-12 w-12 rounded-full bg-muted group-hover:bg-accent/20">
@@ -239,10 +239,28 @@ export const Navbar = () => {
                         </div>
                         <div className="flex flex-col justify-center">
                           <span className="text-base font-semibold leading-tight">
-                            HRML & Payroll
+                            HRMS & Payroll
                           </span>
                           <span className="text-xs text-muted-foreground mt-1">
                             Manage HR, payroll, and staff records with ease.
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/products/portal-gad"
+                        className="group grid grid-cols-[48px_1fr] items-center gap-x-4 px-4 py-4 rounded-lg transition-colors hover:bg-accent focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                      >
+                        <div className="flex items-center justify-center h-12 w-12 rounded-full bg-muted group-hover:bg-accent/20">
+                          <DotsThreeIcon className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex flex-col justify-center">
+                          <span className="text-base font-semibold leading-tight">
+                            Portal & GAD
+                          </span>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            Student and staff portals with GAD integration.
                           </span>
                         </div>
                       </Link>

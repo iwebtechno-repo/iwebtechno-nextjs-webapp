@@ -2,140 +2,112 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { SparkleIcon } from "@phosphor-icons/react";
+import {
+  SparkleIcon,
+  WarningCircleIcon,
+  CheckCircleIcon,
+  ListChecksIcon,
+  PlusCircleIcon,
+  ChartBarIcon,
+  BookOpenIcon,
+  type Icon as PhosphorIconType,
+} from "@phosphor-icons/react";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import {
-  CalendarIcon,
-  UsersIcon,
-  GraduationCapIcon,
-  UserPlusIcon,
-  ChalkboardTeacherIcon,
-  BookOpenIcon,
-  ListChecksIcon,
-  ClockIcon,
-  CheckCircleIcon,
-  PlusCircleIcon,
-  ArrowsClockwiseIcon,
-  WarningCircleIcon,
-  ChartBarIcon,
-  type Icon as PhosphorIconType,
-} from "@phosphor-icons/react";
 import React from "react";
 import { GradientText } from "@/components/ui/gradient-text";
 
 const sampleScreens = [
   {
-    name: "Dashboard",
-    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-attendance-1-v01.jpg",
+    name: "HR Manager - Dashboard",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/hrms-01-v01.jpg",
   },
   {
-    name: "Time Table",
-    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-attendance-2-v01.jpg",
+    name: "Candidate Profile",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/hrms-02-v01.jpg",
   },
   {
-    name: "Attendance Dashboard",
-    url: "https://iwebtechno.com/wp-content/uploads/2019/11/student-attendance-3-v01.jpg",
+    name: "Maintain Reference Data",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/hrms-03-v01.jpg",
+  },
+  {
+    name: "Task List",
+    url: "https://iwebtechno.com/wp-content/uploads/2019/11/hrms-04-v01.jpg",
   },
 ];
 
 const submodules = [
   {
-    code: "SFT",
-    title: "Student / Faculty Timetable Creation",
-    desc: "Generate timetables for students and faculty for each college, with detailed scheduling.",
+    code: "PIM",
+    title: "Personal Information Management System",
+    desc: "Employee Records. Employee Confirmation. Employee Increment. Employee Name change. Employee Transfer. Service Book",
   },
   {
-    code: "SC",
-    title: "Scholarship & Concession",
-    desc: "Automate fee waivers and concessions as per government rules for qualifying students.",
+    code: "RM",
+    title: "Recruitment Management",
+    desc: "HR Requisition form. Online Job Application Form. Screening of Resume. Shortlisting Resumes/Candidates. Conducting Interviews & Rating. Offer and Appointment Process. Joining Process",
   },
   {
-    code: "AC",
-    title: "Academic Calendar",
-    desc: "Create and manage academic calendars, including holidays and semester dates, for each program.",
+    code: "AM",
+    title: "Attendance Management",
+    desc: "Shift Management. Overtime Management. Early Going Late Coming Management. Integration with Attendance device (Format required is SQL or .XLS)",
   },
   {
-    code: "AB",
-    title: "Allot Batches",
-    desc: "Distribute students into batches for practical and tutorial sessions.",
+    code: "LM",
+    title: "Leave Management",
+    desc: "Setup leave records. Setup leave Policy. Leave Application Approval. Leave Accrual. Leave Encashment",
   },
   {
-    code: "ACB",
-    title: "Allot Clinical Batches",
-    desc: "Assign students to clinical and tutorial batches for hands-on learning.",
+    code: "PM",
+    title: "Payroll Management",
+    desc: "Declaration of Investments. Claims and Reimbursement. Arears Management. Processing attendance and leave from the above modules based on the pay structure defined",
   },
   {
-    code: "FCA",
-    title: "Faculty Course Allocation",
-    desc: "Allocate courses to faculty for each college, managed by the college admin.",
+    code: "PM2",
+    title: "Pension Management",
+    desc: "Define Pension Rate. Set Pension Opening Balance. Pension Monthly update. Pension Ledger. My Pension Statement in Employee Self Service Portal",
   },
   {
-    code: "CTM",
-    title: "Course Topic Master",
-    desc: "Maintain topics and subtopics for theory, practical, clinical, and tutorial subjects.",
+    code: "PFM",
+    title: "Provident Fund Management",
+    desc: "Define PF Rate. Set PF Opening Balance. PF Monthly update. PF Ledger. My PF Statement in Employee Self Service Portal",
   },
   {
-    code: "CP",
-    title: "Course Planner",
-    desc: "Assign faculty to topics and subtopics for scheduled lectures.",
+    code: "PM3",
+    title: "Project Management",
+    desc: "Core/University Proposed grant. Core/University Grant Sanction. Core/University Grant Release. Revised Core Proposal. Personal Grant Allotment. Allotment of Project Cordinators/Incharge/Project Assistant. Personal Grants. Proposed Project/Center Master. Project Sanction Master. Project Grant Release Master. Budget Re-appropriation. Budget sheet V/s Actual Sheet. Budgeting of Expenses. Receipts and Payments. Project Incharge project wise details. Budget Utilization Report. Print UC/SOE",
   },
   {
-    code: "TTC",
-    title: "Time Table Creation",
-    desc: "Create department- and course-wise timetables, manage teacher/classroom clashes.",
+    code: "SI",
+    title: "Summer Internships",
+    desc: "Listing students for summer internships. Assign companies for the internships. Project details. Project / Internship Feedback",
   },
   {
-    code: "SA",
-    title: "Student Attendance",
-    desc: "Mark attendance manually or digitally for each class, subject, or full day.",
-  },
-  {
-    code: "MLA",
-    title: "Mark Extra Lecture Attendance",
-    desc: "Record attendance for extra lectures conducted by teachers.",
-  },
-  {
-    code: "MAR",
-    title: "Mark Attendance for Replaced/Swapped Lectures",
-    desc: "Track attendance for lectures that are replaced or swapped by teachers.",
-  },
-  {
-    code: "CDM",
-    title: "Condone & Defaulter Management",
-    desc: "Manage condonation for short attendance and generate defaulter lists instantly.",
-  },
-  {
-    code: "MRG",
-    title: "Statistical Report Generation",
-    desc: "Generate detailed statistical and graphical attendance reports.",
+    code: "PM4",
+    title: "Placement Management",
+    desc: "Registering Companies. Apply for Placement- Staff portal. Placement Feedback. Interview management. Allocation of students to the selected firms",
   },
 ];
 
-// Map submodule code to icon
 const submoduleIcons: Record<string, PhosphorIconType> = {
-  SFT: CalendarIcon,
-  SC: GraduationCapIcon,
-  AC: CalendarIcon,
-  AB: UsersIcon,
-  ACB: UserPlusIcon,
-  FCA: ChalkboardTeacherIcon,
-  CTM: BookOpenIcon,
-  CP: ListChecksIcon,
-  TTC: ClockIcon,
-  SA: CheckCircleIcon,
-  MLA: PlusCircleIcon,
-  MAR: ArrowsClockwiseIcon,
-  CDM: WarningCircleIcon,
-  MRG: ChartBarIcon,
+  PIM: ListChecksIcon,
+  RM: PlusCircleIcon,
+  AM: CheckCircleIcon,
+  LM: BookOpenIcon,
+  PM: ChartBarIcon,
+  PM2: WarningCircleIcon,
+  PFM: CheckCircleIcon,
+  PM3: ChartBarIcon,
+  SI: PlusCircleIcon,
+  PM4: ChartBarIcon,
 };
 
-const StudentAttendancePage = () => {
-  // Group submodules into rows of two
+const HRMSPayrollPage = () => {
+  // Group submodules into rows of two for desktop
   const rows = [];
   for (let i = 0; i < submodules.length; i += 2) {
     rows.push([submodules[i], submodules[i + 1]]);
@@ -143,14 +115,14 @@ const StudentAttendancePage = () => {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
-      {/* Modern Hero Section with Student Attendance Contextual Background */}
+      {/* Modern Hero Section with HRMS Contextual Background */}
       <section className="relative overflow-hidden py-10">
-        {/* Contextual Background Pattern - Attendance/Time Theme */}
+        {/* Contextual Background Pattern - HR/Employee Theme */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0470b6]/15 via-[#f49d2f]/10 to-[#0470b6]/20 dark:from-[#0470b6]/25 dark:via-[#f49d2f]/20 dark:to-[#0470b6]/30">
-          {/* Attendance/Time Pattern */}
-          <div className='absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width="130" height="130" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%230470b6" fill-opacity="0.08"%3E%3Ccircle cx="65" cy="65" r="5"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-60'></div>
-          {/* Time Flow Lines */}
-          <div className='absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width="260" height="260" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" stroke="%230470b6" stroke-width="1" stroke-opacity="0.1"%3E%3Cpath d="M130 0 L130 260 M0 130 L260 130 M65 65 L195 195 M195 65 L65 195"/%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-40'></div>
+          {/* HR/Employee Pattern */}
+          <div className='absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%230470b6" fill-opacity="0.08"%3E%3Ccircle cx="50" cy="50" r="4"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-60'></div>
+          {/* Organization Structure Lines */}
+          <div className='absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" stroke="%230470b6" stroke-width="1" stroke-opacity="0.1"%3E%3Cpath d="M100 0 L100 200 M0 100 L200 100 M50 50 L150 150 M150 50 L50 150"/%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-40'></div>
         </div>
 
         <div className="relative max-w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,23 +133,23 @@ const StudentAttendancePage = () => {
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#0470b6]/10 to-[#f49d2f]/10 border border-[#0470b6]/20 dark:border-[#f49d2f]/20">
                   <SparkleIcon className="h-4 w-4 text-[#0470b6] dark:text-[#f49d2f] mr-2" />
                   <span className="text-sm font-medium text-[#0470b6] dark:text-[#f49d2f]">
-                    Student Attendance Module
+                    HRMS & Payroll Module
                   </span>
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
-                    <GradientText>Student Attendance</GradientText>
+                    <GradientText>HRMS & Payroll</GradientText>
                   </span>
                   <br />
                   <span className="text-gray-900 dark:text-white">
-                    Advanced Attendance Management
+                    Complete HR Solution
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
-                  Digitize your University, College, School, or Coaching Classes
-                  with our advanced Attendance Management module. Integrated
-                  with biometric devices and face readers for real-time,
-                  seamless attendance tracking.
+                  Our HRMS & Payroll Management module will digitize your
+                  University, College, School or even Coaching Classes /
+                  Tutorials with ease. We cover end to end Payroll rules for
+                  Indian Government University digitization.
                 </p>
               </div>
 
@@ -211,7 +183,7 @@ const StudentAttendancePage = () => {
                     <CheckCircleIcon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Biometric Integration
+                    Employee Management
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -219,7 +191,7 @@ const StudentAttendancePage = () => {
                     <CheckCircleIcon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Real-Time Tracking
+                    Payroll Processing
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -227,7 +199,7 @@ const StudentAttendancePage = () => {
                     <CheckCircleIcon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Face Recognition
+                    Attendance Tracking
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -235,7 +207,7 @@ const StudentAttendancePage = () => {
                     <CheckCircleIcon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
-                    Automated Reports
+                    Leave Management
                   </span>
                 </div>
               </div>
@@ -250,17 +222,17 @@ const StudentAttendancePage = () => {
                   className="p-8 lg:p-12 shadow-2xl border-0"
                 >
                   <img
-                    src="https://iwebtechno.com/wp-content/uploads/2019/11/icon-student-attendance.jpg"
-                    alt="Student Attendance System"
+                    src="https://iwebtechno.com/wp-content/uploads/2019/11/icon-hrms-payroll.jpg"
+                    alt="HRMS & Payroll System"
                     className="w-full h-auto rounded-xl object-cover shadow-lg"
                   />
                   <div className="mt-6 space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                      Complete Attendance Solution
+                      Comprehensive HR Solution
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Streamline your attendance tracking with our integrated
-                      biometric and face recognition system.
+                      Streamline your HR operations with our integrated HRMS and
+                      payroll management system.
                     </p>
                   </div>
                 </Card>
@@ -281,12 +253,12 @@ const StudentAttendancePage = () => {
             <GradientText>Sample Screens</GradientText>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Experience our comprehensive attendance interface with modern,
-            user-friendly screens designed for efficient attendance management.
+            Experience our comprehensive HRMS interface with modern,
+            user-friendly screens designed for efficient HR management.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {sampleScreens.map((img) => (
             <Card
               key={img.url}
@@ -322,8 +294,8 @@ const StudentAttendancePage = () => {
             <GradientText>Sub Modules</GradientText>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Comprehensive suite of modules designed to handle every aspect of
-            attendance management and academic scheduling.
+            Comprehensive suite of modules designed to handle every aspect of HR
+            management and payroll processing.
           </p>
         </div>
 
@@ -436,12 +408,12 @@ const StudentAttendancePage = () => {
 
           <div className="relative z-10">
             <h3 className="text-3xl sm:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#0470b6] to-[#f49d2f]">
-              Ready to modernize your attendance tracking?
+              Ready to transform your HR operations?
             </h3>
             <p className="text-xl mb-8 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Contact us for a personalized demo and see how our Student
-              Attendance module can streamline your institute's attendance
-              processes with modern, efficient workflows.
+              Contact us for a personalized demo and see how our HRMS & Payroll
+              module can streamline your institute's HR processes with modern,
+              efficient workflows.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -472,4 +444,4 @@ const StudentAttendancePage = () => {
   );
 };
 
-export default StudentAttendancePage;
+export default HRMSPayrollPage;

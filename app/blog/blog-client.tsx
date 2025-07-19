@@ -123,7 +123,7 @@ const BlogClient = () => {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-10 py-20 px-4">
         {/* Background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute left-1/4 top-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl"></div>
