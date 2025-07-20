@@ -39,7 +39,7 @@ const Hero = () => {
             {/* Logo */}
             <div className="mb-8">
               <img
-                src="/iwebtechno.svg"
+                src="/iwebtechno-gradient.svg"
                 alt="iWebTechno Logo"
                 width={200}
                 height={80}

@@ -42,6 +42,47 @@
 - Import like: `import { ChatCircleIcon } from "@phosphor-icons/react";`
 - **Social Icons**: Use exported social icons from morphy system (`GoogleIcon`, `AppleIcon`, `InstagramIcon`)
 - **Icon prop structure**: `{ icon: IconComponent, title?: string, gradient?: boolean }` - NO subtitle in icon prop
+- **shadcn Icon Replacement**: When installing shadcn components, ALWAYS replace Lucide React icons with Phosphor equivalents:
+  - `ChevronRight` → `CaretRightIcon`
+  - `MoreHorizontal` → `DotsThreeIcon`
+  - `ChevronDown` → `CaretDownIcon`
+  - `ChevronUp` → `CaretUpIcon`
+  - `ChevronLeft` → `CaretLeftIcon`
+  - `Menu` → `ListIcon`
+  - `X` → `XIcon`
+  - `Search` → `MagnifyingGlassIcon`
+  - `User` → `UserIcon`
+  - `Settings` → `GearIcon`
+  - `Home` → `HouseIcon`
+  - `Mail` → `EnvelopeIcon`
+  - `Phone` → `PhoneIcon`
+  - `Calendar` → `CalendarIcon`
+  - `Clock` → `ClockIcon`
+  - `Check` → `CheckIcon`
+  - `Plus` → `PlusIcon`
+  - `Minus` → `MinusIcon`
+  - `Edit` → `PencilIcon`
+  - `Trash` → `TrashIcon`
+  - `Download` → `DownloadIcon`
+  - `Upload` → `UploadIcon`
+  - `Eye` → `EyeIcon`
+  - `EyeOff` → `EyeSlashIcon`
+  - `Lock` → `LockIcon`
+  - `Unlock` → `UnlockIcon`
+  - `Star` → `StarIcon`
+  - `Heart` → `HeartIcon`
+  - `Share` → `ShareIcon`
+  - `Bookmark` → `BookmarkIcon`
+  - `Filter` → `FunnelIcon`
+  - `Sort` → `ArrowsDownUpIcon`
+  - `Refresh` → `ArrowsClockwiseIcon`
+  - `External` → `ArrowUpRightIcon`
+  - `Copy` → `CopyIcon`
+  - `Link` → `LinkIcon`
+  - `Alert` → `WarningIcon`
+  - `Info` → `InfoIcon`
+  - `Success` → `CheckCircleIcon`
+  - `Error` → `XCircleIcon`
 
 ### 6. **Morphy Props Over Manual ClassNames**
 
@@ -454,3 +495,37 @@ import localImage from '@/public/images/local-image.png';
 - **Purchase Inventory**: Supply chain, inventory management, procurement
 - **HRMS Payroll**: Office environments, HR processes, payroll management
 - **Portal GAD**: Digital transformation, portal interfaces, document management
+
+### 25. **Bottom Navigation Spacing**
+
+- **NO global layout padding**: Never add `pb-32 lg:pb-40` to the main layout container
+- **Component-level spacing**: Add bottom spacing only to the last component of each page
+- **Standard spacing**: Use `pb-32 lg:pb-40` for mobile (8rem) and desktop (10rem) respectively
+- **Immersive design**: This approach maintains the immersive feel without unnecessary white space
+- **Consistent implementation**: Apply to all pages to prevent navbar overlap
+
+**Implementation Pattern:**
+
+```tsx
+// ✅ CORRECT - Add spacing to last component
+<section className="py-10 pb-32 lg:pb-40">
+  {/* Last component content */}
+</section>
+
+// ✅ CORRECT - Wrap footer with spacing
+<div className="pb-32 lg:pb-40">
+  <Footer />
+</div>
+
+// ❌ WRONG - Don't add global layout padding
+<main>
+  <div className="min-h-screen pb-32 lg:pb-40">{children}</div>
+</main>
+```
+
+**Pages requiring bottom spacing:**
+
+- Home page: CTA component
+- Product pages: CTA section
+- Blog page: Footer component
+- Other pages: Last main section

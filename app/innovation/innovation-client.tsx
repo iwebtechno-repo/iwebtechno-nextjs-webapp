@@ -7,7 +7,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 const InnovationClient = () => {
   return (
     <main className="min-h-screen">
-      <section className="py-10 py-20 px-4">
+      <section className="py-10 py-20 px-4 pb-32 lg:pb-40">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Driving <GradientText>Innovation</GradientText> in Education

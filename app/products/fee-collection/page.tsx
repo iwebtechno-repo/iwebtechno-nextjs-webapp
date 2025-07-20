@@ -11,18 +11,14 @@ import {
 import { Card, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
-import { gradients } from "@/lib/morphy-ui/morphy";
+
 import {
   SparkleIcon,
   GraduationCap,
   ChartBar,
   BookOpen,
-  CheckCircleIcon,
-  PlusCircleIcon,
-  WarningCircleIcon,
-  ListChecksIcon,
 } from "@phosphor-icons/react";
-import { type IconWeight } from "@phosphor-icons/react";
+
 import Link from "next/link";
 
 const submodules = [
@@ -266,44 +262,42 @@ const FeeCollectionPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <Card
-          variant="gradient"
-          effect="glass"
-          className="p-12 lg:p-16 text-center relative overflow-hidden"
-        >
-          {/* Background Pattern */}
-          <div
-            className={`absolute inset-0 bg-gradient-to-br ${gradients.brand}/5`}
+      <section className="py-10 pb-32 lg:pb-40">
+        <div className="container mx-auto px-4">
+          <Card
+            variant="gradient"
+            className="relative overflow-hidden p-8 md:p-12 text-center"
           >
-            <div className='absolute inset-0 bg-[url(&apos;data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%230470b6" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&apos;)] opacity-30'></div>
-          </div>
+            {/* Background decorative elements */}
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-[#0470b6]/20 to-[#0891b2]/20 dark:from-[#fbbf24]/20 dark:to-[#f59e0b]/20 rounded-full blur-xl"></div>
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-[#0891b2]/20 to-[#0470b6]/20 dark:from-[#f59e0b]/20 dark:to-[#fbbf24]/20 rounded-full blur-xl"></div>
 
-          <div className="relative z-10">
-            <h3
-              className={`text-3xl sm:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r ${gradients.brand}`}
-            >
-              Ready to streamline your financial operations?
-            </h3>
-            <p className="text-xl mb-8 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Contact us for a personalized demo and see how our Fee Collection
-              & Finance module can streamline your institute's financial
-              processes with modern, efficient workflows.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/schedule-demo">
-                <Button variant="blue" size="xl" showRipple>
-                  Schedule Demo
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button variant="outline" size="xl" effect="glass" showRipple>
-                  Contact Sales
-                </Button>
-              </Link>
+            <div className="relative z-10">
+              <h3 className="text-3xl sm:text-4xl font-bold mb-6">
+                <GradientText>
+                  Ready to Streamline Your Financial Operations?
+                </GradientText>
+              </h3>
+              <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                Contact us for a personalized demo and see how our Fee
+                Collection & Finance module can streamline your institute's
+                financial processes with modern, efficient workflows.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/schedule-demo">
+                  <Button variant="blue" size="xl" showRipple>
+                    Schedule Demo
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="outline" size="xl" effect="glass" showRipple>
+                    Contact Sales
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
       </section>
     </main>
   );

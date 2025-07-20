@@ -15,19 +15,10 @@ import {
   SparkleIcon,
   CalendarIcon,
   UsersIcon,
-  GraduationCapIcon,
-  UserPlusIcon,
-  ChalkboardTeacherIcon,
-  BookOpenIcon,
-  ListChecksIcon,
-  ClockIcon,
   CheckCircleIcon,
-  PlusCircleIcon,
-  ArrowsClockwiseIcon,
-  WarningCircleIcon,
   ChartBarIcon,
 } from "@phosphor-icons/react";
-import { type IconWeight } from "@phosphor-icons/react";
+
 import Link from "next/link";
 
 const submodules = [
@@ -301,7 +292,7 @@ const StudentAttendancePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-10">
+      <section className="py-10 pb-32 lg:pb-40">
         <div className="container mx-auto px-4">
           <Card
             variant="gradient"

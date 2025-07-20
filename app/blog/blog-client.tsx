@@ -247,7 +247,9 @@ const BlogClient = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      <div className="pb-32 lg:pb-40">
+        <Footer />
+      </div>
     </main>
   );
 };

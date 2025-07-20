@@ -16,12 +16,8 @@ import {
   GraduationCap,
   ChartBar,
   BookOpen,
-  CheckCircleIcon,
-  PlusCircleIcon,
-  WarningCircleIcon,
-  ListChecksIcon,
 } from "@phosphor-icons/react";
-import { type IconWeight } from "@phosphor-icons/react";
+
 import Link from "next/link";
 
 // Sample screens removed as they're not being used in the current implementation
@@ -266,7 +262,7 @@ const AdmissionManagementPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-10">
+      <section className="py-10 pb-32 lg:pb-40">
         <div className="container mx-auto px-4">
           <Card
             variant="gradient"

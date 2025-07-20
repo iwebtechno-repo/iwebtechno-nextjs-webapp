@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const CTA = () => {
   return (
-    <section className="relative py-10 py-20 px-4 overflow-hidden">
+    <section className="relative py-10 py-20 px-4 overflow-hidden pb-32 lg:pb-40">
       {/* Background gradient */}
       <div
         className={`absolute inset-0 bg-gradient-to-br ${gradients.brand}/90 z-0`}
