@@ -1,6 +1,7 @@
 import { GradientText } from "@/components/ui/gradient-text";
 
 import { colors, gradients, typography } from "@/lib/morphy-ui/morphy";
+import { Card } from "./card";
 
 interface ProductPageHeaderProps {
   title: string;
@@ -77,7 +78,9 @@ export const ProductPageHeader = ({
       }
     >
       {/* Dark overlay for text readability when using background image */}
-      {backgroundImage && <div className="absolute inset-0 bg-black/40"></div>}
+      {backgroundImage && (
+        <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/40 to-black/50"></div>
+      )}
 
       {/* Contextual Background Pattern (fallback when no background image) */}
       {!backgroundImage && (
@@ -101,18 +104,20 @@ export const ProductPageHeader = ({
         <div className="text-center mb-8">
           {/* Title */}
           <h1
-            className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
-              typography.classes.heading
-            } ${backgroundImage ? "text-white" : ""}`}
+            className={`text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight ${typography.classes.heading}`}
           >
-            <GradientText>{title}</GradientText>
+            <Card variant="none" effect="glass">
+              <GradientText>{title}</GradientText>
+            </Card>
           </h1>
 
           {/* Description */}
           <p
-            className={`text-xl max-w-3xl mx-auto ${typography.classes.body} ${
+            className={`text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto leading-relaxed font-light ${
+              typography.classes.body
+            } ${
               backgroundImage
-                ? "text-gray-200"
+                ? "text-gray-100"
                 : `text-[${colors.gray[600]}] dark:text-[${colors.gray[300]}]`
             }`}
           >

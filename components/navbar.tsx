@@ -222,7 +222,8 @@ export const Navbar = () => {
     { href: "/genzdealz-ai", icon: ChartBar, label: "GENZDEALZ.AI" },
   ];
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Products popover
+  const [moreOpen, setMoreOpen] = useState(false); // More popover
 
   return (
     <nav className="fixed bottom-4 left-0 right-0 z-[100] flex justify-center px-4 overflow-visible">
@@ -347,7 +348,6 @@ export const Navbar = () => {
             {(() => {
               // Check if we're on any product page
               const isOnProductPage = pathname.startsWith("/products/");
-
               return (
                 <Popover open={open} onOpenChange={setOpen}>
                   <PopoverTrigger asChild>
@@ -610,19 +610,88 @@ export const Navbar = () => {
                 </Popover>
               );
             })()}
-            {/* Render the rest of the nav items */}
-            {allNavItems.slice(1).map(
-              (item) =>
-                // Skip index 0 (Home), Products is already rendered
-                item.label !== "Home" && (
-                  <NavButton
-                    key={item.href}
-                    item={item}
-                    isActive={pathname === item.href}
-                    isDesktop
+            {/* About and Innovation always visible */}
+            {allNavItems
+              .filter((item) => ["About", "Innovation"].includes(item.label))
+              .map((item) => (
+                <NavButton
+                  key={item.href}
+                  item={item}
+                  isActive={pathname === item.href}
+                  isDesktop
+                />
+              ))}
+            {/* More dropdown for less important links (cloned Products style) */}
+            <Popover open={moreOpen} onOpenChange={setMoreOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="link"
+                  effect="fill"
+                  size="default"
+                  className="flex items-center gap-2 group"
+                  showRipple={false}
+                  onMouseEnter={() => setMoreOpen(true)}
+                  onMouseLeave={() => setMoreOpen(false)}
+                  tabIndex={0}
+                  aria-haspopup="menu"
+                  aria-expanded={moreOpen}
+                >
+                  <DotsThreeIcon className="h-5 w-5" />
+                  <span className="text-base font-medium">More</span>
+                  <CaretUpIcon
+                    className={`h-4 w-4 transition-transform duration-200 ml-1 ${
+                      moreOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                    aria-hidden="true"
                   />
-                )
-            )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                side="top"
+                align="start"
+                className="bg-popover text-popover-foreground shadow-lg border rounded-md w-[480px] p-6 z-[110]"
+                onMouseEnter={() => setMoreOpen(true)}
+                onMouseLeave={() => setMoreOpen(false)}
+              >
+                <ul className="grid gap-2 md:grid-cols-2 auto-rows-fr">
+                  {allNavItems
+                    .filter((item) =>
+                      ["Partners", "Blog", "Clients", "GENZDEALZ.AI"].includes(
+                        item.label
+                      )
+                    )
+                    .map((item) => (
+                      <li className="h-full" key={item.href}>
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            "group grid grid-cols-[48px_1fr] items-start gap-x-4 px-4 py-4 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === item.href
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-12 w-12 rounded-full transition-colors",
+                              pathname === item.href
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <item.icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center items-center h-full w-full">
+                            <span className="text-base font-semibold leading-tight text-center w-full">
+                              {item.label}
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </PopoverContent>
+            </Popover>
           </div>
 
           <div className="flex items-center gap-x-4">

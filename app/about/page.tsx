@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Card, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { GradientText } from "@/components/ui/gradient-text";
 import {
   TrophyIcon,
@@ -12,7 +11,6 @@ import {
   LinkedinLogoIcon,
   TwitterLogoIcon,
   SparkleIcon,
-  StarIcon,
 } from "@phosphor-icons/react";
 
 // Register ScrollTrigger plugin
@@ -94,48 +92,6 @@ export default function AboutPage() {
         { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
         "-=0.8"
       );
-
-    // Journey section animations
-    gsap.fromTo(
-      journeyTitleRef.current,
-      { y: 40, opacity: 0, scale: 0.9 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: journeyTitleRef.current,
-          start: "top 85%",
-          end: "bottom 15%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
-    // Journey cards animation
-    const journeyCards = journeyCardsRef.current?.children;
-    if (journeyCards) {
-      gsap.fromTo(
-        journeyCards,
-        { y: 60, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power3.out",
-          stagger: 0.3,
-          scrollTrigger: {
-            trigger: journeyCardsRef.current,
-            start: "top 85%",
-            end: "bottom 15%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
 
     // Team section animations
     gsap.fromTo(
@@ -221,7 +177,9 @@ export default function AboutPage() {
             ref={titleRef}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight font-heading-exo2"
           >
-            <GradientText>About Us</GradientText>
+            <Card variant="gradient" effect="fade">
+              <GradientText>About Us</GradientText>
+            </Card>
           </h1>
           <p
             ref={subtitleRef}
@@ -360,47 +318,38 @@ export default function AboutPage() {
 
           <div ref={teamMembersRef} className="max-w-7xl mx-auto space-y-20">
             {/* Akshay Shah */}
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="flex flex-col items-center">
-                <div className="relative group w-full">
-                  <div className="w-full h-96 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl relative overflow-hidden">
-                    <img
-                      src="https://iwebtechno.com/wp-content/uploads/2019/11/team-akshay-v01.jpg"
-                      alt="Akshay Shah - Founder, CEO"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0470b6]/20 to-[#0891b2]/20 dark:from-[#fbbf24]/20 dark:to-[#f59e0b]/20"></div>
-                    {/* Social Media Icons Overlay */}
-                    <div className="absolute bottom-4 left-4 flex space-x-3">
-                      <Button
-                        variant="none"
-                        effect="glass"
-                        size="icon"
-                        className="w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                        onClick={() =>
-                          window.open(
-                            "https://www.linkedin.com/in/akshay-shah-a8a4015/",
-                            "_blank"
-                          )
-                        }
-                      >
-                        <LinkedinLogoIcon className="h-5 w-5 text-white" />
-                      </Button>
-                      <Button
-                        variant="none"
-                        effect="glass"
-                        size="icon"
-                        className="w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                        onClick={() =>
-                          window.open("http://twitter.com/AkshayiWeb", "_blank")
-                        }
-                      >
-                        <TwitterLogoIcon className="h-5 w-5 text-white" />
-                      </Button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Image with social icons overlayed bottom left */}
+              <div className="relative flex items-center justify-center w-full">
+                <div className="w-64 h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl overflow-hidden">
+                  <img
+                    src="https://iwebtechno.com/wp-content/uploads/2019/11/team-akshay-v01.jpg"
+                    alt="Akshay Shah - Founder, CEO"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Social icons overlayed bottom right */}
+                  <div className="absolute bottom-4 right-4 flex flex-col gap-2">
+                    <div
+                      className="w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+                      title="LinkedIn"
+                      onClick={() =>
+                        window.open(
+                          "https://www.linkedin.com/in/akshay-shah-a8a4015/",
+                          "_blank"
+                        )
+                      }
+                    >
+                      <LinkedinLogoIcon className="h-5 w-5 text-white dark:text-black" />
                     </div>
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center shadow-lg">
-                    <StarIcon className="text-white dark:text-black text-lg" />
+                    <div
+                      className="w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+                      title="Twitter"
+                      onClick={() =>
+                        window.open("http://twitter.com/AkshayiWeb", "_blank")
+                      }
+                    >
+                      <TwitterLogoIcon className="h-5 w-5 text-white dark:text-black" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -449,35 +398,27 @@ export default function AboutPage() {
 
             {/* Ketan Trivedi */}
             <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="flex flex-col items-center">
-                <div className="relative group w-full">
-                  <div className="w-full h-96 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl relative overflow-hidden">
-                    <img
-                      src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/512885685_10223540173492028_6248824895965791880_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=3mGHxnNYBPwQ7kNvwG09GUy&_nc_oc=AdnsFo2y3QwSJkvo3YD3dnKIsWXG7ZJr_uBt5C98svNZVHru6RunLuVvjyqZCXY2kG9XfpM3X7WHd7XYGnY9cwGQ&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=_d6rMgq9lSLyAKfqXkjO8A&oh=00_AfR1pZo4ILD9LdseCRJsHG4y1CbyQlw9acjKTWh48MvtDw&oe=68835A8F"
-                      alt="Ketan Trivedi - Founder, Mentor"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0470b6]/20 to-[#0891b2]/20 dark:from-[#fbbf24]/20 dark:to-[#f59e0b]/20"></div>
-                    {/* Social Media Icons Overlay */}
-                    <div className="absolute bottom-4 left-4 flex space-x-3">
-                      <Button
-                        variant="none"
-                        effect="glass"
-                        size="icon"
-                        className="w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                        onClick={() =>
-                          window.open(
-                            "https://www.linkedin.com/in/ketan-trivedi-87a8755/",
-                            "_blank"
-                          )
-                        }
-                      >
-                        <LinkedinLogoIcon className="h-5 w-5 text-white" />
-                      </Button>
+              <div className="relative flex items-center justify-center w-full">
+                <div className="w-64 h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl overflow-hidden">
+                  <img
+                    src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/512885685_10223540173492028_6248824895965791880_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=3mGHxnNYBPwQ7kNvwG09GUy&_nc_oc=AdnsFo2y3QwSJkvo3YD3dnKIsWXG7ZJr_uBt5C98svNZVHru6RunLuVvjyqZCXY2kG9XfpM3X7WHd7XYGnY9cwGQ&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=_d6rMgq9lSLyAKfqXkjO8A&oh=00_AfR1pZo4ILD9LdseCRJsHG4y1CbyQlw9acjKTWh48MvtDw&oe=68835A8F"
+                    alt="Ketan Trivedi - Founder, Mentor"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Social icon overlayed bottom right */}
+                  <div className="absolute bottom-4 right-4">
+                    <div
+                      className="w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+                      title="LinkedIn"
+                      onClick={() =>
+                        window.open(
+                          "https://www.linkedin.com/in/ketan-trivedi-87a8755/",
+                          "_blank"
+                        )
+                      }
+                    >
+                      <LinkedinLogoIcon className="h-5 w-5 text-white dark:text-black" />
                     </div>
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center shadow-lg">
-                    <StarIcon className="text-white dark:text-black text-lg" />
                   </div>
                 </div>
               </div>
@@ -521,35 +462,27 @@ export default function AboutPage() {
 
             {/* Varsha Shah */}
             <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="flex flex-col items-center">
-                <div className="relative group w-full">
-                  <div className="w-full h-96 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl relative overflow-hidden">
-                    <img
-                      src="https://iwebtechno.com/wp-content/uploads/2019/11/team-varsha.jpg"
-                      alt="Varsha Shah - Director, Sales & Marketing"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#0470b6]/20 to-[#0891b2]/20 dark:from-[#fbbf24]/20 dark:to-[#f59e0b]/20"></div>
-                    {/* Social Media Icons Overlay */}
-                    <div className="absolute bottom-4 left-4 flex space-x-3">
-                      <Button
-                        variant="none"
-                        effect="glass"
-                        size="icon"
-                        className="w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                        onClick={() =>
-                          window.open(
-                            "https://www.linkedin.com/in/varsha-shah-3842b06/",
-                            "_blank"
-                          )
-                        }
-                      >
-                        <LinkedinLogoIcon className="h-5 w-5 text-white" />
-                      </Button>
+              <div className="relative flex items-center justify-center w-full">
+                <div className="w-64 h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl overflow-hidden">
+                  <img
+                    src="https://iwebtechno.com/wp-content/uploads/2019/11/team-varsha.jpg"
+                    alt="Varsha Shah - Director, Sales & Marketing"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Social icon overlayed bottom right */}
+                  <div className="absolute bottom-4 right-4">
+                    <div
+                      className="w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+                      title="LinkedIn"
+                      onClick={() =>
+                        window.open(
+                          "https://www.linkedin.com/in/varsha-shah-3842b06/",
+                          "_blank"
+                        )
+                      }
+                    >
+                      <LinkedinLogoIcon className="h-5 w-5 text-white dark:text-black" />
                     </div>
-                  </div>
-                  <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-full flex items-center justify-center shadow-lg">
-                    <StarIcon className="text-white dark:text-black text-lg" />
                   </div>
                 </div>
               </div>
