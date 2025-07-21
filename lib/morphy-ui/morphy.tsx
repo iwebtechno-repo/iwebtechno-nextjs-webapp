@@ -54,17 +54,18 @@ export {
 } from "./utils";
 
 // ============================================================================
-// UNIVERSITY TYPOGRAPHY SYSTEM
+// UNIVERSITY TYPOGRAPHY SYSTEM (CENTRALIZED)
+// All typography classes and font families must be referenced via this object.
+// Headings: Exo 2 (.font-heading-exo2), Body: Quicksand (.font-body-quicksand)
 // ============================================================================
 
 export const typography = {
   // Font families
   fonts: {
-    sans: ["Inter", "system-ui", "sans-serif"],
-    heading: ["Poppins", "system-ui", "sans-serif"],
-    display: ["Poppins", "system-ui", "sans-serif"],
+    sans: ["Quicksand", "system-ui", "sans-serif"],
+    heading: ["Exo 2", "system-ui", "sans-serif"],
+    display: ["Exo 2", "system-ui", "sans-serif"],
   },
-
   // Font sizes with line heights
   sizes: {
     xs: ["0.75rem", { lineHeight: "1rem" }],
@@ -81,12 +82,11 @@ export const typography = {
     "8xl": ["6rem", { lineHeight: "1" }],
     "9xl": ["8rem", { lineHeight: "1" }],
   },
-
   // Typography classes
   classes: {
-    heading: "font-heading",
-    body: "font-sans",
-    display: "font-display",
+    heading: "font-heading-exo2",
+    body: "font-body-quicksand",
+    display: "font-heading-exo2",
   },
 } as const;
 

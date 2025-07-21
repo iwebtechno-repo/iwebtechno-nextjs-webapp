@@ -55,12 +55,14 @@ const Testimonials = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {testimonials.map((testimonial, index) => (
             <Card key={index} variant={testimonial.variant} showRipple>
-              <div className="p-6">
-                <Quotes className="h-8 w-8 text-gray-300 dark:text-gray-700 mb-4" />
-                <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
-                  {testimonial.quote}
-                </p>
+              <div className="p-6 flex flex-col h-full justify-between">
                 <div>
+                  <Quotes className="h-8 w-8 text-gray-300 dark:text-gray-700 mb-4" />
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
+                    {testimonial.quote}
+                  </p>
+                </div>
+                <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
                   <h4 className="font-semibold">
                     <GradientText>{testimonial.author}</GradientText>
                   </h4>

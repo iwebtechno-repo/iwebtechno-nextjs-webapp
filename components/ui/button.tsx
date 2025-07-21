@@ -2,11 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { type ColorVariant, type ComponentEffect } from "@/lib/morphy-ui/types";
-import {
-  getVariantStyles,
-  getIconColor,
-  getRippleColor,
-} from "@/lib/morphy-ui/utils";
+import { getVariantStyles, getRippleColor } from "@/lib/morphy-ui/utils";
 import { useRipple } from "@/lib/morphy-ui/ripple";
 import { type IconWeight } from "@phosphor-icons/react";
 import { useIconWeight } from "@/lib/morphy-ui/icon-theme-context";
@@ -48,6 +44,7 @@ export interface ButtonProps
     icon: React.ComponentType<{ className?: string; weight?: IconWeight }>;
     title?: string;
     weight?: IconWeight;
+    gradient?: boolean;
   };
 }
 
@@ -70,13 +67,30 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Get centralized styles
     const variantStyles = getVariantStyles(variant, effect);
-    const iconColor = getIconColor(variant, effect);
 
     // Icon component
     const IconComponent = icon?.icon;
 
-    // Determine if this is an icon-only button
-    const hasTextContent = children && React.Children.count(children) > 0;
+    // Accent color for icon (blue in light, yellow in dark)
+    const accentColor = "text-[#0470b6] dark:text-[#fbbf24]";
+
+    // Decoupled icon background and color logic (muted to gradient)
+    const getIconBoxStyle = (isGradient: boolean) => {
+      if (isGradient) {
+        // Always: solid brand gradient background
+        return "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] border border-transparent";
+      }
+      // For false, transparent bg, accent border on hover
+      return `bg-transparent border border-solid transition-colors duration-300 border-transparent`;
+    };
+
+    const getIconColor = (isGradient: boolean) => {
+      if (isGradient) {
+        // Always: white (light), black (dark)
+        return "text-white dark:text-black";
+      }
+      return accentColor;
+    };
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (showRipple) {
@@ -90,6 +104,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         resetRipple();
       }
       props.onMouseLeave?.(e);
+    };
+
+    // Helper to render the icon block (like Card)
+    const renderIconBlock = () => {
+      if (!IconComponent) return null;
+      const isGradientIcon = icon?.gradient;
+      const gradient = !!isGradientIcon;
+      return (
+        <div className="relative flex items-center justify-center mr-2.5">
+          <div
+            className={cn(
+              "w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-400 border",
+              getIconBoxStyle(gradient)
+            )}
+          >
+            <IconComponent
+              className={cn(
+                "h-4 w-4 transition-colors duration-400",
+                getIconColor(gradient)
+              )}
+              weight={icon?.weight || iconWeight}
+            />
+          </div>
+        </div>
+      );
     };
 
     return (
@@ -106,12 +145,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type={props.type || "button"}
         {...props}
       >
-        {IconComponent && (
-          <IconComponent
-            className={cn("h-4 w-4", hasTextContent ? "mr-2.5" : "", iconColor)}
-            weight={icon?.weight || iconWeight}
-          />
-        )}
+        {IconComponent && renderIconBlock()}
         {children}
         {/* Ripple element */}
         {showRipple && ripple && (

@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Card } from "@/components/ui/card";
-import { HouseIcon, CaretRightIcon } from "@phosphor-icons/react";
+import { CaretRightIcon } from "@phosphor-icons/react";
 
 // Define breadcrumb item type
 interface BreadcrumbItemType {

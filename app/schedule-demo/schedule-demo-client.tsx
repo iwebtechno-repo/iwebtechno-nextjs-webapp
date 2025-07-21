@@ -21,7 +21,7 @@ const ScheduleDemoClient = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h1 className="mb-4 text-4xl font-bold md:text-5xl">
+            <h1 className="mb-4 text-4xl font-bold md:text-5xl font-heading-michroma">
               Schedule Your <GradientText>Personalized Demo</GradientText>
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">

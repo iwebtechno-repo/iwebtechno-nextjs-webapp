@@ -66,9 +66,7 @@ const PurchaseInventoryPage = () => {
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
       <ProductPageHeader
         title="Purchase & Inventory"
-        subtitle="Supply Chain Management"
         description="Our Purchase & Inventory module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. We cover end to end procurement and inventory rules for Indian Government University digitization."
-        icon={SparkleIcon}
         patternType="inventory"
         backgroundImage="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
@@ -145,7 +143,7 @@ const PurchaseInventoryPage = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-lg flex items-center justify-center">
                 <SparkleIcon className="w-6 h-6 text-white dark:text-black" />
               </div>
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-3xl font-bold font-heading-exo2">
                 <GradientText>Comprehensive Modules</GradientText>
               </h2>
             </div>
@@ -179,7 +177,7 @@ const PurchaseInventoryPage = () => {
                                   </span>
                                 </div>
                                 <div>
-                                  <h3 className="font-semibold text-lg">
+                                  <h3 className="font-semibold text-lg font-heading-exo2">
                                     {submodule.title}
                                   </h3>
                                 </div>
@@ -226,7 +224,9 @@ const PurchaseInventoryPage = () => {
                         </span>
                       </div>
                       <div>
-                        <h3 className="font-semibold">{submodule.title}</h3>
+                        <h3 className="font-semibold font-heading-exo2">
+                          {submodule.title}
+                        </h3>
                       </div>
                     </div>
                   </AccordionTrigger>
@@ -276,7 +276,7 @@ const PurchaseInventoryPage = () => {
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" size="xl" effect="glass" showRipple>
+                  <Button variant="gradient" size="xl" effect="fade" showRipple>
                     Contact Sales
                   </Button>
                 </Link>

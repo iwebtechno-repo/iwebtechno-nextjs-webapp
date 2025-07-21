@@ -135,9 +135,7 @@ const PortalGADPage = () => {
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
       <ProductPageHeader
         title="Portals & GAD"
-        subtitle="Digital Transformation System"
         description="Our Portals & GAD module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. Highly configurable role / department wise portals with integrated Document Management System."
-        icon={SparkleIcon}
         patternType="portal"
         backgroundImage="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
@@ -214,7 +212,7 @@ const PortalGADPage = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-lg flex items-center justify-center">
                 <SparkleIcon className="w-6 h-6 text-white dark:text-black" />
               </div>
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-3xl font-bold font-heading-michroma">
                 <GradientText>Comprehensive Modules</GradientText>
               </h2>
             </div>
@@ -248,7 +246,7 @@ const PortalGADPage = () => {
                                   </span>
                                 </div>
                                 <div>
-                                  <h3 className="font-semibold text-lg">
+                                  <h3 className="font-semibold text-lg font-heading-michroma">
                                     {submodule.title}
                                   </h3>
                                 </div>
@@ -295,7 +293,9 @@ const PortalGADPage = () => {
                         </span>
                       </div>
                       <div>
-                        <h3 className="font-semibold">{submodule.title}</h3>
+                        <h3 className="font-semibold font-heading-michroma">
+                          {submodule.title}
+                        </h3>
                       </div>
                     </div>
                   </AccordionTrigger>
@@ -343,7 +343,7 @@ const PortalGADPage = () => {
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" size="xl" effect="glass" showRipple>
+                  <Button variant="gradient" size="xl" effect="fade" showRipple>
                     Contact Sales
                   </Button>
                 </Link>

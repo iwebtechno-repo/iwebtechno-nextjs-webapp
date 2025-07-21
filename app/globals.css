@@ -128,6 +128,37 @@
   --fadeGrey: #e5e7eb80;
 }
 
+/* Remove Barlow Condensed font-face and utility */
+/* Remove Inter and Poppins font-face and utility if present */
+/* Remove Gruppo and Michroma font-face and utility if present */
+/* Remove Economica font-face and utility if present */
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("/fonts/Quicksand/Quicksand-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-body-quicksand {
+  font-family: "Quicksand", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("/fonts/Exo_2/Exo2-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-heading-exo2 {
+  font-family: "Exo 2", Arial, sans-serif;
+  letter-spacing: 0.01em;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

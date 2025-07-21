@@ -80,9 +80,7 @@ const FeeCollectionPage = () => {
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]">
       <ProductPageHeader
         title="Fee Collection"
-        subtitle="Digital Payment System"
         description="Our Fee Collection module will digitize your University, College, School or even Coaching Classes / Tutorials with ease. We cover end to end fee collection rules for Indian Government University digitization."
-        icon={SparkleIcon}
         patternType="finance"
         backgroundImage="https://wallpaper-house.com/data/out/8/wallpaper2you_264665.jpg"
       />
@@ -159,7 +157,7 @@ const FeeCollectionPage = () => {
               <div className="w-12 h-12 bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] rounded-lg flex items-center justify-center">
                 <SparkleIcon className="w-6 h-6 text-white dark:text-black" />
               </div>
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-3xl font-bold font-heading-exo2">
                 <GradientText>Comprehensive Modules</GradientText>
               </h2>
             </div>
@@ -193,7 +191,7 @@ const FeeCollectionPage = () => {
                                   </span>
                                 </div>
                                 <div>
-                                  <h3 className="font-semibold text-lg">
+                                  <h3 className="font-semibold text-lg font-heading-exo2">
                                     {submodule.title}
                                   </h3>
                                 </div>
@@ -240,7 +238,9 @@ const FeeCollectionPage = () => {
                         </span>
                       </div>
                       <div>
-                        <h3 className="font-semibold">{submodule.title}</h3>
+                        <h3 className="font-semibold font-heading-exo2">
+                          {submodule.title}
+                        </h3>
                       </div>
                     </div>
                   </AccordionTrigger>
@@ -273,10 +273,8 @@ const FeeCollectionPage = () => {
             <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-[#0891b2]/20 to-[#0470b6]/20 dark:from-[#f59e0b]/20 dark:to-[#fbbf24]/20 rounded-full blur-xl"></div>
 
             <div className="relative z-10">
-              <h3 className="text-3xl sm:text-4xl font-bold mb-6">
-                <GradientText>
-                  Ready to Streamline Your Financial Operations?
-                </GradientText>
+              <h3 className="text-3xl sm:text-4xl font-bold mb-6 font-heading-exo2">
+                <GradientText>Ready to Digitize Your Admissions?</GradientText>
               </h3>
               <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
                 Contact us for a personalized demo and see how our Fee
@@ -290,7 +288,7 @@ const FeeCollectionPage = () => {
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" size="xl" effect="glass" showRipple>
+                  <Button variant="gradient" size="xl" effect="fade" showRipple>
                     Contact Sales
                   </Button>
                 </Link>

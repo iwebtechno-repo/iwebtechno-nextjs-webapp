@@ -22,15 +22,35 @@
 - Use `cursor-pointer` for interactive elements
 - Add proper spacing (`px-6` to `px-16` for buttons)
 - **Text overflow tooltips**: Always add `title` attribute to elements with `truncate` class for automatic overflow detection
+- **Typography Centralization**: All heading typography is relayed through Morphy UI's `typography` system. Use only `.font-heading-exo2` for headings (Exo 2) and `.font-body-quicksand` for body text (Quicksand). Do not use manual font-family or legacy font classes. All typography classes are managed in Morphy UI and referenced via `typography.classes`.
 
 ### 4. **Effects**
 
 - Use `lib/morphy-ui/morphy.tsx` for all effects and types
-- **`variant` prop controls color, `effect` prop controls style (e.g. "glass")**
+- **`variant` prop controls color, `effect` prop controls style (e.g. "glass", "fade")**
 - Use `showRipple={true}` for interactive elements
 - Apply glass effects using `effect="glass"`, which works with any `variant`
-- **Ripple colors automatically complement variant colors** — no manual configuration needed
-- Glass effect uses modern Tailwind approach with CSS variables
+- **Fade effect:** Use `effect="fade"` for a soft, faded background (e.g., for badges, subtle CTAs, or to match the "Real Impact, Real Results" badge). For `variant="gradient"`, this uses a faded brand gradient; for other variants, a faded version of the main color.
+- **Ripple color logic:**
+  - For `effect="fill"`, ripple is white/black/transparent as before.
+  - For `effect="glass"` or `effect="fade"`, ripple is color-matched and visible: blue in light mode, yellow in dark mode for blue/gradient/multi; yellow for yellow; purple for purple, etc.
+  - Ripple color always switches with color mode for brand consistency.
+- Glass and fade effects use modern Tailwind approach with CSS variables and color mode support.
+
+### 4a. **Icon Gradient Logic**
+
+- For `icon={{ gradient: true }}` on Card/Button:
+  - Icon background is always solid brand gradient (blue→cyan in light, yellow→orange in dark).
+  - Icon color is always white (light) or black (dark), regardless of hover state.
+  - No muted/opacity/hover inversion for icon gradient backgrounds.
+
+### 4b. **CTA Section Consistency**
+
+- The CTA section at the bottom of the home page must match the product page CTA in:
+  - Outer background: `bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347]`
+  - Card: `variant="gradient"`, with the same decorative background elements and layout.
+  - Button structure and spacing.
+  - This ensures a unified, on-brand CTA experience across all major pages.
 
 ### 5. **Icons**
 
@@ -86,27 +106,18 @@
 
 ### 6. **Morphy Props Over Manual ClassNames**
 
-- **NEVER use manual className when morphy props are available**
-- **Use built-in props instead of manual styling**:
+- **NEVER use manual className when morphy props or typography classes are available**
+- **Use built-in props and Morphy typography classes instead of manual styling**:
 
 ```typescript
 // ❌ WRONG - Manual className
-<Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-500/90 hover:to-purple-600/90">
+<h1 className="font-bold" style={{ fontFamily: 'Gruppo' }}>Title</h1>
 
-// ✅ CORRECT - Use variant prop
-<Button variant="blue">
+// ✅ CORRECT - Use Morphy typography class
+<h1 className="font-heading-exo2 font-bold">Title</h1>
 
-// ❌ WRONG - Manual glass styling
-<Button className="bg-white/10 backdrop-blur-md border border-white/20">
-
-// ✅ CORRECT - Use effect prop for glass
-<Button variant="none" effect="glass">
-
-// ❌ WRONG - Manual ripple styling
-<Button className="relative overflow-hidden">
-
-// ✅ CORRECT - Use showRipple prop
-<Button showRipple>
+// Or via Morphy UI system
+<h1 className={typography.classes.heading}>Title</h1>
 ```
 
 - **Available morphy props to use**:
@@ -356,6 +367,7 @@ import {
   getRippleGradient,
   GradientShowcase,
   GlassShowcase,
+  typography,
 } from "@/lib/morphy-ui/morphy";
 import { useIconWeight } from "@/lib/morphy-ui/icon-theme-context";
 import { GoogleIcon, AppleIcon, InstagramIcon } from "@/lib/morphy-ui/morphy";
@@ -447,7 +459,14 @@ import localImage from '@/public/images/local-image.png';
   - Use a single column with independent AccordionItems, each with its own `border-b` for separation.
 - All colors and gradients must use the brand palette: blue→orange in light mode, orange→blue in dark mode.
 
-### 24. **Hero Backgrounds & Image Usage**
+### 24. **Typography System**
+
+- **Headings:** Use only Exo 2 via `.font-heading-exo2` (centralized in Morphy UI)
+- **Body:** Use only Quicksand via `.font-body-quicksand` (centralized in Morphy UI)
+- **All typography classes must be referenced via Morphy UI's `typography.classes` object**
+- **Do not use manual font-family or legacy font classes anywhere in the app**
+
+### 25. **Hero Backgrounds & Image Usage**
 
 - **Product Page Heroes**: Use high-quality (2K+) real images from the internet that are contextually relevant to each product
 - **Image Quality**: Minimum 2K resolution (2048px width) for hero backgrounds
@@ -495,3 +514,37 @@ import localImage from '@/public/images/local-image.png';
 - **Purchase Inventory**: Supply chain, inventory management, procurement
 - **HRMS Payroll**: Office environments, HR processes, payroll management
 - **Portal GAD**: Digital transformation, portal interfaces, document management
+
+### 25. **Bottom Navigation Spacing**
+
+- **NO global layout padding**: Never add `pb-32 lg:pb-40` to the main layout container
+- **Component-level spacing**: Add bottom spacing only to the last component of each page
+- **Standard spacing**: Use `pb-32 lg:pb-40` for mobile (8rem) and desktop (10rem) respectively
+- **Immersive design**: This approach maintains the immersive feel without unnecessary white space
+- **Consistent implementation**: Apply to all pages to prevent navbar overlap
+
+**Implementation Pattern:**
+
+```tsx
+// ✅ CORRECT - Add spacing to last component
+<section className="py-10 pb-32 lg:pb-40">
+  {/* Last component content */}
+</section>
+
+// ✅ CORRECT - Wrap footer with spacing
+<div className="pb-32 lg:pb-40">
+  <Footer />
+</div>
+
+// ❌ WRONG - Don't add global layout padding
+<main>
+  <div className="min-h-screen pb-32 lg:pb-40">{children}</div>
+</main>
+```
+
+**Pages requiring bottom spacing:**
+
+- Home page: CTA component
+- Product pages: CTA section
+- Blog page: Footer component
+- Other pages: Last main section

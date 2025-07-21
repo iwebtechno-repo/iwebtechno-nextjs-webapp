@@ -119,10 +119,14 @@ const HowItWorks = () => {
             <Card
               key={index}
               variant={service.variant}
-              showRipple
-              icon={{ icon: service.icon, title: service.title }}
+              effect="glass"
+              icon={{
+                icon: service.icon,
+                title: service.title,
+                gradient: true,
+              }}
             >
-              <div className="p-6 flex flex-col h-full">
+              <div className="p-3 flex flex-col h-full">
                 <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   {service.description.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-2">

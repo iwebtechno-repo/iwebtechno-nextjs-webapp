@@ -65,11 +65,11 @@ const DemoForm = () => {
         </p>
         <Button
           onClick={() => setIsSubmitted(false)}
-          variant="outline"
-          effect="glass"
+          variant="gradient"
+          effect="fade"
           showRipple
         >
-          Submit Another Request
+          Schedule Another Demo
         </Button>
       </div>
     );

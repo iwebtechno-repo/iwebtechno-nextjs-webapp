@@ -9,7 +9,7 @@ const InnovationClient = () => {
     <main className="min-h-screen">
       <section className="py-10 py-20 px-4 pb-32 lg:pb-40">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 font-heading-michroma">
             Driving <GradientText>Innovation</GradientText> in Education
           </h1>
           <p className="text-lg mb-8">
@@ -22,7 +22,7 @@ const InnovationClient = () => {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button variant="outline" size="xl" effect="glass" showRipple>
+              <Button variant="none" size="xl" effect="glass" showRipple>
                 Contact Us
               </Button>
             </Link>

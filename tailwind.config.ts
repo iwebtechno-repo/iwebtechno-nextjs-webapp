@@ -18,12 +18,9 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        // University-focused typography system
-        // Headings: Poppins (professional, academic)
-        // Body: Inter (readable, modern)
-        sans: ["Inter", "system-ui", "sans-serif"],
-        heading: ["Poppins", "system-ui", "sans-serif"],
-        display: ["Poppins", "system-ui", "sans-serif"],
+        sans: ["Quicksand", "system-ui", "sans-serif"],
+        heading: ["Economica", "system-ui", "sans-serif"],
+        display: ["Economica", "system-ui", "sans-serif"],
       },
       fontSize: {
         // University typography scale

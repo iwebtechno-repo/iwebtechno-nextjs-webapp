@@ -1,32 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { IconThemeProvider } from "@/lib/morphy-ui/icon-theme-context";
 import { Navbar } from "@/components/navbar";
-
-// University typography setup
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "iWebTechno - University Management System",
@@ -84,9 +61,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/iwebtechno.svg" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body
-        className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
-      >
+      <body className="font-body-quicksand antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

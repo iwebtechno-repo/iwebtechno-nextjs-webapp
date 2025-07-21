@@ -35,7 +35,7 @@ const Features = () => {
             </p>
             <div className="mt-auto">
               <Link href="/products">
-                <Button variant="outline" size="sm" showRipple>
+                <Button variant="gradient" size="sm" effect="fade" showRipple>
                   Learn More
                 </Button>
               </Link>
@@ -54,7 +54,7 @@ const Features = () => {
             </p>
             <div className="mt-auto">
               <Link href="/products">
-                <Button variant="outline" size="sm" showRipple>
+                <Button variant="gradient" size="sm" effect="fade" showRipple>
                   Learn More
                 </Button>
               </Link>
@@ -73,7 +73,7 @@ const Features = () => {
             </p>
             <div className="mt-auto">
               <Link href="/products">
-                <Button variant="outline" size="sm" showRipple>
+                <Button variant="gradient" size="sm" effect="fade" showRipple>
                   Learn More
                 </Button>
               </Link>
@@ -92,7 +92,7 @@ const Features = () => {
             </p>
             <div className="mt-auto">
               <Link href="/products">
-                <Button variant="outline" size="sm" showRipple>
+                <Button variant="gradient" size="sm" effect="fade" showRipple>
                   Learn More
                 </Button>
               </Link>

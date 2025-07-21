@@ -19,11 +19,10 @@ export type ColorVariant =
   | "green-gradient" // Green gradient variant (fallback to blue)
   | "orange"
   | "orange-gradient" // Orange gradient variant (fallback to yellow)
-  | "multi"
-  | "outline";
+  | "multi";
 
 // New effect type for component styling
-export type ComponentEffect = "fill" | "glass";
+export type ComponentEffect = "fill" | "glass" | "fade";
 
 // ============================================================================
 // DIRECTION & GRADIENT TYPES

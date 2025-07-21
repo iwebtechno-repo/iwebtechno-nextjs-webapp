@@ -64,14 +64,14 @@ const Hero = () => {
             </div>
             <div className="flex flex-wrap gap-4">
               <Link href="/schedule-demo">
-                <Button variant="gradient" size="xl" showRipple>
+                <Button variant="none" size="xl" showRipple>
                   Get Started
                 </Button>
               </Link>
               <Button
-                variant="outline"
+                variant="gradient"
                 size="xl"
-                effect="glass"
+                effect="fade"
                 showRipple
                 icon={{ icon: Play }}
               >

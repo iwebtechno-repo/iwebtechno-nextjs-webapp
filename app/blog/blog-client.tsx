@@ -132,7 +132,7 @@ const BlogClient = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-12">
-            <h1 className="mb-6 text-4xl font-bold md:text-5xl">
+            <h1 className="mb-6 text-4xl font-bold md:text-5xl font-heading-michroma">
               The iWebTechno <GradientText>Blog</GradientText>
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
@@ -158,7 +158,8 @@ const BlogClient = () => {
             {categories.map((category, index) => (
               <Button
                 key={index}
-                variant={index === 0 ? "gradient" : "outline"}
+                variant={index === 0 ? "gradient" : "none"}
+                effect={index === 0 ? undefined : "glass"}
                 size="sm"
               >
                 {category}

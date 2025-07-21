@@ -626,6 +626,16 @@ export const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-x-4">
+            <Link href="/schedule-demo">
+              <Button
+                variant="gradient"
+                effect="fade"
+                size="default"
+                showRipple
+              >
+                Schedule Demo
+              </Button>
+            </Link>
             <ThemeToggle />
             <Separator orientation="vertical" className="h-6" />
           </div>

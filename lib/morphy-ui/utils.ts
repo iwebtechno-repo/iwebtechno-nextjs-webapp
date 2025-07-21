@@ -40,14 +40,18 @@ export const getVariantStyles = (
   switch (variant) {
     case "gradient":
       if (effect === "fill") {
-        return `bg-gradient-to-r ${gradientPresets.primary} hover:from-[#0470b6]/90 hover:to-[#0891b2]/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
+        return `bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] hover:from-[#0470b6]/90 hover:to-[#0891b2]/90 dark:hover:from-[#fbbf24]/90 dark:hover:to-[#f59e0b]/90 text-white dark:text-black shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r from-[#0470b6]/10 to-[#0891b2]/10 dark:from-[#fbbf24]/10 dark:to-[#f59e0b]/10 border border-[#0470b6]/20 dark:border-[#fbbf24]/20 text-[#0470b6] dark:text-[#fbbf24]`;
       } else {
-        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
+        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 dark:border-[#fbbf24]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
 
     case "blue":
       if (effect === "fill") {
         return "bg-gradient-to-r from-[#0891b2] to-[#0470b6] text-white shadow-lg transition-shadow,transition-colors duration-200 dark:from-[#fbbf24] dark:to-[#f59e0b] dark:text-black";
+      } else if (effect === "fade") {
+        return `bg-[#0470b6]/10 border border-[#0470b6]/20 text-[#0470b6]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -55,6 +59,8 @@ export const getVariantStyles = (
     case "blue-gradient":
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets["blue-gradient"]} hover:from-university-blue-400/90 hover:to-university-blue-600/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r ${gradientPresets["blue-gradient"]} border border-[#0470b6]/20 text-[#0470b6]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-blue-500/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -62,6 +68,8 @@ export const getVariantStyles = (
     case "yellow":
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.yellow} hover:from-university-yellow-300/90 hover:to-university-yellow-500/90 text-black shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#fbbf24]/10 border border-[#fbbf24]/20 text-[#fbbf24]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-yellow-500/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -69,6 +77,8 @@ export const getVariantStyles = (
     case "yellow-gradient":
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets["yellow-gradient"]} hover:from-university-yellow-300/90 hover:to-university-yellow-500/90 text-black shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r ${gradientPresets["yellow-gradient"]} border border-[#fbbf24]/20 text-[#fbbf24]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-yellow-500/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -78,6 +88,8 @@ export const getVariantStyles = (
       // Fallback to blue for university consistency
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.blue} hover:from-university-blue-400/90 hover:to-university-blue-600/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#7c3aed]/10 border border-[#7c3aed]/20 text-[#7c3aed]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-blue-500/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -87,6 +99,8 @@ export const getVariantStyles = (
       // Fallback to blue for university consistency
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.blue} hover:from-university-blue-400/90 hover:to-university-blue-600/90 text-white shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#10b981]/10 border border-[#10b981]/20 text-[#10b981]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-blue-500/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -96,6 +110,8 @@ export const getVariantStyles = (
       // Fallback to yellow for university consistency
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.yellow} hover:from-university-yellow-300/90 hover:to-university-yellow-500/90 text-black shadow-lg transition-shadow,transition-colors duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-yellow-500/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
@@ -103,15 +119,14 @@ export const getVariantStyles = (
     case "multi":
       if (effect === "fill") {
         return "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] text-white dark:text-black shadow-lg transition-shadow,transition-colors duration-200";
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r from-[#0470b6]/10 to-[#0891b2]/10 dark:from-[#fbbf24]/10 dark:to-[#f59e0b]/10 border border-[#0470b6]/20 dark:border-[#fbbf24]/20 text-[#0470b6] dark:text-[#fbbf24]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] hover:shadow-[0px_15px_40px_var(--activeShadowColor)] transition-shadow,transition-colors duration-200";
       }
 
     case "link":
       return "text-[#374151] dark:text-[#e5e7eb] hover:text-[#0470b6] dark:hover:text-[#fbbf24] underline-offset-4 hover:underline transition-colors duration-200 bg-transparent border-none shadow-none";
-
-    case "outline":
-      return "text-[#0470b6] dark:text-[#fbbf24] bg-[#eff6ff] dark:bg-[#fefce8]/10 border border-[#bfdbfe] dark:border-[#fde68a]/30 hover:bg-[#dbeafe] dark:hover:bg-[#fef3c7]/20 shadow-sm transition-colors duration-200";
 
     case "none":
     default:
@@ -134,14 +149,18 @@ export const getVariantStylesNoHover = (
   switch (variant) {
     case "gradient":
       if (effect === "fill") {
-        return `bg-gradient-to-r ${gradientPresets.primary} text-white shadow-lg transition-all duration-200`;
+        return `bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] text-white dark:text-black shadow-lg transition-all duration-200`;
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r from-[#0470b6]/10 to-[#0891b2]/10 dark:from-[#fbbf24]/10 dark:to-[#f59e0b]/10 border border-[#0470b6]/20 dark:border-[#fbbf24]/20 text-[#0470b6] dark:text-[#fbbf24]`;
       } else {
-        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-blue-500/20 backdrop-blur-[10px] transition-all duration-200";
+        return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 dark:border-[#fbbf24]/20 backdrop-blur-[10px] transition-all duration-200";
       }
 
     case "blue":
       if (effect === "fill") {
         return "bg-gradient-to-r from-university-blue-600 to-university-blue-500 text-white shadow-lg transition-all duration-200 dark:from-university-yellow-400 dark:to-university-yellow-500 dark:text-black";
+      } else if (effect === "fade") {
+        return `bg-[#0470b6]/10 border border-[#0470b6]/20 text-[#0470b6]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-university-blue-500/20 backdrop-blur-[10px] transition-all duration-200";
       }
@@ -149,6 +168,8 @@ export const getVariantStylesNoHover = (
     case "blue-gradient":
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets["blue-gradient"]} text-white shadow-lg transition-all duration-200`;
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r ${gradientPresets["blue-gradient"]} border border-[#0470b6]/20 text-[#0470b6]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] transition-all duration-200";
       }
@@ -156,6 +177,8 @@ export const getVariantStylesNoHover = (
     case "yellow":
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.yellow} text-black shadow-lg transition-all duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#fbbf24]/10 border border-[#fbbf24]/20 text-[#fbbf24]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#fbbf24]/20 backdrop-blur-[10px] transition-all duration-200";
       }
@@ -163,6 +186,8 @@ export const getVariantStylesNoHover = (
     case "yellow-gradient":
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets["yellow-gradient"]} text-black shadow-lg transition-all duration-200`;
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r ${gradientPresets["yellow-gradient"]} border border-[#fbbf24]/20 text-[#fbbf24]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#fbbf24]/20 backdrop-blur-[10px] transition-all duration-200";
       }
@@ -174,6 +199,8 @@ export const getVariantStylesNoHover = (
       // Fallback to blue for university consistency
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.blue} text-white shadow-lg transition-all duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#7c3aed]/10 border border-[#7c3aed]/20 text-[#7c3aed]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] transition-all duration-200";
       }
@@ -183,6 +210,8 @@ export const getVariantStylesNoHover = (
       // Fallback to yellow for university consistency
       if (effect === "fill") {
         return `bg-gradient-to-r ${gradientPresets.yellow} text-black shadow-lg transition-all duration-200`;
+      } else if (effect === "fade") {
+        return `bg-[#f59e0b]/10 border border-[#f59e0b]/20 text-[#f59e0b]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#fbbf24]/20 backdrop-blur-[10px] transition-all duration-200";
       }
@@ -190,15 +219,14 @@ export const getVariantStylesNoHover = (
     case "multi":
       if (effect === "fill") {
         return "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] text-white dark:text-black shadow-lg transition-all duration-200";
+      } else if (effect === "fade") {
+        return `bg-gradient-to-r from-[#0470b6]/10 to-[#0891b2]/10 dark:from-[#fbbf24]/10 dark:to-[#f59e0b]/10 border border-[#0470b6]/20 dark:border-[#fbbf24]/20 text-[#0470b6] dark:text-[#fbbf24]`;
       } else {
         return "bg-[var(--activeGlassColor)] shadow-[0px_10px_30px_var(--activeShadowColor)] border border-[#0470b6]/20 backdrop-blur-[10px] transition-all duration-200";
       }
 
     case "link":
       return "text-university-gray-700 dark:text-university-gray-200 underline-offset-4 transition-colors duration-200 bg-transparent border-none shadow-none";
-
-    case "outline":
-      return "text-university-blue-500 dark:text-university-yellow-400 bg-university-blue-50 dark:bg-university-yellow-50/10 border border-university-blue-200 dark:border-university-yellow-200/30 shadow-sm transition-all duration-200";
 
     case "none":
     default:
@@ -246,9 +274,6 @@ export const getIconColor = (
     case "link":
       return "text-[#374151] dark:text-[#e5e7eb]";
 
-    case "outline":
-      return "text-[#0470b6] dark:text-[#fbbf24]";
-
     case "none":
     default:
       if (effect === "fill") {
@@ -267,6 +292,34 @@ export const getRippleColor = (
   variant: ColorVariant,
   effect: ComponentEffect = "fill"
 ): string => {
+  // For glass/fade, use visible color-matched ripple
+  if (effect === "glass" || effect === "fade") {
+    switch (variant) {
+      case "gradient":
+      case "multi":
+      case "blue":
+      case "blue-gradient":
+        return "bg-[#0470b6]/30 dark:bg-[#fbbf24]/30";
+      case "yellow":
+      case "yellow-gradient":
+        return "bg-[#fbbf24]/30";
+      case "purple":
+      case "purple-gradient":
+        return "bg-[#7c3aed]/30";
+      case "green":
+      case "green-gradient":
+        return "bg-[#10b981]/30";
+      case "orange":
+      case "orange-gradient":
+        return "bg-[#f59e0b]/30";
+      case "link":
+        return "bg-[#0470b6]/20 dark:bg-[#fbbf24]/20";
+      case "none":
+      default:
+        return "bg-foreground/10";
+    }
+  }
+  // Default: fill (legacy logic)
   switch (variant) {
     case "gradient":
     case "blue":
@@ -276,35 +329,17 @@ export const getRippleColor = (
     case "green":
     case "green-gradient":
     case "multi":
-      if (effect === "fill") {
-        return "bg-white/20";
-      } else {
-        return "bg-university-blue-500/20";
-      }
-
+      return "bg-white/20";
     case "yellow":
     case "yellow-gradient":
     case "orange":
     case "orange-gradient":
-      if (effect === "fill") {
-        return "bg-black/10";
-      } else {
-        return "bg-university-yellow-500/20";
-      }
-
+      return "bg-black/10";
     case "link":
       return "bg-[#0470b6]/20 dark:bg-[#fbbf24]/20";
-
-    case "outline":
-      return "bg-[#0470b6]/20 dark:bg-[#fbbf24]/20";
-
     case "none":
     default:
-      if (effect === "fill") {
-        return "bg-foreground/10";
-      } else {
-        return "bg-foreground/10";
-      }
+      return "bg-foreground/10";
   }
 };
 

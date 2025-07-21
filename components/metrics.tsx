@@ -9,7 +9,6 @@ import {
   Coins,
   TrendUp,
   SparkleIcon,
-  CheckCircleIcon,
   ArrowUpIcon,
   type IconWeight,
 } from "@phosphor-icons/react";
@@ -81,9 +80,11 @@ const metrics: Metric[] = [
 const AnimatedCounter = ({
   value,
   suffix,
+  metricId,
 }: {
   value: number;
   suffix: string;
+  metricId?: string;
 }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -109,26 +110,54 @@ const AnimatedCounter = ({
   useEffect(() => {
     if (!isVisible) return;
 
-    const duration = 2000; // 2 seconds
-    const steps = 60;
-    const increment = value / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [value, isVisible]);
+    if (metricId === "students" && suffix === "M+") {
+      // Animate from 0 to 1,000,000 in steps
+      const duration = 2000;
+      const steps = 60;
+      const max = 1000000;
+      let current = 0;
+      const increment = max / steps;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= max) {
+          setCount(max);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(current));
+        }
+      }, duration / steps);
+      return () => clearInterval(timer);
+    } else {
+      // Default animation
+      const duration = 2000; // 2 seconds
+      const steps = 60;
+      const increment = value / steps;
+      let current = 0;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= value) {
+          setCount(value);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(current));
+        }
+      }, duration / steps);
+      return () => clearInterval(timer);
+    }
+  }, [value, isVisible, metricId, suffix]);
 
   // Format the number based on suffix
   const formatNumber = (num: number, suffix: string) => {
+    if (metricId === "students" && suffix === "M+") {
+      if (num < 1000) return "0";
+      if (num < 10000) return "10K";
+      if (num < 100000) return "100K";
+      if (num < 250000) return "250K";
+      if (num < 500000) return "500K";
+      if (num < 750000) return "750K";
+      if (num < 900000) return "900K";
+      return "1M+";
+    }
     if (suffix === "K+") {
       return `${num}K+`;
     } else if (suffix === "M+") {
@@ -186,13 +215,13 @@ const Metrics = () => {
       <div className="container relative z-10 mx-auto px-4">
         {/* Header */}
         <div
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-16 transition-colors duration-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#0470b6]/10 to-[#0891b2]/10 dark:from-[#fbbf24]/10 dark:to-[#f59e0b]/10 border border-[#0470b6]/20 dark:border-[#fbbf24]/20 mb-6">
-            <SparkleIcon className="h-4 w-4 text-[#0470b6] dark:text-black mr-2" />
-            <span className="text-sm font-medium text-[#0470b6] dark:text-black">
+            <SparkleIcon className="h-4 w-4 text-[#0470b6] dark:text-[#fbbf24] mr-2" />
+            <span className="text-sm font-medium text-[#0470b6] dark:text-[#fbbf24]">
               Real Impact, Real Results
             </span>
           </div>
@@ -207,19 +236,20 @@ const Metrics = () => {
 
         {/* Metrics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12">
-          {metrics.map((metric, index) => (
+          {metrics.map((metric) => (
             <Card
               key={metric.id}
-              variant="none"
-              effect="glass"
+              variant="gradient"
+              effect="fade"
               showRipple
               icon={{
                 icon: metric.icon,
                 title: metric.label,
+                gradient: true,
+                // Add color prop for future extensibility if needed
+                // color: metric.color
               }}
-              className={`relative overflow-hidden p-6 h-full flex flex-col transition-all duration-1000 delay-${
-                index * 200
-              } ${
+              className={`relative overflow-hidden p-6 h-full flex flex-col transition-colors duration-300 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
@@ -232,6 +262,7 @@ const Metrics = () => {
                   <AnimatedCounter
                     value={metric.value}
                     suffix={metric.suffix}
+                    metricId={metric.id}
                   />
                 </div>
 
@@ -262,7 +293,7 @@ const Metrics = () => {
 
         {/* Bottom Stats */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-1000 delay-800 ${
+          className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-colors duration-300 delay-75 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >

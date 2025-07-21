@@ -10,7 +10,6 @@ import {
   getRippleColor,
 } from "@/lib/morphy-ui/utils";
 import { useRipple } from "@/lib/morphy-ui/ripple";
-import { useState } from "react";
 
 // ============================================================================
 // CARD COMPONENT
@@ -42,7 +41,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     ref
   ) => {
     const { addRipple, resetRipple, ripple } = useRipple();
-    const [isHovered, setIsHovered] = useState(false);
 
     // Get centralized styles - use no-hover version when ripple is disabled
     const variantStyles = showRipple
@@ -61,51 +59,28 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       "bottom-right": "justify-end mt-4 flex-row-reverse",
     };
 
-    const getIconBoxStyle = (isHovered: boolean) => {
-      if (!isHovered) {
-        return "bg-background/50 backdrop-blur-sm border border-transparent";
-      }
+    // Accent color for icon (blue in light, yellow in dark)
+    const accentColor = "text-[#0470b6] dark:text-[#fbbf24]";
 
-      switch (variant) {
-        case "gradient":
-        case "multi":
-          return "bg-gradient-to-br from-[#0470b6]/20 to-[#f49d2f]/20 dark:from-[#0470b6]/20 dark:to-[#f49d2f]/20 border-transparent";
-        case "blue":
-          return "bg-gradient-to-br from-blue-500/20 to-blue-600/20 dark:from-blue-400/20 dark:to-blue-500/20 border-transparent";
-        case "purple":
-          return "bg-gradient-to-br from-purple-500/20 to-purple-600/20 dark:from-purple-400/20 dark:to-purple-500/20 border-transparent";
-        case "green":
-          return "bg-gradient-to-br from-green-500/20 to-green-600/20 dark:from-green-400/20 dark:to-green-500/20 border-transparent";
-        case "orange":
-          return "bg-gradient-to-br from-orange-500/20 to-orange-600/20 dark:from-orange-400/20 dark:to-orange-500/20 border-transparent";
-        default:
-          return "bg-gradient-to-br from-gray-500/20 to-gray-600/20 dark:from-gray-400/20 dark:to-gray-500/20 border-transparent";
+    // Decoupled icon background and color logic (muted to gradient)
+    const getIconBoxStyle = (isGradient: boolean) => {
+      if (isGradient) {
+        // Always: solid brand gradient background
+        return "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] border border-transparent";
       }
+      // For false, transparent bg, accent border on hover
+      return `bg-transparent border border-solid transition-colors duration-75 border-transparent`;
     };
 
-    const getIconColor = (isHovered: boolean) => {
-      if (!isHovered) {
-        switch (variant) {
-          case "gradient":
-          case "multi":
-            return "text-[#0470b6] dark:text-[#fbbf24]";
-          case "blue":
-            return "text-blue-500 dark:text-blue-400";
-          case "purple":
-            return "text-purple-500 dark:text-purple-400";
-          case "green":
-            return "text-green-500 dark:text-green-400";
-          case "orange":
-            return "text-orange-500 dark:text-orange-400";
-          default:
-            return "text-primary";
-        }
+    const getIconColor = (isGradient: boolean) => {
+      if (isGradient) {
+        // Always: white (light), black (dark)
+        return "text-white dark:text-black";
       }
-      return "text-foreground dark:text-foreground";
+      return accentColor;
     };
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-      setIsHovered(true);
       if (showRipple) {
         addRipple(e);
       }
@@ -114,7 +89,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      setIsHovered(false);
       if (showRipple) {
         resetRipple();
       }
@@ -129,6 +103,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       // Check if gradient icon is requested
       const isGradientIcon = icon?.gradient;
 
+      const gradient = !!isGradientIcon;
       return (
         <div
           className={cn(
@@ -139,21 +114,14 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           <div className="relative">
             <div
               className={cn(
-                "w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 border",
-                isGradientIcon
-                  ? "bg-gradient-to-r from-[#0470b6] to-[#0891b2] dark:from-[#fbbf24] dark:to-[#f59e0b] border-transparent"
-                  : cn(
-                      getIconBoxStyle(isHovered),
-                      !isHovered && "border-primary/20 hover:border-primary/50"
-                    )
+                "w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-400 border",
+                getIconBoxStyle(gradient)
               )}
             >
               <IconComponent
                 className={cn(
-                  "h-5 w-5 transition-colors duration-300",
-                  isGradientIcon
-                    ? "text-white dark:text-black"
-                    : getIconColor(isHovered)
+                  "h-5 w-5 transition-colors duration-400",
+                  getIconColor(gradient)
                 )}
                 weight="regular"
               />
@@ -174,9 +142,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-lg border bg-card text-card-foreground shadow-sm relative p-6",
+          "rounded-lg border border-solid bg-card text-card-foreground shadow-sm relative p-6 transition-colors duration-75",
           variantStyles,
           showRipple ? "overflow-hidden" : "",
+          "border-transparent",
           className
         )}
         onMouseEnter={handleMouseEnter}

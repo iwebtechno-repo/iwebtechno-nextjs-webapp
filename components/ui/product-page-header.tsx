@@ -1,12 +1,10 @@
 import { GradientText } from "@/components/ui/gradient-text";
-import { type IconWeight } from "@phosphor-icons/react";
+
 import { colors, gradients, typography } from "@/lib/morphy-ui/morphy";
 
 interface ProductPageHeaderProps {
   title: string;
-  subtitle: string;
   description: string;
-  icon: React.ComponentType<{ className?: string; weight?: IconWeight }>;
   patternType:
     | "admission"
     | "attendance"
@@ -65,9 +63,7 @@ const patternConfigs = {
 
 export const ProductPageHeader = ({
   title,
-  subtitle,
   description,
-  icon: IconComponent,
   patternType,
   backgroundImage,
 }: ProductPageHeaderProps) => {
