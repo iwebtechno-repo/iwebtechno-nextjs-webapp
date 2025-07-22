@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import {
   HouseIcon,
   UserCircleIcon,
@@ -36,6 +36,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const NavButton = ({
   item,
@@ -81,6 +82,9 @@ const NavButton = ({
 
 export const Navbar = () => {
   const pathname = usePathname();
+  const isMobile = useIsMobile();
+  const iconWeight = useIconWeight();
+  const toggleCellRef = useRef<HTMLDivElement>(null); // Move useRef to top level
 
   // Define the breadcrumb mapping for different routes
   const breadcrumbMap: Record<string, string> = {
@@ -222,13 +226,622 @@ export const Navbar = () => {
     { href: "/genzdealz-ai", icon: ChartBar, label: "GENZDEALZ.AI" },
   ];
 
-  const [open, setOpen] = useState(false); // Products popover
-  const [moreOpen, setMoreOpen] = useState(false); // More popover
+  const [open, setOpenRaw] = useState(false); // Products popover
+  const [moreOpen, setMoreOpenRaw] = useState(false); // More popover
 
+  // Ensure only one dropup is open at a time
+  const setOpen = (val: boolean) => {
+    setOpenRaw(val);
+    if (val) setMoreOpenRaw(false);
+  };
+  const setMoreOpen = (val: boolean) => {
+    setMoreOpenRaw(val);
+    if (val) setOpenRaw(false);
+  };
+
+  // --- MOBILE NAVBAR (identical styling, limited items) ---
+  if (isMobile) {
+    return (
+      <nav
+        className="fixed bottom-4 left-0 right-0 z-[100] flex justify-center px-4 overflow-visible lg:hidden"
+        style={{ "--navbar-pill-height": "48px" } as React.CSSProperties}
+      >
+        <div className="w-full max-w-2xl mx-auto flex flex-col gap-2 relative">
+          {/* Modern floating indicator - subtle shadow */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-yellow-500/10 rounded-full blur-xl opacity-50 pointer-events-none" />
+          <Card
+            variant="none"
+            className="flex items-stretch justify-between px-2 py-2 rounded-full relative group"
+          >
+            {/* Modern design indicator - subtle glow on hover */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-yellow-500/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="flex flex-1 items-center justify-between gap-x-1">
+              {/* Home */}
+              <Button
+                variant={pathname === "/" ? "multi" : "link"}
+                effect="fill"
+                size="default"
+                className="flex flex-col items-center justify-center flex-1 min-w-0 py-2 h-auto rounded-full"
+                title="Home"
+                showRipple={false}
+              >
+                <Link
+                  href="/"
+                  aria-label="Home"
+                  className="flex flex-col items-center w-full"
+                >
+                  <HouseIcon
+                    className="h-6 w-6 mt-1 mb-1"
+                    weight={pathname === "/" ? "duotone" : iconWeight}
+                  />
+                  <span className="text-xs font-medium truncate mt-1">
+                    Home
+                  </span>
+                </Link>
+              </Button>
+              {/* Products Popover */}
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={
+                      pathname.startsWith("/products/") ? "multi" : "link"
+                    }
+                    effect="fill"
+                    size="default"
+                    className="flex flex-col items-center justify-center flex-1 min-w-0 py-2 h-auto rounded-full"
+                    title="Products"
+                    showRipple={false}
+                  >
+                    <SparkleIcon
+                      className="h-6 w-6 mb-1"
+                      weight={
+                        pathname.startsWith("/products/")
+                          ? "duotone"
+                          : iconWeight
+                      }
+                    />
+                    <span className="text-xs font-medium truncate flex items-center justify-center mt-1.5">
+                      Products
+                      <CaretUpIcon
+                        className={`h-4 w-4 ml-1 transition-transform duration-200 ${
+                          open ? "rotate-180" : "rotate-0"
+                        }`}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Button>
+                </PopoverTrigger>
+                <>
+                  {open && (
+                    <div
+                      className="fixed left-0 right-0 top-0 bg-black/30 z-[100]"
+                      style={{
+                        bottom: "calc(var(--navbar-pill-height) + 48px)",
+                      }}
+                      onClick={() => setOpen(false)}
+                    />
+                  )}
+                  <div
+                    className={cn(
+                      "fixed left-4 right-4 mx-auto max-w-xs bg-popover text-popover-foreground shadow-lg border rounded-2xl p-1 z-[110] transition-all duration-200 ease-out",
+                      open
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0 pointer-events-none"
+                    )}
+                    style={{ bottom: "calc(var(--navbar-pill-height) + 48px)" }}
+                  >
+                    <ul className="grid gap-0.5 grid-cols-1 auto-rows-fr">
+                      <li className="h-full">
+                        <Link
+                          href="/products/admission-management"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/admission-management"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/admission-management"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <SparkleIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Admission Management
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Digitize your admission process with online forms
+                              and fee collection.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        <Link
+                          href="/products/student-attendance"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/student-attendance"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/student-attendance"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <GraduationCap className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Student Attendance
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Track and manage student attendance efficiently.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        <Link
+                          href="/products/fee-collection"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/fee-collection"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/fee-collection"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <ChartBar className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Fee Collection with Accounts & Finance
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Collect fees and manage accounts with seamless
+                              integration.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        <Link
+                          href="/products/student-exams"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/student-exams"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/student-exams"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <BookOpen className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Student Exams & Results
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Manage exams, results, and student performance
+                              online.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        <Link
+                          href="/products/purchase-inventory"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/purchase-inventory"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/purchase-inventory"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <UsersThreeIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Purchase & Stores Inventory
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Streamline purchasing and inventory for your
+                              institution.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        <Link
+                          href="/products/hrms-payroll"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/hrms-payroll"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/hrms-payroll"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <DotsThreeIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              HRMS & Payroll
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Manage HR, payroll, and staff records with ease.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        <Link
+                          href="/products/portal-gad"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/products/portal-gad"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex items-center justify-center h-6 w-6 rounded-full transition-colors",
+                              pathname === "/products/portal-gad"
+                                ? "bg-primary/20"
+                                : "bg-muted group-hover:bg-accent/20"
+                            )}
+                          >
+                            <DotsThreeIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Portal & GAD
+                            </span>
+                            <span className="text-[10px] text-muted-foreground mt-0.5">
+                              Student and staff portals with GAD integration.
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+                {/* Desktop PopoverContent remains unchanged */}
+                {!isMobile && (
+                  <PopoverContent
+                    side="top"
+                    align="center"
+                    className="bg-popover text-popover-foreground shadow-lg border rounded-2xl w-[99vw] max-w-[320px] p-1 z-[110]"
+                  >
+                    <ul className="grid gap-0.5 grid-cols-1 auto-rows-fr">
+                      {allNavItems
+                        .filter((item) =>
+                          [
+                            "Partners",
+                            "Blog",
+                            "Clients",
+                            "GENZDEALZ.AI",
+                          ].includes(item.label)
+                        )
+                        .map((item) => (
+                          <li className="h-full" key={item.href}>
+                            <Link
+                              href={item.href}
+                              className={cn(
+                                "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                                pathname === item.href
+                                  ? "bg-accent/20 border border-primary/20"
+                                  : "hover:bg-accent"
+                              )}
+                            >
+                              <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted group-hover:bg-accent/20">
+                                <item.icon className="h-4 w-4 text-primary" />
+                              </div>
+                              <div className="flex flex-col justify-center">
+                                <span className="text-xs font-semibold leading-tight">
+                                  {item.label}
+                                </span>
+                              </div>
+                            </Link>
+                          </li>
+                        ))}
+                      <li className="h-full">
+                        <Link
+                          href="/schedule-demo"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/schedule-demo"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted group-hover:bg-accent/20">
+                            <SparkleIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Schedule Demo
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    </ul>
+                  </PopoverContent>
+                )}
+              </Popover>
+              {/* About */}
+              <Button
+                variant={pathname === "/about" ? "multi" : "link"}
+                effect="fill"
+                size="default"
+                className="flex flex-col items-center justify-center flex-1 min-w-0 py-2 h-auto rounded-full"
+                title="About"
+                showRipple={false}
+              >
+                <Link
+                  href="/about"
+                  aria-label="About"
+                  className="flex flex-col items-center w-full"
+                >
+                  <InfoIcon
+                    className="h-6 w-6 mt-1 mb-1"
+                    weight={pathname === "/about" ? "duotone" : iconWeight}
+                  />
+                  <span className="text-xs font-medium truncate mt-1">
+                    About
+                  </span>
+                </Link>
+              </Button>
+              {/* More Popover */}
+              <Popover open={moreOpen} onOpenChange={setMoreOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={
+                      [
+                        "/partners",
+                        "/blog",
+                        "/clients",
+                        "/genzdealz-ai",
+                        "/schedule-demo",
+                      ].includes(pathname)
+                        ? "multi"
+                        : "link"
+                    }
+                    effect="fill"
+                    size="default"
+                    className="flex flex-col items-center justify-center flex-1 min-w-0 py-2 h-auto rounded-full"
+                    title="More"
+                    showRipple={false}
+                  >
+                    <DotsThreeIcon
+                      className="h-6 w-6 mb-1"
+                      weight={iconWeight}
+                    />
+                    <span className="text-xs font-medium truncate flex items-center justify-center mt-1.5">
+                      More
+                      <CaretUpIcon
+                        className={`h-4 w-4 ml-1 transition-transform duration-200 ${
+                          moreOpen ? "rotate-180" : "rotate-0"
+                        }`}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Button>
+                </PopoverTrigger>
+                <>
+                  {isMobile && moreOpen && (
+                    <div
+                      className="fixed left-0 right-0 top-0 bg-black/30 z-[100]"
+                      style={{
+                        bottom: "calc(var(--navbar-pill-height) + 48px)",
+                      }}
+                      onClick={() => setMoreOpen(false)}
+                    />
+                  )}
+                  <div
+                    className={cn(
+                      "fixed left-4 right-4 mx-auto max-w-xs bg-popover text-popover-foreground shadow-lg border rounded-2xl p-1 z-[110] transition-all duration-200 ease-out",
+                      isMobile && moreOpen
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0 pointer-events-none"
+                    )}
+                    style={{ bottom: "calc(var(--navbar-pill-height) + 48px)" }}
+                  >
+                    <ul className="grid gap-0.5 grid-cols-1 auto-rows-fr">
+                      {allNavItems
+                        .filter((item) =>
+                          [
+                            "Partners",
+                            "Blog",
+                            "Clients",
+                            "GENZDEALZ.AI",
+                          ].includes(item.label)
+                        )
+                        .map((item) => (
+                          <li className="h-full" key={item.href}>
+                            <Link
+                              href={item.href}
+                              className={cn(
+                                "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                                pathname === item.href
+                                  ? "bg-accent/20 border border-primary/20"
+                                  : "hover:bg-accent"
+                              )}
+                            >
+                              <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted group-hover:bg-accent/20 transition-colors">
+                                <item.icon className="h-4 w-4 text-primary" />
+                              </div>
+                              <div className="flex flex-col justify-center">
+                                <span className="text-xs font-semibold leading-tight">
+                                  {item.label}
+                                </span>
+                              </div>
+                            </Link>
+                          </li>
+                        ))}
+                      <li className="h-full">
+                        <Link
+                          href="/schedule-demo"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/schedule-demo"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted group-hover:bg-accent/20 transition-colors">
+                            <SparkleIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Schedule Demo
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li className="h-full">
+                        {/* Theme toggle row, use top-level toggleCellRef */}
+                        <div className="group grid grid-cols-[28px_1fr] items-center gap-x-1 px-1 py-1 rounded-lg w-full">
+                          <div
+                            className="flex items-center justify-center h-6 w-6 rounded-full bg-muted"
+                            ref={toggleCellRef}
+                          >
+                            <ThemeToggle />
+                          </div>
+                          <div className="flex items-center w-full">
+                            <span
+                              className="text-xs font-semibold leading-tight cursor-pointer"
+                              onClick={() => {
+                                const btn =
+                                  toggleCellRef.current?.querySelector(
+                                    "button"
+                                  );
+                                btn?.click();
+                              }}
+                            >
+                              Theme
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+                {/* Desktop PopoverContent remains unchanged */}
+                {!isMobile && (
+                  <PopoverContent
+                    side="top"
+                    align="center"
+                    className="bg-popover text-popover-foreground shadow-lg border rounded-2xl w-[99vw] max-w-[320px] p-1 z-[110]"
+                  >
+                    <ul className="grid gap-0.5 grid-cols-1 auto-rows-fr">
+                      {allNavItems
+                        .filter((item) =>
+                          [
+                            "Partners",
+                            "Blog",
+                            "Clients",
+                            "GENZDEALZ.AI",
+                          ].includes(item.label)
+                        )
+                        .map((item) => (
+                          <li className="h-full" key={item.href}>
+                            <Link
+                              href={item.href}
+                              className={cn(
+                                "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                                pathname === item.href
+                                  ? "bg-accent/20 border border-primary/20"
+                                  : "hover:bg-accent"
+                              )}
+                            >
+                              <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted group-hover:bg-accent/20 transition-colors">
+                                <item.icon className="h-4 w-4 text-primary" />
+                              </div>
+                              <div className="flex flex-col justify-center">
+                                <span className="text-xs font-semibold leading-tight">
+                                  {item.label}
+                                </span>
+                              </div>
+                            </Link>
+                          </li>
+                        ))}
+                      <li className="h-full">
+                        <Link
+                          href="/schedule-demo"
+                          className={cn(
+                            "group grid grid-cols-[28px_1fr] items-start gap-x-1 px-1 py-1 rounded-lg transition-colors focus:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 h-full",
+                            pathname === "/schedule-demo"
+                              ? "bg-accent/20 border border-primary/20"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted group-hover:bg-accent/20 transition-colors">
+                            <SparkleIcon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-xs font-semibold leading-tight">
+                              Schedule Demo
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    </ul>
+                  </PopoverContent>
+                )}
+              </Popover>
+            </div>
+          </Card>
+        </div>
+      </nav>
+    );
+  }
+
+  // --- DESKTOP NAVBAR (unchanged) ---
   return (
     <nav className="fixed bottom-4 left-0 right-0 z-[100] flex justify-center px-4 overflow-visible">
-      {/* Removed mobile & tablet navbar for now */}
-
       {/* Desktop Navbar with Breadcrumb above and Navigation below */}
       <div className="w-full max-w-6xl mx-auto hidden lg:flex flex-col gap-2 relative">
         {/* Modern floating indicator - subtle shadow */}
@@ -681,8 +1294,8 @@ export const Navbar = () => {
                           >
                             <item.icon className="h-6 w-6 text-primary" />
                           </div>
-                          <div className="flex flex-col justify-center items-center h-full w-full">
-                            <span className="text-base font-semibold leading-tight text-center w-full">
+                          <div className="flex flex-col justify-center h-12">
+                            <span className="text-base font-semibold leading-tight">
                               {item.label}
                             </span>
                           </div>
