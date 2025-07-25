@@ -418,34 +418,26 @@ _Version: 3.3_
 
 ### 22. **Image Component Usage**
 
-- **Use standard `<img>` for external sources**: For images loaded from external URLs (e.g., from an API or a different domain), use the standard HTML `<img>` tag instead of Next.js's `<Image>` component. This avoids configuration issues with `next.config.ts` for a large number of external domains.
-- **Linter Warnings for `<img>`**: It is acceptable to have linter warnings related to using `<img>` instead of `<Image>`. These warnings can be ignored as this is an intentional choice for handling external media.
-- **Use Next.js `<Image>` for local assets**: For local images stored within the `/public` directory, continue to use the Next.js `<Image>` component to benefit from automatic optimization.
+- **All images used in static pages must be downloaded and served from the `/public/images` directory, organized by route (e.g., `/public/images/about`, `/public/images/products/...`).**
+- **Use Next.js `<Image />` for all local images.**
+- **External URLs are not allowed for static content.**
+- For images loaded from external APIs at runtime (not static), use the standard HTML `<img>` tag.
+- For local images stored within the `/public` directory, always use the Next.js `<Image />` component to benefit from automatic optimization.
 
 **Implementation Pattern:**
 
 ```tsx
-// ✅ CORRECT - For external images from an API
-<img
-  src={deal.image}
-  alt={deal.title}
-  className="object-cover w-full h-full"
-/>
-
 // ✅ CORRECT - For local static images
-import localImage from '@/public/images/local-image.png';
+import localImage from "@/public/images/about/sidbi-smile-high-res.jpg";
+import Image from "next/image";
+
 <Image
   src={localImage}
   alt="Description of local image"
-/>
-
-// ❌ WRONG - Using Next/Image for dynamic external URLs
-<Image
-  src={deal.image} // deal.image is from an external API
-  alt={deal.title}
-  width={500}
-  height={300}
-/>
+  width={1200}
+  height={800}
+  placeholder="blur"
+/>;
 ```
 
 ### 23. **Accordion Layout & Separator Rules**
@@ -548,3 +540,24 @@ import localImage from '@/public/images/local-image.png';
 - Product pages: CTA section
 - Blog page: Footer component
 - Other pages: Last main section
+
+### 26. **Static Generation & ISG Optimization**
+
+- **All static pages must use:**
+  ```ts
+  export const dynamic = "force-static";
+  ```
+- **Pages with dynamic content that changes infrequently should use:**
+  ```ts
+  export const revalidate = <seconds>; // e.g., 3600 for 1 hour
+  ```
+- **Never use getServerSideProps or server-only logic unless absolutely necessary.**
+- **All images and assets must be local and optimized as per the image rules above.**
+- **Document any exceptions in this file.**
+
+**Example:**
+
+```ts
+export const dynamic = "force-static";
+export const revalidate = 3600; // For ISG (revalidate every hour)
+```

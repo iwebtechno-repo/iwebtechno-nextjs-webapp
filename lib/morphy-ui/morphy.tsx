@@ -21,11 +21,7 @@ export type {
 export { useRipple, Ripple, rippleKeyframes } from "./ripple";
 
 // Icon system
-export {
-  useIconWeight,
-  IconThemeProvider,
-  useIconTheme,
-} from "./icon-theme-context";
+export { useIconWeight } from "./icon-theme-context";
 
 export { IconWrapper, useGlobalIconWeight } from "./icon-utils";
 

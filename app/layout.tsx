@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { IconThemeProvider } from "@/lib/morphy-ui/icon-theme-context";
 import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
@@ -59,7 +58,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/iwebtechno.svg" />
         <link rel="apple-touch-icon" href="/iwebtechno.svg" />
-        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="font-body-quicksand antialiased">
         <ThemeProvider
@@ -68,13 +66,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <IconThemeProvider>
-            <main>
-              <div className="min-h-screen">{children}</div>
-            </main>
-            <Navbar />
-            <Toaster />
-          </IconThemeProvider>
+          <main>
+            <div className="min-h-screen">{children}</div>
+          </main>
+          <Navbar />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

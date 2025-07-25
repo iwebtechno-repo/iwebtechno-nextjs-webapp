@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-static";
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
@@ -12,6 +13,11 @@ import {
   TwitterLogoIcon,
   SparkleIcon,
 } from "@phosphor-icons/react";
+import Image from "next/image";
+import sidbiSmile from "@/public/images/about/sidbi-smile-high-res.jpg";
+import teamAkshay from "@/public/images/about/team-akshay-v01.jpg";
+import teamKetan from "@/public/images/about/team-ketan.jpg";
+import teamVarsha from "@/public/images/about/team-varsha.jpg";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -147,27 +153,29 @@ export default function AboutPage() {
       <section
         ref={heroRef}
         className="relative min-h-[85vh] bg-cover bg-center bg-no-repeat flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url('https://iwebtechno.com/wp-content/uploads/2019/10/Sidbi-smile-high-res.jpg')`,
-          backgroundPosition: "center 30%", // Adjusted to show more upper body/faces
-        }}
       >
+        {/* Optimized local hero background */}
+        <Image
+          src={sidbiSmile}
+          alt="SIDBI Smile Hero"
+          fill
+          style={{ objectFit: "cover", objectPosition: "center 30%" }}
+          placeholder="blur"
+          priority
+        />
         {/* Floating background elements */}
         <div
           ref={floatingElementsRef}
           className="absolute inset-0 pointer-events-none"
         />
-
         {/* Enhanced overlay with gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/40 to-black/50"></div>
-
         {/* Subtle background shapes */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-[#0470b6]/20 to-[#0891b2]/20 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute bottom-20 right-20 w-24 h-24 bg-gradient-to-r from-[#fbbf24]/20 to-[#f59e0b]/20 rounded-full blur-xl animate-pulse delay-1000"></div>
           <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-r from-[#0470b6]/30 to-[#0891b2]/30 rounded-full blur-lg animate-pulse delay-500"></div>
         </div>
-
         {/* Content */}
         <div
           ref={heroContentRef}
@@ -322,10 +330,13 @@ export default function AboutPage() {
               {/* Image with social icons overlayed bottom left */}
               <div className="relative flex items-center justify-center w-full">
                 <div className="w-64 h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl overflow-hidden">
-                  <img
-                    src="https://iwebtechno.com/wp-content/uploads/2019/11/team-akshay-v01.jpg"
+                  <Image
+                    src={teamAkshay}
                     alt="Akshay Shah - Founder, CEO"
+                    width={256}
+                    height={256}
                     className="w-full h-full object-cover"
+                    placeholder="blur"
                   />
                   {/* Social icons overlayed bottom right */}
                   <div className="absolute bottom-4 right-4 flex flex-col gap-2">
@@ -400,10 +411,13 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="relative flex items-center justify-center w-full">
                 <div className="w-64 h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl overflow-hidden">
-                  <img
-                    src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/512885685_10223540173492028_6248824895965791880_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=3mGHxnNYBPwQ7kNvwG09GUy&_nc_oc=AdnsFo2y3QwSJkvo3YD3dnKIsWXG7ZJr_uBt5C98svNZVHru6RunLuVvjyqZCXY2kG9XfpM3X7WHd7XYGnY9cwGQ&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=_d6rMgq9lSLyAKfqXkjO8A&oh=00_AfR1pZo4ILD9LdseCRJsHG4y1CbyQlw9acjKTWh48MvtDw&oe=68835A8F"
+                  <Image
+                    src={teamKetan}
                     alt="Ketan Trivedi - Founder, Mentor"
+                    width={256}
+                    height={256}
                     className="w-full h-full object-cover"
+                    placeholder="blur"
                   />
                   {/* Social icon overlayed bottom right */}
                   <div className="absolute bottom-4 right-4">
@@ -464,10 +478,13 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="relative flex items-center justify-center w-full">
                 <div className="w-64 h-64 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-3xl shadow-2xl overflow-hidden">
-                  <img
-                    src="https://iwebtechno.com/wp-content/uploads/2019/11/team-varsha.jpg"
+                  <Image
+                    src={teamVarsha}
                     alt="Varsha Shah - Director, Sales & Marketing"
+                    width={256}
+                    height={256}
                     className="w-full h-full object-cover"
+                    placeholder="blur"
                   />
                   {/* Social icon overlayed bottom right */}
                   <div className="absolute bottom-4 right-4">

@@ -2,6 +2,8 @@ import { GradientText } from "@/components/ui/gradient-text";
 
 import { colors, gradients, typography } from "@/lib/morphy-ui/morphy";
 import { Card } from "./card";
+import Image, { StaticImageData } from "next/image";
+import { ProductHeaderIcon } from "@/components/ui/ProductHeaderIcon";
 
 interface ProductPageHeaderProps {
   title: string;
@@ -14,7 +16,8 @@ interface ProductPageHeaderProps {
     | "inventory"
     | "hrms"
     | "portal";
-  backgroundImage?: string;
+  backgroundImage?: string | StaticImageData;
+  icon?: "sparkle" | "book" | "chart" | "users" | "dots";
 }
 
 const patternConfigs = {
@@ -67,6 +70,7 @@ export const ProductPageHeader = ({
   description,
   patternType,
   backgroundImage,
+  icon,
 }: ProductPageHeaderProps) => {
   const config = patternConfigs[patternType];
 
@@ -74,14 +78,26 @@ export const ProductPageHeader = ({
     <section
       className="relative overflow-hidden min-h-[60vh] bg-cover bg-center bg-no-repeat py-20"
       style={
-        backgroundImage ? { backgroundImage: `url('${backgroundImage}')` } : {}
+        typeof backgroundImage === "string" && backgroundImage
+          ? { backgroundImage: `url('${backgroundImage}')` }
+          : {}
       }
     >
+      {/* Local image background with Next.js <Image /> */}
+      {backgroundImage && typeof backgroundImage !== "string" && (
+        <Image
+          src={backgroundImage}
+          alt={title + " hero background"}
+          fill
+          style={{ objectFit: "cover" }}
+          placeholder="blur"
+          priority
+        />
+      )}
       {/* Dark overlay for text readability when using background image */}
       {backgroundImage && (
         <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/40 to-black/50"></div>
       )}
-
       {/* Contextual Background Pattern (fallback when no background image) */}
       {!backgroundImage && (
         <div
@@ -100,30 +116,27 @@ export const ProductPageHeader = ({
         </div>
       )}
 
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="text-center mb-8">
-          {/* Title */}
-          <h1
-            className={`text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight ${typography.classes.heading}`}
-          >
-            <Card variant="none" effect="glass">
-              <GradientText>{title}</GradientText>
-            </Card>
-          </h1>
-
-          {/* Description */}
-          <p
-            className={`text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto leading-relaxed font-light ${
-              typography.classes.body
-            } ${
-              backgroundImage
-                ? "text-gray-100"
-                : `text-[${colors.gray[600]}] dark:text-[${colors.gray[300]}]`
-            }`}
-          >
-            {description}
-          </p>
-        </div>
+      <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col items-center justify-center">
+        {/* Optional icon (client-only) */}
+        {icon && <ProductHeaderIcon icon={icon} />}
+        <h1
+          className={`text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight ${typography.classes.heading}`}
+        >
+          <Card variant="none" effect="glass">
+            <GradientText>{title}</GradientText>
+          </Card>
+        </h1>
+        <p
+          className={`text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto leading-relaxed font-light ${
+            typography.classes.body
+          } ${
+            backgroundImage
+              ? "text-gray-100"
+              : `text-[${colors.gray[600]}] dark:text-[${colors.gray[300]}]`
+          }`}
+        >
+          {description}
+        </p>
       </div>
     </section>
   );

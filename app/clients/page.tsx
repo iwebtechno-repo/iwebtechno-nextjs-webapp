@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { WarningIcon } from "@phosphor-icons/react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { WarningIcon } from "@phosphor-icons/react";
 import { typography } from "@/lib/morphy-ui/morphy";
 
-export default function ErrorPage() {
+const ClientsPage = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#f8fafc] to-[#e0e7ff] dark:from-[#18181b] dark:to-[#232347] p-4">
       <Card
@@ -21,18 +21,22 @@ export default function ErrorPage() {
         <h1
           className={`text-3xl md:text-4xl font-bold mb-2 text-center ${typography.classes.heading}`}
         >
-          Something went wrong
+          Page Under Construction
         </h1>
         <p className="text-lg text-gray-700 dark:text-gray-200 text-center mb-6 font-body-quicksand">
-          Sorry, an unexpected error has occurred. Please try again or return to
-          the home page.
+          We're working hard to bring you this page soon. Please check back
+          later!
         </p>
-        <Link href="/">
-          <Button variant="gradient" effect="fade" size="xl" showRipple>
-            Go to Home
-          </Button>
-        </Link>
+        <div className="flex gap-4">
+          <Link href="/">
+            <Button variant="gradient" effect="fade" size="xl" showRipple>
+              Go to Home
+            </Button>
+          </Link>
+        </div>
       </Card>
     </div>
   );
-}
+};
+
+export default ClientsPage;

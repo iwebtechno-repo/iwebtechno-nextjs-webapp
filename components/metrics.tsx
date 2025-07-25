@@ -81,31 +81,14 @@ const AnimatedCounter = ({
   value,
   suffix,
   metricId,
+  isVisible,
 }: {
   value: number;
   suffix: string;
   metricId?: string;
+  isVisible: boolean;
 }) => {
   const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    const element = document.getElementById("metrics-section");
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -178,6 +161,7 @@ const AnimatedCounter = ({
 
 const Metrics = () => {
   const [isVisible, setIsVisible] = useState(false);
+  // const isMobile = useIsMobile(); // Remove isMobile shortcut
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -186,7 +170,7 @@ const Metrics = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 } // Low threshold for all devices
     );
 
     const element = document.getElementById("metrics-section");
@@ -263,6 +247,7 @@ const Metrics = () => {
                     value={metric.value}
                     suffix={metric.suffix}
                     metricId={metric.id}
+                    isVisible={isVisible}
                   />
                 </div>
 

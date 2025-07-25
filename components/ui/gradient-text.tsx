@@ -36,7 +36,7 @@ export const GradientText = ({
   return (
     <span
       className={cn(
-        "inline-block bg-clip-text text-transparent bg-gradient-to-r",
+        "inline-block bg-clip-text text-transparent bg-gradient-to-r p-2",
         getUniversityGradient(),
         typography.classes.heading,
         className

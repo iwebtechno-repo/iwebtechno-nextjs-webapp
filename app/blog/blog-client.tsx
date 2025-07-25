@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MagnifyingGlass, CaretRight } from "@phosphor-icons/react";
 import { GradientText } from "@/components/ui/gradient-text";
 import Footer from "@/components/footer";
+import Image from "next/image";
 
 // Sample blog posts data
 const blogPosts = [
@@ -172,10 +173,21 @@ const BlogClient = () => {
             {featuredPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden">
                 <CardContent className="p-0">
-                  <img
-                    src={post.image}
+                  <Image
+                    src={post.image
+                      .replace(
+                        "/placeholder.svg?height=300&width=600",
+                        "/images/placeholder-300x600.svg"
+                      )
+                      .replace(
+                        "/placeholder.svg?height=200&width=400",
+                        "/images/placeholder-200x400.svg"
+                      )}
                     alt={post.title}
+                    width={600}
+                    height={300}
                     className="w-full h-56 object-cover"
+                    priority
                   />
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-2">
@@ -212,9 +224,19 @@ const BlogClient = () => {
             {regularPosts.map((post) => (
               <Card key={post.id} className="overflow-hidden">
                 <CardContent className="p-0">
-                  <img
-                    src={post.image}
+                  <Image
+                    src={post.image
+                      .replace(
+                        "/placeholder.svg?height=300&width=600",
+                        "/images/placeholder-300x600.svg"
+                      )
+                      .replace(
+                        "/placeholder.svg?height=200&width=400",
+                        "/images/placeholder-200x400.svg"
+                      )}
                     alt={post.title}
+                    width={400}
+                    height={200}
                     className="w-full h-40 object-cover"
                   />
                   <div className="p-4">

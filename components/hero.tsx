@@ -7,6 +7,7 @@ import { GradientText } from "@/components/ui/gradient-text";
 import { colors } from "@/lib/morphy-ui/morphy";
 import { Play } from "@phosphor-icons/react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,12 +39,13 @@ const Hero = () => {
           >
             {/* Logo */}
             <div className="mb-8">
-              <img
+              <Image
                 src="/iwebtechno-gradient.svg"
                 alt="iWebTechno Logo"
                 width={200}
                 height={80}
                 className="h-16 md:h-20 w-auto"
+                priority
               />
             </div>
 
@@ -88,12 +90,13 @@ const Hero = () => {
             }`}
           >
             <Card className="overflow-hidden p-2">
-              <img
-                src="/placeholder.svg?height=600&width=800"
+              <Image
+                src="/placeholder.svg"
                 alt="Campus Digitization Dashboard"
                 width={800}
                 height={600}
                 className="rounded-md object-cover"
+                priority
               />
             </Card>
           </div>

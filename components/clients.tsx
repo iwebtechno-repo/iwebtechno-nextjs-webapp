@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Clients = () => {
   // Placeholder for client logos
   const clients = [
@@ -31,8 +33,8 @@ const Clients = () => {
               key={index}
               className="flex justify-center items-center p-4 grayscale hover:grayscale-0 transition-all duration-300"
             >
-              <img
-                src={client.logo || "/placeholder.svg"}
+              <Image
+                src={client.logo || "/images/placeholder-160x80.svg"}
                 alt={client.name}
                 width={160}
                 height={80}

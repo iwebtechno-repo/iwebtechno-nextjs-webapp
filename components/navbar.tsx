@@ -18,7 +18,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useIconWeight } from "@/lib/morphy-ui/icon-theme-context";
 import {
   Popover,
   PopoverContent,
@@ -51,7 +50,8 @@ const NavButton = ({
   isActive: boolean;
   isDesktop?: boolean;
 }) => {
-  const iconWeight = useIconWeight();
+  // const iconWeight = useIconWeight();
+  const iconWeight = "regular";
 
   return (
     <Button
@@ -83,7 +83,8 @@ const NavButton = ({
 export const Navbar = () => {
   const pathname = usePathname();
   const isMobile = useIsMobile();
-  const iconWeight = useIconWeight();
+  // const iconWeight = useIconWeight();
+  const iconWeight = "regular";
   const toggleCellRef = useRef<HTMLDivElement>(null); // Move useRef to top level
 
   // Define the breadcrumb mapping for different routes
